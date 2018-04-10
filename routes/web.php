@@ -20,9 +20,11 @@ Route::get('/', function () {
 Route::get('/produits', function () {
 
     $products = DB::table('products')->get();
+    $priceAVG = DB::table('products')->avg('price');
 
     return view('products',
-        compact('products'));
+        compact('products'),
+        compact('priceAVG'));
 /*		compact('tasks'),
 
 		[
@@ -34,12 +36,11 @@ Route::get('/produits', function () {
 
 });
 
-Route::get('/produit/{produit}', function ($id) {
+Route::get('/produit/{product}', function ($id) {
 
-    $product = DB::table('product')->find($id);
+    $product = DB::table('products')->find($id);
 
     return view('product', compact('product'));
-
 });
 
 Route::get('/ajouter-un-produit', function () {
