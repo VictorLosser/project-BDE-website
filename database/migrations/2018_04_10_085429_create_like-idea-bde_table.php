@@ -16,6 +16,8 @@ class CreateLikeIdeaBdeTable extends Migration
         Schema::create('like-idea-bde', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('idea_box_id');
+            $table->primary('user_id');
+            $table->primary('idea_box_id');
         });
     }
 
