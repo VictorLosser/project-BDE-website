@@ -13,7 +13,7 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="the-navbar">
-        <a class="navbar-brand" href="home"><img src="img/logo.png" height="50px"/></a>
+        <a class="navbar-brand" href="home"><img src="{{ asset('img/logo.png') }}" height="50px"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

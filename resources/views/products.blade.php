@@ -8,7 +8,7 @@
     <FORM method="post" action="produits">
         <div id="form-tri" class="form-group">
             <p id="prix-avg">Le prix moyen est :
-                {{--<strong>{{ round($price_avgAnswer->price_avg, 2) }}</strong> €</p>--}}
+                <strong>{{ round($priceAVG, 2) }}</strong> €</p>
             <p id="msg-tri">
                 @if (isset($_POST['ordreTri']))
                     Actuellement trié par {{ $_POST['ordreTri'] }}
@@ -42,7 +42,7 @@
         @foreach ($products as $productsAnswer)
             <div class="col-md-3 product-item">
                 <div class="product-header">
-                    <a href="./produit/{{ $productsAnswer->id }}">
+                    <a href="produit/{{ $productsAnswer->id }}">
                         <h1>{{ $productsAnswer->title }}</h1></a>
                 </div>
                 <div class="product-image"><img src="{{ asset('products/'.$productsAnswer->image) }}">
