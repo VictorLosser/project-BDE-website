@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParticipatesBdeTable extends Migration
+class CreateStatusBdeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateParticipatesBdeTable extends Migration
      */
     public function up()
     {
-        Schema::create('participates-bde', function (Blueprint $table) {
-            $table->integer('event_id');
-            $table->integer('user_id');
-            $table->primary('event_id');
-            $table->primary('user_id');
+        Schema::create('status-bde', function (Blueprint $table) {
+            $table->increments('status_id');
+            $table->string('status',255);
+            $table->engine = 'InnoDB';
+
         });
     }
 
@@ -28,6 +28,6 @@ class CreateParticipatesBdeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('participates-bde');
+        Schema::dropIfExists('status-bde');
     }
 }

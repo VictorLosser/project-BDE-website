@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductCategoryBdeTable extends Migration
+class CreateLikeEventBdeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateProductCategoryBdeTable extends Migration
      */
     public function up()
     {
-        Schema::create('product-category-bde', function (Blueprint $table) {
-            $table->increments('category_id');
-            $table->string('category_name',255);
+        Schema::create('like-event-bde', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->integer('event_id');
+            $table->primary('user_id');
+            $table->primary('event_id');
+            $table->engine = 'InnoDB';
+
         });
     }
 
@@ -26,6 +30,6 @@ class CreateProductCategoryBdeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product-category-bde');
+        Schema::dropIfExists('like-event-bde');
     }
 }

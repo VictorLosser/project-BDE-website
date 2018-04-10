@@ -22,6 +22,8 @@ class CreateImagebdeTable extends Migration
             $table->integer('users_id');
             $table->foreign('users_id')->references('user_id')->on('users-bde');
             $table->timestamps();
+            $table->engine = 'InnoDB';
+
         });
     }
 

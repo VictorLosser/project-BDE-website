@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersBdeTable extends Migration
+class CreateParticipatesBdeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateOrdersBdeTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders-bde', function (Blueprint $table) {
-            $table->increments('order_id');
-            $table->decimal('total_price', 10, 2);
-            $table->date('order_date');
+        Schema::create('participates-bde', function (Blueprint $table) {
+            $table->integer('event_id');
             $table->integer('user_id');
-            $table->foreign('users_id')->references('user_id')->on('users-bde');
+            $table->primary(array('event_id', 'user_id'));
+            $table->engine = 'InnoDB';
+
         });
     }
 
@@ -29,6 +29,6 @@ class CreateOrdersBdeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders-bde');
+        Schema::dropIfExists('participates-bde');
     }
 }

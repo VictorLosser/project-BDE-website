@@ -19,10 +19,15 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('e_mail')->unique();
             $table->string('password');
-            $table->integer('status_id');
-            $table->foreign('status_id')->references('status_id')->on('status-bde');
+            $table->integer('status_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
+
+        });
+        Schema::table('users', function ($table) {
+            $table->foreign('status_id')->references('status_id')->on('status-bde');
         });
     }
 

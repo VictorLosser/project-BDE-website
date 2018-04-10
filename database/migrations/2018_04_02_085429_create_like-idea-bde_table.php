@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikeEventBdeTable extends Migration
+class CreateLikeIdeaBdeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateLikeEventBdeTable extends Migration
      */
     public function up()
     {
-        Schema::create('like-event-bde', function (Blueprint $table) {
+        Schema::create('like-idea-bde', function (Blueprint $table) {
             $table->integer('user_id');
-            $table->integer('event_id');
-            $table->primary('user_id');
-            $table->primary('event_id');
+            $table->integer('idea_box_id');
+            $table->primary(array('user_id','idea_box_id'));
+            $table->engine = 'InnoDB';
+
         });
     }
 
@@ -28,6 +29,6 @@ class CreateLikeEventBdeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('like-event-bde');
+        Schema::dropIfExists('like-idea-bde');
     }
 }

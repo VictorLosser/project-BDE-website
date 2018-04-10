@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikeImageBdeTable extends Migration
+class CreateProductCategoryBdeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateLikeImageBdeTable extends Migration
      */
     public function up()
     {
-        Schema::create('like-image-bde', function (Blueprint $table) {
-            $table->integer('image_id');
-            $table->integer('user_id');
-            $table->primary('image_id');
-            $table->primary('user_id');
+        Schema::create('product-category-bde', function (Blueprint $table) {
+            $table->increments('category_id');
+            $table->string('category_name',255);
+            $table->engine = 'InnoDB';
+
         });
     }
 
@@ -28,6 +28,6 @@ class CreateLikeImageBdeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('like-image-bde');
+        Schema::dropIfExists('product-category-bde');
     }
 }

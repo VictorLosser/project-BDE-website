@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatusBdeTable extends Migration
+class CreateLikeImageBdeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateStatusBdeTable extends Migration
      */
     public function up()
     {
-        Schema::create('status-bde', function (Blueprint $table) {
-            $table->increments('status_id');
-            $table->string('status',255);
+        Schema::create('like-image-bde', function (Blueprint $table) {
+            $table->integer('image_id');
+            $table->integer('user_id');
+            $table->primary(array('image_id','user_id'));
+
+            $table->engine = 'InnoDB';
+
         });
     }
 
@@ -26,6 +30,6 @@ class CreateStatusBdeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status-bde');
+        Schema::dropIfExists('like-image-bde');
     }
 }
