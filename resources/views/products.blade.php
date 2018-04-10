@@ -5,27 +5,27 @@
 @section('content')
 
     <!-- DROPDOWN LIST TO CHOOSE THE TYPE TO ORDER PRODUCTS -->
-    <FORM method="post" action="produits">
+    <FORM method="get" action="produits">
         <div id="form-tri" class="form-group">
             <p id="prix-avg">Le prix moyen est :
                 <strong>{{ round($priceAVG, 2) }}</strong> €</p>
             <p id="msg-tri">
-                @if (isset($_POST['ordreTri']))
-                    Actuellement trié par {{ $_POST['ordreTri'] }}
+                @if (isset($_GET['orderBy']))
+                    Actuellement trié par {{ $_GET['orderBy'] }}
                 @endif
             </p>
-            <SELECT name="ordreTri" class="form-control" id="selectTri">
-                <OPTION value="nom"
-                        @if (isset($_POST['ordreTri']))
-                        @if ($_POST['ordreTri'] == "nom")
+            <SELECT name="orderBy" class="form-control" id="selectTri">
+                <OPTION value="title"
+                        @if (isset($_GET['orderBy']))
+                        @if ($_GET['orderBy'] == "title")
                         selected
                         @endif
                         @endif>
                     nom
                 </OPTION>
                 <OPTION value="price"
-                        @if (isset($_POST['ordreTri']))
-                        @if ($_POST['ordreTri'] == "price")
+                        @if (isset($_GET['orderBy']))
+                        @if ($_GET['orderBy'] == "price")
                         selected
                         @endif
                         @endif>

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,22 +19,27 @@ Route::get('/', function () {
 
 });
 
-Route::get('/produits', function () {
+Route::get('/produits', function (Request $request) {
 
-    $products = DB::table('products')->get();
     $priceAVG = DB::table('products')->avg('price');
+
+    $products = DB::table('products')
+        ->when($request->orderBy, function ($query) use ($request) {
+            return $query->orderBy($request->orderBy);
+        })
+        ->get();
 
     return view('products',
         compact('products'),
         compact('priceAVG'));
-/*		compact('tasks'),
+    /*		compact('tasks'),
 
-		[
-			'firstname' => 'Victor',
-			'lastname' => 'Losser'
-		]
+            [
+                'firstname' => 'Victor',
+                'lastname' => 'Losser'
+            ]
 
-	)->with('site', 'Boutique SWAG');*/
+        )->with('site', 'Boutique SWAG');*/
 
 });
 
