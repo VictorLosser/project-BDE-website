@@ -54,6 +54,8 @@ Route::get('/ajouter-un-produit', function () {
     return view('product_management.add');
 });
 
+Route::post('/ajouter-un-produit/nouveau-produit', 'products@store');
+
 Route::get('/supprimer-un-produit', function () {
     $products = DB::table('products')->get();
 
