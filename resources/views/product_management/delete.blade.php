@@ -13,8 +13,8 @@
                 Vous êtes sur une page réservée aux administrateurs. (vous en avez de la chance)
             </div>
             <select name="choixProduit" id="inputState" class="form-control" required>
-                <option value="" selected>Choissiez une image</option>
-                @foreach($productsList as $product)
+                <option value="" selected>Choissiez un produit</option>
+                @foreach($products as $product)
 
                     <option value="{{ $product->title }}">{{ $product->title }}</option>
 

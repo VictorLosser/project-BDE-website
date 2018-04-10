@@ -21,7 +21,7 @@
                     <select name="productImg" id="inputState" class="form-control" required>
                         <option value="" selected>Choissiez une image</option>
                         <?php
-                        if ($dossier = opendir('./dist/products')) {
+                        if ($dossier = opendir(public_path('/products'))) {
                             while (false !== ($fichier = readdir($dossier))) {
                                 if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
                                     echo "<option value=\"" . $fichier . "\">" . $fichier . "</option>";

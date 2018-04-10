@@ -55,9 +55,19 @@ Route::get('/ajouter-un-produit', function () {
 });
 
 Route::get('/supprimer-un-produit', function () {
-    return view('product_management.delete');
+    $products = DB::table('products')->get();
+
+
+    return view('product_management.delete',
+        compact('products'));
 });
 
 Route::get('/modifier-un-produit', function () {
-    return view('product_management.modify');
+
+    $products = DB::table('products')
+        ->select('id', 'title')
+        ->get();
+
+    return view('product_management.modify',
+        compact('products'));
 });

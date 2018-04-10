@@ -34,7 +34,7 @@
                     <select name="productImg" id="imgChoice" class="form-control" required>
                         <option value="" selected>Choissiez une image</option>
                         <?php
-                        if ($dossier = opendir('./dist/products')) {
+                        if ($dossier = opendir(public_path('/products'))) {
                             while (false !== ($fichier = readdir($dossier))) {
                                 if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
                                     echo "<option value=\"" . $fichier . "\">" . $fichier . "</option>";
@@ -113,7 +113,7 @@
                 <div class="col">
                     <select name="productChoice" id="productChoice" class="form-control" required>
                         <option value="" selected>Choissiez un produit à modifier</option>
-                        @foreach($productsList as $product)
+                        @foreach($products as $product)
 
                             <option value="{{ $product->id }}">{{ $product->title }}</option>
 
