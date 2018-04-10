@@ -76,3 +76,10 @@ Route::get('/modifier-un-produit', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/users/{oui}', function ($id) {
+
+    $users = DB::table('users')->get();
+    dd($users);
+
+});
