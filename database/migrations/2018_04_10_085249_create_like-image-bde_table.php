@@ -14,11 +14,10 @@ class CreateLikeImageBdeTable extends Migration
     public function up()
     {
         Schema::create('like-image-bde', function (Blueprint $table) {
-            $table->increments('image_id');
-            $table->string('image-link',255);
-            $table->string('alt',255);
-
-
+            $table->integer('image_id');
+            $table->integer('user_id');
+            $table->primary('image_id');
+            $table->primary('user_id');
         });
     }
 
