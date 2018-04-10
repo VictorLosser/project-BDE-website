@@ -50,11 +50,16 @@ Route::get('/produit/{product}', function ($id) {
     return view('product', compact('product'));
 });
 
+
+
+
 Route::get('/ajouter-un-produit', function () {
     return view('product_management.add');
 });
 
 Route::post('/ajouter-un-produit/nouveau-produit', 'products@store');
+
+
 
 Route::get('/supprimer-un-produit', function () {
     $products = DB::table('products')->get();
@@ -63,6 +68,9 @@ Route::get('/supprimer-un-produit', function () {
     return view('product_management.delete',
         compact('products'));
 });
+
+Route::get('/supprimer-un-produit/{id}', 'products@destroy');
+
 
 Route::get('/modifier-un-produit', function () {
 

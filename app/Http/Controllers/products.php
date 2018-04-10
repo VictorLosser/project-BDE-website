@@ -50,7 +50,7 @@ class products extends Controller
 
         DB::table('products')->insert($data);
 
-        echo "Félicitations !!! La BDD s'est vu ajouté l'entrée " . $title;
+        return redirect('/ajouter-un-produit')->with('status', 'Nouveau produit ajouté');
     }
 
     /**
@@ -95,6 +95,7 @@ class products extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('products')->where('id', $id)->delete();
+        return redirect('/supprimer-un-produit')->with('status', 'Le produit a bien été supprimé');
     }
 }
