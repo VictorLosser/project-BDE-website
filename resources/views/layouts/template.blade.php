@@ -46,10 +46,10 @@
                 <button class="btn member btn btn-outline-success my-2 my-sm-0">Se déconnecter</button>
             </a>
         @else
-            <a href='inscription'>
+            <a href='register'>
                 <button class="btn-member btn btn-outline-success my-2 my-sm-0">Inscription</button>
             </a>
-            <a href='connexion'>
+            <a href='login'>
                 <button class="btn member btn btn-outline-success my-2 my-sm-0">Connexion</button>
             </a>
         @endif
