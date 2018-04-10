@@ -1,0 +1,119 @@
+#carouselid {
+    height: 100%;
+    background-color: silver;
+    overflow: hidden;
+}
+
+#carouselid img {
+    /*Cette propriété fait que l'image prend toute la hauteur*/
+    height: 100vh;
+
+    /*Là je centre mon image, quand sa taille est inférieure à la fenêtre*/
+    margin: auto;
+
+    /*Ces deux lignes permettent à l'image d'être centrée quand l'image est trop grande pour la fenêtre*/
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-item {
+    margin: 0 20px 0 20px;
+}
+
+
+.container {
+    margin-top: 20px;
+}
+/*--------------PRODUCT--------------*/
+
+.btn-member {
+    margin: 0 20px 0 20px;
+}
+
+#prix-avg, #msg-tri {
+    margin-right: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#form-tri {
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+#selectTri {
+    width: auto;
+    margin-right: 10px;
+}
+
+#product-cont {
+    margin-top: 10px;
+}
+
+.product-item {
+    background-color: gainsboro;
+    margin: 10px 10px 10px 10px;
+    width: 200px;
+}
+
+.product-header {
+    height: 50px;
+}
+
+.product-header h1 {
+    font-size: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 80%;
+    height: 150px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.product-item img {
+    height: 100%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.product-description {
+    font-size: 15px;
+    text-align: center;
+    overflow: hidden;
+    height: 70px;
+    display: flex;
+}
+
+.product-description p {
+    margin: auto;
+}
+
+.product-price {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.product-price p {
+    margin: 5px 5px 5px 5px;
+}
+
+#old-price {
+    text-decoration: line-through;
+    font-size: 15px;
+    color: darkslategray;
+}
+
+#price {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+textarea {
+    resize: none;
+}

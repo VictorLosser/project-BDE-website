@@ -1,0 +1,34 @@
+.s-product-header {
+    font-size: 30px;
+    text-align: center;
+    background-color: forestgreen;
+    color:white;
+    width: fit-content;
+    padding: 0 40px 0 40px;
+    display:block;
+    margin: auto;
+}
+
+.s-product-image img {
+    display:block;
+    margin: 20px auto 20px auto;
+    width: auto;
+    height: 300px;
+}
+
+.s-product-description {
+    font-size: 20px;
+    text-align: center;
+}
+
+.s-product-price {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color:white;
+    background-color: limegreen;
+    width: fit-content;
+    padding: 0 20px 0 20px;
+    display:block;
+    margin: auto;
+}
