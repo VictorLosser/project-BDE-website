@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateContainProductBdeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->increments('product_id');
-            $table->string('title',255);
-            $table->text('description');
-            $table->decimal('price', 10, 2);
-
-            $table->engine = 'InnoDB';
+        Schema::create('contain-product-bde', function (Blueprint $table) {
+            $table->integer('quantity');
+            $table->integer('product_id');
+            $table->integer('order_id');
         });
     }
 
@@ -30,6 +27,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('contain-product-bde');
     }
 }
