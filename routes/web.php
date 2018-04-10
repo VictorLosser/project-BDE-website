@@ -73,3 +73,6 @@ Route::get('/modifier-un-produit', function () {
     return view('product_management.modify',
         compact('products'));
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
