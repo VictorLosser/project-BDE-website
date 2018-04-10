@@ -85,9 +85,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/users/{oui}', function ($id) {
+Route::get('/users/{name}', function ($name) {
 
-    $users = DB::table('users')->get();
-    dd($users);
-
+    if(strtolower($name) == 'all') {
+        $users = $query = DB::table('users')->get();
+        dd($users);
+    }
+    elseif (is_numeric($name)) {
+        $users = $query = DB::table('users')->find($name);
+        dd($users);
+    }
+    else {
+        $users = $query = DB::table('users')->where('name', '=', $name)->first();
+        dd($users);
+    }
 });
