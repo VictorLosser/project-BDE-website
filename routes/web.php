@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\ProductBDE;
+use App\EventsBDE;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,17 +31,15 @@ Route::get('/produits', function (Request $request) {
     return view('products',
         compact('products'),
         compact('priceAVG'));
-    /*		compact('tasks'),
-            [
-                'firstname' => 'Victor',
-                'lastname' => 'Losser'
-            ]
-        )->with('site', 'Boutique SWAG');*/
 });
-
-Route::resource('produit', 'productController');
 
 Route::get('/evenements', function () {
-   $events = DB::table('events-bde')->get();
-    return view('events/events', compact('events'));
+   $events = EventsBDE::all();
+    return view('events', compact('events'));
 });
+
+Route::resources([
+    'produit' => 'productController',
+    'evenement' => 'eventController'
+]);
+

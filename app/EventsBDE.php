@@ -29,4 +29,10 @@ class EventsBDE extends Model
     public function usersParticipate(){
         return $this->belongsToMany('App\User', 'participates-bde', 'event_id', 'id');
     }
+
+    /*Sans le fillable, ca ne marche po ! LAISSEZ LE WE NEED IT*/
+    protected $fillable = [
+        'title', 'description', 'date_event', 'price', 'recurrence', 'id',
+    ];
+
 }

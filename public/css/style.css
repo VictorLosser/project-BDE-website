@@ -125,15 +125,18 @@ textarea {
      align-items: center;
      flex-direction: row;
 
-     color: #FFF;
      background-color: silver;
  }
+ #sousNav a {
+     color: #FFF;
+ }
+#sousNav a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: grey;
+}
 #addProduct h5, #updateProduct h5 {
     text-transform: uppercase;
     margin: 0px;
     padding: 4px;
-}
-#addProduct:hover, #updateProduct:hover{
-    cursor: pointer;
-    color: grey;
 }
