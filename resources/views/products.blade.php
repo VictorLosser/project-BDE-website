@@ -48,18 +48,20 @@
         @foreach ($products as $product)
             <div class="col-md-3 product-item">
                 <div class="product-header">
-                    <a href="/produit/{{ $product->id }}">
+                    <a href="/produit/{{ $product->product_id }}">
                         <h1>{{ $product->title }}</h1></a>
                 </div>
-                <div class="product-image"><img src="{{ asset('/products/'.$product->image) }}">
+                <div class="product-image"><img src="
+{{--{{ asset('/products/'.$product->image) }}--}}
+                            ">
                 </div>
                 <div class="product-description">
                     <p>{{ $product->description }}</p>
                 </div>
                 <div class="product-price">
-                    @if ($product->old_price !== null)
-                        <p id="old-price">{{ $product->old_price }}€</p>
-                    @endif
+                    {{--@if ($product->old_price !== null)--}}
+                        {{--<p id="old-price">{{ $product->old_price }}€</p>--}}
+                    {{--@endif--}}
                     <p id="price">{{ $product->price }}€</p>
                 </div>
             </div>

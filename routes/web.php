@@ -20,8 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('/produits', function (Request $request) {
-    $priceAVG = DB::table('products')->avg('price');
-    $products = DB::table('products')
+    $priceAVG = DB::table('product-bde')->avg('price');
+    $products = DB::table('product-bde')
         ->when($request->orderBy, function ($query) use ($request) {
             return $query->orderBy($request->orderBy);
         })
