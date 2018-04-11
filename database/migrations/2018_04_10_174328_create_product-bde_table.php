@@ -19,7 +19,7 @@ class CreateProductBdeTable extends Migration
             $table->text('description');
             $table->decimal('price', 10, 2);
             $table->integer('category_id');
-            $table->foreign('category_id')->references('category_id')->on('product-category-bde');
+//            $table->foreign('category_id')->references('category_id')->on('product-category-bde');
 
             $table->engine = 'InnoDB';
         });

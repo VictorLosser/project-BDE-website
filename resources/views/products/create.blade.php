@@ -4,18 +4,12 @@
 
 @section('content')
 
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
     <div id="formProduit">
         <div class="alert alert-info" role="alert">
             Vous êtes sur une page réservée aux administrateurs. (vous en avez de la chance)
         </div>
 
-        <form method="post" action="/ajouter-un-produit/nouveau-produit">
+        <form method="post" action="/produit">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col">

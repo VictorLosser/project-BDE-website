@@ -4,6 +4,12 @@
 
 @section('content')
 
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <!-- DROPDOWN LIST TO CHOOSE THE TYPE TO ORDER PRODUCTS -->
     <FORM method="get" action="produits">
         <div id="form-tri" class="form-group">
@@ -39,22 +45,22 @@
     <!-- PRODUCTS DISPLAY -->
     <div class="row" style="justify-content: space-around">
 
-        @foreach ($products as $productsAnswer)
+        @foreach ($products as $product)
             <div class="col-md-3 product-item">
                 <div class="product-header">
-                    <a href="produit/{{ $productsAnswer->id }}">
-                        <h1>{{ $productsAnswer->title }}</h1></a>
+                    <a href="/produit/{{ $product->id }}">
+                        <h1>{{ $product->title }}</h1></a>
                 </div>
-                <div class="product-image"><img src="{{ asset('products/'.$productsAnswer->image) }}">
+                <div class="product-image"><img src="{{ asset('/products/'.$product->image) }}">
                 </div>
                 <div class="product-description">
-                    <p>{{ $productsAnswer->description }}</p>
+                    <p>{{ $product->description }}</p>
                 </div>
                 <div class="product-price">
-                    @if ($productsAnswer->old_price !== null)
-                        <p id="old-price">{{ $productsAnswer->old_price }}€</p>
+                    @if ($product->old_price !== null)
+                        <p id="old-price">{{ $product->old_price }}€</p>
                     @endif
-                    <p id="price">{{ $productsAnswer->price }}€</p>
+                    <p id="price">{{ $product->price }}€</p>
                 </div>
             </div>
         @endforeach

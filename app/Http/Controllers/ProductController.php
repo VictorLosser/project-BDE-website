@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductBDE;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
-class products extends Controller
+class productController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,8 @@ class products extends Controller
      */
     public function index()
     {
-        //
+        $products = ProductBDE::all();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -25,7 +27,7 @@ class products extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -36,21 +38,21 @@ class products extends Controller
      */
     public function store(Request $request)
     {
-        $title = $request->input('productName');
-        $image = $request->input('productImg');
-        $description = $request->input('productDescription');
-        $price = $request->input('productPrice');
+//        $request->validate([
+//            'title' => 'required',
+//            'image' => 'required',
+//            'description' => 'required',
+//            'price' => 'required'
+//        ]);
 
-        $data = array(
-            'title' => $title,
-            'image' => $image,
-            'description' => $description,
-            'price' => $price
-        );
+        ProductBDE::create([
+            'title' => $request->productName,
+            'image' => $request->productImg,
+            'description' => $request->productDescription,
+            'price' => $request->productPrice
+        ]);
 
-        DB::table('products')->insert($data);
-
-        return redirect('/ajouter-un-produit')->with('status', 'Nouveau produit ajouté');
+        return redirect('/produits')->with('status', 'Nouveau produit ajouté');
     }
 
     /**
@@ -61,7 +63,8 @@ class products extends Controller
      */
     public function show($id)
     {
-
+        $product = ProductBDE::find($id);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -72,7 +75,9 @@ class products extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = ProductBDE::find($id);
+
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -84,7 +89,13 @@ class products extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        ProductBDE::find($id)->update([
+            'title' => $request->productName,
+            'image' => $request->productImg,
+            'description' => $request->productDescription,
+            'price' => $request->productPrice
+        ]);
+        return redirect('/produits')->with('status', 'Le produit a bien été modifié');
     }
 
     /**
@@ -95,7 +106,7 @@ class products extends Controller
      */
     public function destroy($id)
     {
-        DB::table('products')->where('id', $id)->delete();
-        return redirect('/supprimer-un-produit')->with('status', 'Le produit a bien été supprimé');
+        ProductBDE::find($id)->delete();
+        return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
     }
 }

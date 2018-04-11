@@ -30,7 +30,16 @@
                     <td>{{ $product->title }}</td>
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->price }}</td>
-                    <td><a href="/supprimer-un-produit/{{ $product->id }}">Supprimer</a></td>
+                    <td>
+                        <a href="{{ URL::to('produit/' . $product->id . '/edit') }}">
+                            <button class="btn btn-info" type="submit">Modifier</button>
+                        </a>
+                        <form action="{{url('produit', [$product->id])}}" method="post">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

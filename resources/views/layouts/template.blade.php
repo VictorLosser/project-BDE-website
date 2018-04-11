@@ -24,7 +24,7 @@
                     <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item font-weight-bold" id="nav_produits">
-                    <a class="nav-link" href="produits">PRODUITS</a>
+                    <a class="nav-link" href="/produits">PRODUITS</a>
                 </li>
                 <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -32,9 +32,8 @@
                         GESTION PRODUITS
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="ajouter-un-produit">Ajouter un produit</a>
-                        <a class="dropdown-item" href="supprimer-un-produit">Supprimer un produit</a>
-                        <a class="dropdown-item" href="modifier-un-produit">Modifier un produit</a>
+                        <a class="dropdown-item" href="/produit/create">Ajouter un produit</a>
+                        <a class="dropdown-item" href="/produit">Modifier ou supprimer un produit</a>
                     </div>
                 </li>
             </ul>
