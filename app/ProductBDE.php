@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductBDE extends Model
 {
-    protected $table = "products";
+    protected $table = "product-bde";
 
     public $timestamps = false;
 
     protected $fillable = [
-        'title', 'description', 'image', 'price', 'category_id'
+        'title', 'description', 'price', 'category_id'
     ];
 }
