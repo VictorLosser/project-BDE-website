@@ -26,6 +26,9 @@
                 <li class="nav-item font-weight-bold" id="nav_produits">
                     <a class="nav-link" href="/produits">PRODUITS</a>
                 </li>
+                <li class="nav-item font-weight-bold" id="nav_evenements">
+                    <a class="nav-link" href="/evenements">EVENEMENTS</a>
+                </li>
                 <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
@@ -55,9 +58,7 @@
     </nav>
 </header>
 
-<div class="container">
     @yield('content')
-</div>
 
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 @yield('scripts')

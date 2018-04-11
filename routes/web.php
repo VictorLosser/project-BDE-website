@@ -38,3 +38,8 @@ Route::get('/produits', function (Request $request) {
 });
 
 Route::resource('produit', 'productController');
+
+Route::get('/evenements', function () {
+   $events = DB::table('events-bde')->get();
+    return view('events/events', compact('events'));
+});
