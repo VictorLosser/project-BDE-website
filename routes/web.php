@@ -38,7 +38,7 @@ Route::get('/evenements', function () {
     return view('events', compact('events'));
 });
 
-Route::resource([
+Route::resources([
     'produit' => 'productController',
     'evenement' => 'eventController'
 ]);
