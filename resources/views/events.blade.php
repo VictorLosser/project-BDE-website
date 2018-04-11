@@ -12,10 +12,10 @@
 
     <nav id="sousNav">
         <div id="addProduct">
-            <h5><a href="/evenement/create">Ajouter un produit</a></h5>
+            <h5><a href="/evenement/create">Ajouter un evenement</a></h5>
         </div>
         <div id="updateProduct">
-            <h5><a href="">Modifier ou supprimer un produit</a></h5>
+            <h5><a href="/evenement">Modifier ou supprimer un evenement</a></h5>
         </div>
     </nav>
 
