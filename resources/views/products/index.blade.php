@@ -26,15 +26,15 @@
             <tbody>
             @foreach($products as $product)
                 <tr>
-                    <th>{{ $product->id }}</th>
+                    <th>{{ $product->product_id }}</th>
                     <td>{{ $product->title }}</td>
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->price }}</td>
                     <td>
-                        <a href="{{ URL::to('produit/' . $product->id . '/edit') }}">
+                        <a href="{{ URL::to('produit/' . $product->product_id . '/edit') }}">
                             <button class="btn btn-info" type="submit">Modifier</button>
                         </a>
-                        <form action="{{url('produit', [$product->id])}}" method="post">
+                        <form action="{{url('produit', [$product->product_id])}}" method="post">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="DELETE">
                             <button class="btn btn-danger" type="submit">Supprimer</button>

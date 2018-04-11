@@ -8,7 +8,7 @@
         Vous êtes sur une page réservée aux administrateurs. (vous en avez de la chance)
     </div>
 
-    <form method="post" action="{{url('produit', [$product->id])}}">
+    <form method="post" action="{{url('produit', [$product->product_id])}}">
         {{ csrf_field() }}
 
         <input type="hidden" name="_method" value="PUT">

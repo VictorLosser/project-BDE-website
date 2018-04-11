@@ -63,7 +63,7 @@ class productController extends Controller
      */
     public function show($id)
     {
-        $product = ProductBDE::find($id);
+        $product = ProductBDE::where('product_id', $id)->first();
         return view('products.show', compact('product'));
     }
 
@@ -75,7 +75,7 @@ class productController extends Controller
      */
     public function edit($id)
     {
-        $product = ProductBDE::find($id);
+        $product = ProductBDE::where('product_id', $id)->first();
 
         return view('products.edit', compact('product'));
     }

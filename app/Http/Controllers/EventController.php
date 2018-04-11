@@ -68,7 +68,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = EventsBDE::where('event_id', $id)->first();
+
+        return view('events.edit', compact('event'));
     }
 
     /**
@@ -80,8 +82,18 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        EventsBDE::where('event_id', $id)->first()->update([
+            'title' => $request->eventName,
+            'description' => $request->eventDescription,
+            'date_event' => $request->eventDate,
+            'recurrence' => $request->eventRecurrence,
+            'price' => $request->eventPrice,
+            'id' => $request->eventIdUser
+        ]);
+
+        return redirect('/evenements')->with('status', "Le produit a bien été modifié !");
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -91,6 +103,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        EventsBDE::where('event_id', $id)->first()->delete();
+        return redirect('/evenements')->with('status', 'Le produit a bien été supprimé');
     }
 }
