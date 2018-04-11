@@ -9,4 +9,9 @@ class EventsBDE extends Model
     protected $table = "events-bde";
 
     public $timestamps = false;
+
+    /*Sans le fillable, ca ne marche po ! LAISSEZ LE WE NEED IT*/
+    protected $fillable = [
+        'title', 'description', 'date_event', 'price', 'recurrence', 'id',
+    ];
 }
