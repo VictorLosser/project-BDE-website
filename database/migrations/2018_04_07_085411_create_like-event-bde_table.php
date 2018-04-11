@@ -16,8 +16,8 @@ class CreateLikeEventBdeTable extends Migration
         Schema::create('like-event-bde', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('event_id');
-            $table->primary('user_id');
-            $table->primary('event_id');
+            $table->primary(array('user_id','event_id'));
+
             $table->engine = 'InnoDB';
 
         });

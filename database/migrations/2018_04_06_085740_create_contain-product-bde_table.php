@@ -17,8 +17,9 @@ class CreateContainProductBdeTable extends Migration
             $table->integer('quantity');
             $table->integer('product_id');
             $table->integer('order_id');
-            $table->primary('product_id');
-            $table->primary('order_id');
+
+            $table->primary(array('product_id','order_id'));
+
             $table->engine = 'InnoDB';
 
         });

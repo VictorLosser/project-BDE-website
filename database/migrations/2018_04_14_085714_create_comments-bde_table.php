@@ -16,14 +16,17 @@ class CreateCommentsBdeTable extends Migration
         Schema::create('comments-bde', function (Blueprint $table) {
             $table->increments('comment_id');
             $table->string('content');
-            $table->integer('image_id');
-            $table->foreign('image_id')->references('image_id')->on('image-bde');
-            $table->integer('user_id');
-            $table->foreign('users_id')->references('user_id')->on('users-bde');
-            $table->integer('event_id');
-            $table->foreign('event_id')->references('event_id')->on('event-bde');
+            $table->integer('image_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->integer('event_id')->unsigned();
+
             $table->engine = 'InnoDB';
 
+        });
+        Schema::table('comments-bde', function ($table) {
+            $table->foreign('image_id')->references('image_id')->on('image-bde');
+            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('event_id')->references('event_id')->on('events-bde');
         });
     }
 

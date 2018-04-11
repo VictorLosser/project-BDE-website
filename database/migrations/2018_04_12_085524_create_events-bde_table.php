@@ -20,10 +20,13 @@ class CreateEventsBdeTable extends Migration
             $table->date('date_event');
             $table->decimal('price', 10, 2);
             $table->string('recurrence',255);
-            $table->integer('user_id');
-            $table->foreign('users_id')->references('user_id')->on('users-bde');
+            $table->integer('user_id')->unsigned();
+
             $table->engine = 'InnoDB';
 
+        });
+        Schema::table('events-bde', function ($table) {
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 

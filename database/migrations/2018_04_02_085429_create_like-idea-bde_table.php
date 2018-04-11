@@ -17,6 +17,7 @@ class CreateLikeIdeaBdeTable extends Migration
             $table->integer('user_id');
             $table->integer('idea_box_id');
             $table->primary(array('user_id','idea_box_id'));
+
             $table->engine = 'InnoDB';
 
         });

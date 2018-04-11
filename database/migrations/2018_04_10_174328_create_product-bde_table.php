@@ -18,10 +18,12 @@ class CreateProductBdeTable extends Migration
             $table->string('title',255);
             $table->text('description');
             $table->decimal('price', 10, 2);
-            $table->integer('category_id');
-//            $table->foreign('category_id')->references('category_id')->on('product-category-bde');
+            $table->integer('category_id')->unsigned();
 
             $table->engine = 'InnoDB';
+        });
+        Schema::table('product-bde', function ($table) {
+            $table->foreign('category_id')->references('category_id')->on('product-category-bde');
         });
     }
 

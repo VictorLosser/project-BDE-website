@@ -17,10 +17,12 @@ class CreateIdeaBoxBdeTable extends Migration
             $table->increments('idea_box_id');
             $table->string('title',255);
             $table->string('description',255);
-            $table->integer('user_id');
-            $table->foreign('users_id')->references('user_id')->on('users-bde');
+            $table->integer('user_id')->unsigned();
             $table->engine = 'InnoDB';
 
+        });
+        Schema::table('idea-box-bde', function ($table) {
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 
