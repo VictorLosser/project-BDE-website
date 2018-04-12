@@ -14,17 +14,17 @@ class IdeaBoxSeeder extends Seeder
         DB::table('idea-box-bde')->insert([
             'title' => 'Concert de JUL',
             'description' => 'JUL un artiste incontournable du moment pourrait venir faire un concert dans notre école',
-            'id' => 1,
+            'user_id' => 1,
         ]);
         DB::table('idea-box-bde')->insert([
             'title' => 'Barathon',
             'description' => 'Pour décompresser après un cctl bien difficile',
-            'id' => 3,
+            'user_id' => 3,
         ]);
         DB::table('idea-box-bde')->insert([
             'title' => 'Chasse aux oeufs de Paques',
             'description' => 'Nous adorons tous le chocolat',
-            'id' => 2,
+            'user_id' => 2,
         ]);
     }
 }

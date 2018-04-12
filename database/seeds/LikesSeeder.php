@@ -14,32 +14,32 @@ class LikesSeeder extends Seeder
         DB::table('likes-bde')->insert([
             'likeable_id' => 1,
             'likeable_type' => 'event',
-            'id' => 1
+            'user_id' => 1
         ]);
         DB::table('likes-bde')->insert([
             'likeable_id' => 1,
             'likeable_type' => 'event',
-            'id' => 2
+            'user_id' => 2
         ]);
         DB::table('likes-bde')->insert([
             'likeable_id' => 2,
             'likeable_type' => 'event',
-            'id' => 1
+            'user_id' => 1
         ]);
         DB::table('likes-bde')->insert([
             'likeable_id' => 3,
             'likeable_type' => 'event',
-            'id' => 2
+            'user_id' => 2
         ]);
         DB::table('likes-bde')->insert([
             'likeable_id' => 1,
             'likeable_type' => 'image',
-            'id' => 2
+            'user_id' => 2
         ]);
         DB::table('likes-bde')->insert([
             'likeable_id' => 1,
             'likeable_type' => 'idea',
-            'id' => 1
+            'user_id' => 1
         ]);
     }
 }

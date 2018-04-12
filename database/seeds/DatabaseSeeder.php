@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             LikesSeeder::class,
             OrdersBDESeeder::class,
             ProductCategorySeeder::class,
-            ProductsBDESeeder::class
+            ProductsBDESeeder::class,
+            ParticipatesSeeder::class
         ]);
     }
 }

@@ -16,7 +16,7 @@ class EventsBDESeeder extends Seeder
         ]);*/
 
         DB::table('events-bde')->insert([
-            'id' => '1',
+            'user_id' => '1',
             'title' => 'Soirée Pyjama',
             'description' => "Soirée pyjama chez Jawad ! Venez tous on va s'éclater !",
             'date_event' => date('2015-11-13 21:25:00'),
@@ -24,7 +24,7 @@ class EventsBDESeeder extends Seeder
             'recurrence' => 'Evenement unique sans suite.',
         ]);
         DB::table('events-bde')->insert([
-            'id' => '1',
+            'user_id' => '1',
             'title' => 'Soirée Boom',
             'description' => "Soirée boom chez Jawad ! Avec DJ Kalash, DJ Kamikaze & DJ Tnt. Venez tous on va s'éclater !",
             'date_event' => date('2015-11-13 21:25:00'),
@@ -32,7 +32,7 @@ class EventsBDESeeder extends Seeder
             'recurrence' => 'Evenement unique sans suite.',
         ]);
         DB::table('events-bde')->insert([
-            'id' => '1',
+            'user_id' => '1',
             'title' => 'Soirée Restauration',
             'description' => "Restaurons nous chez Jawad ! Salade de rocket au menu !",
             'date_event' => date('2015-11-13 21:25:00'),
@@ -40,7 +40,7 @@ class EventsBDESeeder extends Seeder
             'recurrence' => 'Evenement unique sans suite.',
         ]);
         DB::table('events-bde')->insert([
-            'id' => '1',
+            'user_id' => '1',
             'title' => 'Tournage clip VDO',
             'description' => "Tournage d'un clip vidéo chez Jawad ! #armes #ceintures #ak47 #gows",
             'date_event' => date('2015-11-13 21:25:00'),
