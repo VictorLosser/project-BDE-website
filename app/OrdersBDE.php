@@ -8,8 +8,6 @@ class OrdersBDE extends Model
 {
     protected $table = "orders-bde";
 
-    public $timestamps = false;
-
     public function products() {
         return $this->belongsToMany('App\ProductBDE', 'contain-product-bde', 'order_id', 'product_id')
             ->withPivot('quantity')
