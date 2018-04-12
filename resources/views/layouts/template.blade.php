@@ -29,6 +29,7 @@
                 <li class="nav-item font-weight-bold" id="nav_evenements">
                     <a class="nav-link" href="/evenements">EVENEMENTS</a>
                 </li>
+                @if (Auth::check())
                 <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
@@ -37,21 +38,35 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/produit/create">Ajouter un produit</a>
                         <a class="dropdown-item" href="/produit">Modifier ou supprimer un produit</a>
+                    <li class="nav-item font-weight-bold" id="nav_evenements">
+                        <a class="nav-link" href="/idée">Boite à idée</a>
+                    </li>
                     </div>
                 </li>
+                 @else
+                    <a class="nav-link" href="/idée">Boite à idée</a>
+                 @endif
+
             </ul>
         </div>
-
-        @if (isset($_SESSION['pseudo']))
-            <p style='color:white; margin: 0 10px 0 0; font-size:20px'>Bonjour : {{ $_SESSION['pseudo'] }} ! </p>
-            <a href='connexion?action=disconnect'>
-                <button class="btn member btn btn-outline-success my-2 my-sm-0">Se déconnecter</button>
+        <?php use App\User;
+        $userId = Auth::id();
+        $users = User::where('id','=',$userId)->get(); ?>
+        @if (Auth::check())
+            <p style='color:white; margin: 0 10px 0 0; font-size:20px'>Bonjour : {{ $users[0]->firstname}} ! </p>
+            <a class="btn-member btn btn-outline-success my-2 my-sm-0" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                Logout
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
         @else
-            <a href='register'>
+            <a href="{{ url('/register') }}">
                 <button class="btn-member btn btn-outline-success my-2 my-sm-0">Inscription</button>
             </a>
-            <a href='login'>
+            <a href="{{ url('/login') }}">
                 <button class="btn member btn btn-outline-success my-2 my-sm-0">Connexion</button>
             </a>
         @endif

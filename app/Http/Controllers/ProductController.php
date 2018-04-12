@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\ProductBDE;
 use Illuminate\Http\Request;
+use App\User;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class productController extends Controller
@@ -27,7 +29,19 @@ class productController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        if (Auth::check()) {
+            $users = User::where('id', '=', Auth::id())->get();
+            $status = $users::isauthorized();
+        }
+        else
+        return view('welcome');
+
+         if ( $status = 2 )
+                return view('products.create');
+            else
+                return view('welcome');
+
+
     }
 
     /**

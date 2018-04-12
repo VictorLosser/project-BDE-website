@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'firstname', 'email', 'password',
+        'firstname','name', 'email', 'password',
     ];
 
     /**
@@ -68,4 +68,9 @@ class User extends Authenticatable
     public function ideasLiked(){
         return $this->belongsToMany('App\IdeaBoxBDE','like-idea-bde','id','idea_box_id');
     }
+    public function isauthorized(){
+        $statu = $this[0]->status_id;
+        return $statu;
+    }
+
 }
