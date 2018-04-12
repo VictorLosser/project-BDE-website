@@ -135,8 +135,12 @@ textarea {
     cursor: pointer;
     color: grey;
 }
-#addProduct h5, #updateProduct h5 {
+#addEvent h5, #updateEvent h5 {
     text-transform: uppercase;
     margin: 0px;
     padding: 4px;
+}
+.pannelRightAlign p{
+    margin: 0px;
+    text-align: right;
 }

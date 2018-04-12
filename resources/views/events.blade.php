@@ -4,32 +4,38 @@
 
 @section('content')
 
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
     <nav id="sousNav">
-        <div id="addProduct">
+        <div id="addEvent">
             <h5><a href="/evenement/create">Ajouter un evenement</a></h5>
         </div>
-        <div id="updateProduct">
+        <div id="updateEvent">
             <h5><a href="/evenement">Modifier ou supprimer un evenement</a></h5>
         </div>
     </nav>
 
-    <div class="container">
+    @if (session('status'))
+        <div class="alert alert-success" style="margin: 0px;">
+            {{ session('status') }}
+        </div>
+    @endif
+
+        <div class="container">
         <div class="row" style="justify-content: space-around;">
             @foreach ($events as $event)
                 <div class="col-md-3 product-item">
-                    <div class="product-header">
+                    <div class="event-header">
                         <h1><a href="/evenement/{{$event->event_id}}">{{$event->title}}</a></h1>
                     </div>
-                    <div class="product-description">
+                    <div class="event-description">
                         <p>{{$event->description}}</p>
                     </div>
-                    <div class="product-price">
+                    <div class="event-date pannelRightAlign">
+                        <p>{{$event->date_event}}</p>
+                    </div>
+                    <div class="event-recurrence pannelRightAlign">
+                        <p>{{$event->recurrence}}</p>
+                    </div>
+                    <div class="event-price pannelRightAlign">
                         <p id="price">{{$event->price}}€</p>
                     </div>
                 </div>

@@ -14,10 +14,14 @@
                 <input id="eventName" name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
                        required>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
                     <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3" placeholder="description"
                               required></textarea>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <input id="eventDate" name="eventDate" type="date" class="form-control" placeholder="date"
                        required>
@@ -48,13 +52,19 @@
         <div class="row" style="justify-content: space-around;">
             <h3>Ancien : </h3>
             <div class="col-md-3 product-item">
-                <div class="product-header">
+                <div class="event-header">
                     <h1>{{$event->title}}</h1>
                 </div>
-                <div class="product-description">
+                <div class="event-description">
                     <p>{{$event->description}}</p>
                 </div>
-                <div class="product-price">
+                <div class="event-date pannelRightAlign">
+                    <p>{{$event->date_event}}</p>
+                </div>
+                <div class="event-recurrence pannelRightAlign">
+                    <p>{{$event->recurrence}}</p>
+                </div>
+                <div class="event-price pannelRightAlign">
                     <p id="price">{{$event->price}}€</p>
                 </div>
             </div>
@@ -62,13 +72,19 @@
         <!-- CURRENTLY MODIFIED EVENT -->
             <h3>Nouveau : </h3>
             <div class="col-md-3 product-item">
-                <div class="product-header">
+                <div class="event-header">
                     <h1 class="rt-title">{{$event->title}}</h1>
                 </div>
-                <div class="product-description rt-description">
-                    <p>{{$event->description}}</p>
+                <div class="event-description">
+                    <p class="rt-description">{{$event->description}}</p>
                 </div>
-                <div class="product-price">
+                <div class="event-date pannelRightAlign">
+                    <p class="rt-date">{{$event->date_event}}</p>
+                </div>
+                <div class="event-recurrence pannelRightAlign">
+                    <p class="rt-recurrence">{{$event->recurrence}}</p>
+                </div>
+                <div class="event-price pannelRightAlign">
                     <p id="price" class="rt-price">{{$event->price}}€</p>
                 </div>
             </div>
@@ -87,7 +103,15 @@
             $('.rt-description').text($('#eventDescription').val());
         });
 
-        $('#eventPrice').on('keyup keydown change', function () {
+        $('#eventDate').on('change', function () {
+            $('.rt-date').text($('#eventDate').val());
+        });
+
+        $('#eventRecurrence').on('change', function () {
+            $('.rt-recurrence').text($('#eventRecurrence').val());
+        });
+
+        $('#eventPrice').on('change keyup keydown', function () {
             $('.rt-price').text($('#eventPrice').val());
         });
     </script>

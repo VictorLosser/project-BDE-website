@@ -9,13 +9,17 @@
             {{ csrf_field() }}
             <div class="row">
                 <div>
-                    <input name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
-                       required>
+                    <input id="eventName" name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
+                           required>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col">
-                    <textarea name="eventDescription" class="form-control" rows="3" placeholder="description"
+                    <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3" placeholder="description"
                               required></textarea>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col">
                     <input name="eventDate" type="date" class="form-control" placeholder="date"
                            required>
@@ -43,4 +47,54 @@
     <br>
     <br>
 
+    <!--OLD EVENT -->
+    <div class="container">
+        <div class="row" style="justify-content: center;">
+
+            <!-- CURRENTLY CREATING EVENT -->
+            <h3>Apparence : </h3>
+            <div class="col-md-3 product-item">
+                <div class="event-header">
+                    <h1 class="rt-title"><i>Titre</i></h1>
+                </div>
+                <div class="event-description">
+                    <p class="rt-description"><i>Description</i></p>
+                </div>
+                <div class="event-date pannelRightAlign">
+                    <p class="rt-date"><i>Date</i></p>
+                </div>
+                <div class="event-recurrence pannelRightAlign">
+                    <p class="rt-recurrence"><i>Récurrence</i></p>
+                </div>
+                <div class="event-price pannelRightAlign">
+                    <p id="price" class="rt-price"><i>Prix</i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $('#eventName').on('input', function () {
+            $('.rt-title').text($('#eventName').val());
+        });
+
+        $('#eventDescription').on('input', function () {
+            $('.rt-description').text($('#eventDescription').val());
+        });
+
+        $('#eventDate').on('change', function () {
+            $('.rt-date').text($('#eventDate').val());
+        });
+
+        $('#eventRecurrence').on('change', function () {
+            $('.rt-recurrence').text($('#eventRecurrence').val());
+        });
+
+        $('#eventPrice').on('change keyup keydown', function () {
+            $('.rt-price').text($('#eventPrice').val());
+        });
+    </script>
 @endsection

@@ -89,7 +89,7 @@ class productController extends Controller
      */
     public function update(Request $request, $id)
     {
-        ProductBDE::find($id)->update([
+        ProductBDE::where('product_id', $id)->update([
             'title' => $request->productName,
             'image' => $request->productImg,
             'description' => $request->productDescription,
@@ -106,7 +106,7 @@ class productController extends Controller
      */
     public function destroy($id)
     {
-        ProductBDE::find($id)->delete();
+        ProductBDE::where('product_id', $id)->delete();
         return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
     }
 }
