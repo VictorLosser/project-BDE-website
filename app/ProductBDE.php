@@ -9,7 +9,7 @@ class ProductBDE extends Model
     protected $table = "product-bde";
 
     protected $fillable = [
-        'title', 'description', 'price', 'category_id'
+        'id', 'title', 'description', 'price', 'category_id'
     ];
 
     public function category(){

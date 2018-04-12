@@ -8,6 +8,10 @@ class ImageBDE extends Model
 {
     protected $table = "image-bde";
 
+    protected $fillable = [
+        'image_link','alt','imageable_id','imageable_type','id',
+    ];
+
     public function usersPost(){
         return $this->belongsTo('App\User','id','id');
     }
@@ -23,7 +27,4 @@ class ImageBDE extends Model
     public function comments(){
         return $this->morphMany('App\CommentsBDE','commentable');
     }
-    protected $fillable = [
-        'image_link','alt','imageable_id','imageable_type','id',
-    ];
 }

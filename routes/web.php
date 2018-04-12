@@ -48,3 +48,7 @@ Route::resources([
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/mentions-legales', function () {
+    return view('mentions');
+});
