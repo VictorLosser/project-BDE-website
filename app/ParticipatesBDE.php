@@ -8,5 +8,7 @@ class ParticipatesBDE extends Model
 {
     protected $table = "participates-bde";
 
-    public $timestamps = false;
+    protected $fillable = [
+        'event_id','id',
+    ];
 }

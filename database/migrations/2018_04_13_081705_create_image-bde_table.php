@@ -17,16 +17,14 @@ class CreateImageBdeTable extends Migration
             $table->increments('image_id');
             $table->string('image_link',255);
             $table->string('alt',255);
-            $table->integer('event_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->morphs('imageable');
+            $table->integer('id')->unsigned();
+            $table->timestamps();
 
             $table->engine = 'InnoDB';
         });
         Schema::table('image-bde', function ($table) {
-            $table->foreign('event_id')->references('event_id')->on('events-bde');
-            $table->foreign('product_id')->references('product_id')->on('product-bde');
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 

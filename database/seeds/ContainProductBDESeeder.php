@@ -13,32 +13,32 @@ class ContainProductBDESeeder extends Seeder
     {
         DB::table('contain-product-bde')->insert([
             'quantity' => 2,
-            'product_id' => 5,
+            'product_id' => 1,
             'order_id' => 1
         ]);
         DB::table('contain-product-bde')->insert([
             'quantity' => 5,
-            'product_id' => 6,
+            'product_id' => 2,
             'order_id' => 2
         ]);
         DB::table('contain-product-bde')->insert([
             'quantity' => 1,
-            'product_id' => 7,
+            'product_id' => 3,
             'order_id' => 2
         ]);
         DB::table('contain-product-bde')->insert([
             'quantity' => 1,
-            'product_id' => 8,
+            'product_id' => 4,
             'order_id' => 3
         ]);
         DB::table('contain-product-bde')->insert([
             'quantity' => 4,
-            'product_id' => 9,
+            'product_id' => 5,
             'order_id' => 3
         ]);
         DB::table('contain-product-bde')->insert([
             'quantity' => 3,
-            'product_id' => 10,
+            'product_id' => 6,
             'order_id' => 3
         ]);
     }

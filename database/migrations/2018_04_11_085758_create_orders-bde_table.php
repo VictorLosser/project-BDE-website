@@ -17,13 +17,14 @@ class CreateOrdersBdeTable extends Migration
             $table->increments('order_id');
             $table->decimal('total_price', 10, 2);
             $table->date('order_date');
-            $table->integer('user_id')->unsigned();
+            $table->integer('id')->unsigned();
+            $table->timestamps();
 
             $table->engine = 'InnoDB';
 
         });
         Schema::table('orders-bde', function ($table) {
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 

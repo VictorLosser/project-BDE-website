@@ -8,5 +8,7 @@ class ContainProductBDE extends Model
 {
     protected $table = "contain-product-bde";
 
-    public $timestamps = false;
+    protected $fillable = [
+        'quantity','product_id','order_id',
+    ];
 }

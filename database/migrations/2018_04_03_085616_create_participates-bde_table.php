@@ -15,9 +15,10 @@ class CreateParticipatesBdeTable extends Migration
     {
         Schema::create('participates-bde', function (Blueprint $table) {
             $table->integer('event_id');
-            $table->integer('user_id');
+            $table->integer('id');
+            $table->timestamps();
 
-            $table->primary(array('event_id', 'user_id'));
+            $table->primary(array('event_id', 'id'));
             $table->engine = 'InnoDB';
 
         });

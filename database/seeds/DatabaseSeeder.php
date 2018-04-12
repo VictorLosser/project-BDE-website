@@ -12,12 +12,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-//            ProductCategorySeeder::class,
-//            ProductsBDESeeder::class,
-//            ImageBDESeeder::class,
-//            OrdersBDESeeder::class,
-//            ContainProductBDESeeder::class,
-            LikeImageBDESeeder::class
+            CommentsSeeder::class,
+            ContainProductBDESeeder::class,
+            EventsBDESeeder::class,
+            IdeaBoxSeeder::class,
+            ImageBDESeeder::class,
+            LikesSeeder::class,
+            OrdersBDESeeder::class,
+            ProductCategorySeeder::class,
+            ProductsBDESeeder::class
         ]);
     }
 }

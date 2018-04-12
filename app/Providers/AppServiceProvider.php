@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +15,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Relation::morphMap([
+            'event' => 'App\EventsBDE',
+            'image' => 'App\ImageBDE',
+            'idea' => 'App\IdeaBoxBDE',
+            'product' => 'App\ProductBDE'
+        ]);
+
+
         Schema::defaultStringLength(191);
     }
 
