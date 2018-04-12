@@ -11,4 +11,7 @@ class StatusBDE extends Model
     public function users(){
         return $this->hasMany('App\User','status_id','status_id');
     }
+    protected $fillable = [
+        'status',
+    ];
 }

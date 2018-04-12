@@ -11,4 +11,8 @@ class ProductCategoryBDE extends Model
     public function products(){
         return $this->hasMany('App\ProductBDE','category_id', 'category_id');
     }
+
+    protected $fillable = [
+        'category_name',
+    ];
 }

@@ -15,4 +15,8 @@ class CommentsBDE extends Model
     public function commentable(){
         return $this->morphTo();
     }
+
+    protected $fillable = [
+        'content','id','commentable_id','commentable_type',
+    ];
 }

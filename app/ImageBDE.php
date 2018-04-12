@@ -23,4 +23,7 @@ class ImageBDE extends Model
     public function comments(){
         return $this->morphMany('App\CommentsBDE','commentable');
     }
+    protected $fillable = [
+        'image_link','alt','imageable_id','imageable_type','id',
+    ];
 }

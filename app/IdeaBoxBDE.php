@@ -15,4 +15,8 @@ class IdeaBoxBDE extends Model
     public function likes(){
         return $this->morphMany('App\LikeBDE', 'likeable');
     }
+
+    protected $fillable = [
+        'title','description','id',
+    ];
 }

@@ -17,4 +17,8 @@ class OrdersBDE extends Model
     public function usersOrder(){
         return $this->belongsTo('App\User','id','id');
     }
+
+    protected $fillable = [
+        'total_price','order_date','id',
+    ];
 }

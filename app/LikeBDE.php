@@ -11,4 +11,8 @@ class LikeBDE extends Model
     public function likeable(){
         return $this->morphTo();
     }
+
+    protected $fillable = [
+        'likeable_id','likeable_type','id',
+    ];
 }
