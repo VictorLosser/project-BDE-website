@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
 
         });
         Schema::table('users', function ($table) {
-            $table->foreign('status_id')->references('status_id')->on('status-bde');
+            $table->foreign('status_id')->references('id')->on('status-bde');
         });
     }
 

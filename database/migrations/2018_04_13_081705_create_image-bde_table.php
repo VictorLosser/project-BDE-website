@@ -14,17 +14,17 @@ class CreateImageBdeTable extends Migration
     public function up()
     {
         Schema::create('image-bde', function (Blueprint $table) {
-            $table->increments('image_id');
+            $table->increments('id');
             $table->string('image_link',255);
             $table->string('alt',255);
             $table->morphs('imageable');
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
         });
         Schema::table('image-bde', function ($table) {
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

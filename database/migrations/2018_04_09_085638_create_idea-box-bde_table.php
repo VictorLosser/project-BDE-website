@@ -14,16 +14,16 @@ class CreateIdeaBoxBdeTable extends Migration
     public function up()
     {
         Schema::create('idea-box-bde', function (Blueprint $table) {
-            $table->increments('idea_box_id');
+            $table->increments('id');
             $table->string('title',255);
             $table->string('description',255);
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->engine = 'InnoDB';
 
         });
         Schema::table('idea-box-bde', function ($table) {
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

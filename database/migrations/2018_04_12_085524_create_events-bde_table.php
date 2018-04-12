@@ -14,20 +14,20 @@ class CreateEventsBdeTable extends Migration
     public function up()
     {
         Schema::create('events-bde', function (Blueprint $table) {
-            $table->increments('event_id');
+            $table->increments('id');
             $table->string('title',255);
             $table->string('description',255);
             $table->date('date_event');
             $table->decimal('price', 10, 2);
             $table->string('recurrence',255);
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
 
         });
         Schema::table('events-bde', function ($table) {
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

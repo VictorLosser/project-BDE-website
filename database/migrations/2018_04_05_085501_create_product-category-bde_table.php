@@ -14,7 +14,7 @@ class CreateProductCategoryBdeTable extends Migration
     public function up()
     {
         Schema::create('product-category-bde', function (Blueprint $table) {
-            $table->increments('category_id');
+            $table->increments('id');
             $table->string('category_name',255);
             $table->timestamps();
 

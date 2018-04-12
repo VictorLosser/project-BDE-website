@@ -14,7 +14,7 @@ class CreateStatusBdeTable extends Migration
     public function up()
     {
         Schema::create('status-bde', function (Blueprint $table) {
-            $table->increments('status_id');
+            $table->increments('id');
             $table->string('status',255);
             $table->timestamps();
 

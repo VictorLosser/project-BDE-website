@@ -14,17 +14,17 @@ class CreateOrdersBdeTable extends Migration
     public function up()
     {
         Schema::create('orders-bde', function (Blueprint $table) {
-            $table->increments('order_id');
+            $table->increments('id');
             $table->decimal('total_price', 10, 2);
             $table->date('order_date');
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
 
         });
         Schema::table('orders-bde', function ($table) {
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -14,7 +14,7 @@ class CreateProductBdeTable extends Migration
     public function up()
     {
         Schema::create('product-bde', function (Blueprint $table) {
-            $table->increments('product_id');
+            $table->increments('id');
             $table->string('title',255);
             $table->text('description');
             $table->decimal('price', 10, 2);
@@ -24,7 +24,7 @@ class CreateProductBdeTable extends Migration
             $table->engine = 'InnoDB';
         });
         Schema::table('product-bde', function ($table) {
-            $table->foreign('category_id')->references('category_id')->on('product-category-bde');
+            $table->foreign('category_id')->references('id')->on('product-category-bde');
         });
     }
 

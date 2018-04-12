@@ -14,13 +14,13 @@ class CreateLikesBDETable extends Migration
     public function up()
     {
         Schema::create('likes-bde', function (Blueprint $table) {
-            $table->increments('like_id');
+            $table->increments('id');
             $table->morphs('likeable');
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
         Schema::table('likes-bde', function ($table) {
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
