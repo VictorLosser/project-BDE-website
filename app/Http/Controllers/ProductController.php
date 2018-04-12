@@ -91,7 +91,7 @@ class productController extends Controller
     {
         ProductBDE::where('product_id', $id)->update([
             'title' => $request->productName,
-            'image' => $request->productImg,
+            /*'image' => $request->productImg,*/
             'description' => $request->productDescription,
             'price' => $request->productPrice
         ]);

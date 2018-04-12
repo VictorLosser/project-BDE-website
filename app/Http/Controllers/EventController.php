@@ -82,7 +82,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        EventsBDE::where('event_id', $id)->first()->update([
+        EventsBDE::where('event_id', $id)->update([
             'title' => $request->eventName,
             'description' => $request->eventDescription,
             'date_event' => $request->eventDate,
@@ -103,7 +103,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        EventsBDE::where('event_id', $id)->first()->delete();
+        EventsBDE::where('event_id', $id)->delete();
         return redirect('/evenements')->with('status', 'Le produit a bien été supprimé');
     }
 }

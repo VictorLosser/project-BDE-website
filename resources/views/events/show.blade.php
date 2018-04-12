@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', "Supprimer un évenement")
+@section('title', "Supprimer un événement")
 
 @section('content')
     <style>

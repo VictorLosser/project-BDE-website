@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', "Modifier un produit")
+@section('title', "Modifier un événement")
 
 @section('content')
 
@@ -12,31 +12,31 @@
         <div class="row">
             <div>
                 <input id="eventName" name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
-                       required>
+                       value="{{ $event->title }}" required>
             </div>
         </div>
         <div class="row">
             <div class="col">
                     <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3" placeholder="description"
-                              required></textarea>
+                               required>{{ $event->description }}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <input id="eventDate" name="eventDate" type="date" class="form-control" placeholder="date"
-                       required>
+                       value="{{ $event->event_date }}" required>
             </div>
             <div class="col">
                 <input id="eventRecurrence" name="eventRecurrence" type="text" class="form-control" placeholder="récurrence"
-                       required>
+                       value="{{ $event->recurrence }}" required>
             </div>
             <div class="col">
                 <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix" step="0.01"
-                       required>
+                       value="{{ $event->price }}" required>
             </div>
             <div class="col">
                 <input id="eventIdUser" name="eventIdUser" type="number" class="form-control" placeholder="user id" step="1"
-                       required>
+                       value="{{ $event->id }}" required>
             </div>
         </div>
         <br>
@@ -107,7 +107,7 @@
             $('.rt-date').text($('#eventDate').val());
         });
 
-        $('#eventRecurrence').on('change', function () {
+        $('#eventRecurrence').on('input', function () {
             $('.rt-recurrence').text($('#eventRecurrence').val());
         });
 

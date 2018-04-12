@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', "Liste des évenements")
+@section('title', "Liste des événements")
 
 @section('content')
 

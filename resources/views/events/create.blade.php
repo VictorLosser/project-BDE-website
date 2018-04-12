@@ -1,57 +1,54 @@
 @extends('layouts.template')
 
-@section('title', "Ajouter un produit")
+@section('title', "Ajouter un événement")
 
 @section('content')
 
-    <div id="formProduit">
-        <form method="post" action="/evenement">
-            {{ csrf_field() }}
-            <div class="row">
-                <div>
-                    <input id="eventName" name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
-                           required>
-                </div>
+    <form method="post" action="evenement/">
+        {{ csrf_field() }}
+        <div class="row">
+            <div>
+                <input id="eventName" name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
+                       value="" required>
             </div>
-            <div class="row">
-                <div class="col">
+        </div>
+        <div class="row">
+            <div class="col">
                     <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3" placeholder="description"
                               required></textarea>
-                </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <input name="eventDate" type="date" class="form-control" placeholder="date"
-                           required>
-                </div>
-                <div class="col">
-                    <input name="eventRecurrence" type="text" class="form-control" placeholder="récurrence"
-                           required>
-                </div>
-                <div class="col">
-                    <input name="eventPrice" type="number" class="form-control" placeholder="prix" step="0.01"
-                           required>
-                </div>
-                <div class="col">
-                    <input name="eventIdUser" type="number" class="form-control" placeholder="user id" step="1"
-                           required>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input id="eventDate" name="eventDate" type="date" class="form-control" placeholder="date"
+                       value="" required>
             </div>
-            <br>
-            <input type="submit"
-                   value="ENVOYER"
-                   class="btn btn-sm btn-secondary"/>
-        </form>
-    </div>
+            <div class="col">
+                <input id="eventRecurrence" name="eventRecurrence" type="text" class="form-control" placeholder="récurrence"
+                       value="" required>
+            </div>
+            <div class="col">
+                <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix" step="0.01"
+                       value="" required>
+            </div>
+            <div class="col">
+                <input id="eventIdUser" name="eventIdUser" type="number" class="form-control" placeholder="user id" step="1"
+                       value="" required>
+            </div>
+        </div>
+        <br>
+        <input type="submit"
+               value="ENVOYER"
+               class="btn btn-sm btn-secondary"/>
+    </form>
 
-    <br>
     <br>
 
     <!--OLD EVENT -->
     <div class="container">
         <div class="row" style="justify-content: center;">
 
-            <!-- CURRENTLY CREATING EVENT -->
+            <!-- CURRENTLY MODIFIED EVENT -->
             <h3>Apparence : </h3>
             <div class="col-md-3 product-item">
                 <div class="event-header">
@@ -89,7 +86,7 @@
             $('.rt-date').text($('#eventDate').val());
         });
 
-        $('#eventRecurrence').on('change', function () {
+        $('#eventRecurrence').on('input', function () {
             $('.rt-recurrence').text($('#eventRecurrence').val());
         });
 
