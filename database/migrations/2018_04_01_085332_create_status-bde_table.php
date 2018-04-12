@@ -16,8 +16,9 @@ class CreateStatusBdeTable extends Migration
         Schema::create('status-bde', function (Blueprint $table) {
             $table->increments('status_id');
             $table->string('status',255);
-            $table->engine = 'InnoDB';
+            $table->timestamps();
 
+            $table->engine = 'InnoDB';
         });
     }
 

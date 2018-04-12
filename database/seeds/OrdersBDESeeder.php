@@ -19,12 +19,12 @@ class OrdersBDESeeder extends Seeder
         DB::table('orders-bde')->insert([
             'total_price' => 11.11,
             'order_date' => '2018-04-11 11:11:11',
-            'id' => 9
+            'id' => 2
         ]);
         DB::table('orders-bde')->insert([
             'total_price' => 366.99,
             'order_date' => '2018-04-11 10:05:00',
-            'id' => 8
+            'id' => 3
         ]);
     }
 }

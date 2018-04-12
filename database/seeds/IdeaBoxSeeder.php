@@ -19,12 +19,12 @@ class IdeaBoxSeeder extends Seeder
         DB::table('idea-box-bde')->insert([
             'title' => 'Barathon',
             'description' => 'Pour décompresser après un cctl bien difficile',
-            'id' => 8,
+            'id' => 3,
         ]);
         DB::table('idea-box-bde')->insert([
             'title' => 'Chasse aux oeufs de Paques',
             'description' => 'Nous adorons tous le chocolat',
-            'id' => 9,
+            'id' => 2,
         ]);
     }
 }

@@ -17,6 +17,7 @@ class CreateContainProductBdeTable extends Migration
             $table->integer('quantity');
             $table->integer('product_id');
             $table->integer('order_id');
+            $table->timestamps();
 
             $table->primary(array('product_id','order_id'));
 

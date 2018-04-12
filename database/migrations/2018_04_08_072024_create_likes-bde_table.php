@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsBdeTable extends Migration
+class CreateLikesBDETable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,13 @@ class CreateEventsBdeTable extends Migration
      */
     public function up()
     {
-        Schema::create('events-bde', function (Blueprint $table) {
-            $table->increments('event_id');
-            $table->string('title',255);
-            $table->string('description',255);
-            $table->date('date_event');
-            $table->decimal('price', 10, 2);
-            $table->string('recurrence',255);
+        Schema::create('likes-bde', function (Blueprint $table) {
+            $table->increments('like_id');
+            $table->morphs('likeable');
             $table->integer('id')->unsigned();
             $table->timestamps();
-
-            $table->engine = 'InnoDB';
-
         });
-        Schema::table('events-bde', function ($table) {
+        Schema::table('likes-bde', function ($table) {
             $table->foreign('id')->references('id')->on('users');
         });
     }
@@ -38,6 +31,6 @@ class CreateEventsBdeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events-bde');
+        Schema::dropIfExists('likes-bde');
     }
 }
