@@ -30,7 +30,6 @@ Route::get('/produits', function (Request $request) {
         })
         ->get();
 
-
     return view('products',
         compact('products'),
         compact('priceAVG'));

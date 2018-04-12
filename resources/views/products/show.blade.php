@@ -16,7 +16,7 @@
     <div class="s-product-header">
         <h1>{{ $product->title }}</h1>
     </div>
-    <div class="s-product-image"><img src="{{ asset('/products/'.$product->image) }}"></div>
+    <div class="s-product-image"><img src="{{asset('products/'.$product->images[0]->image_link)}}" alt="{{$product->images[0]->alt}}"></div>
     <div class="s-product-description">
         <p>{{ $product->description }}</p>
     </div>

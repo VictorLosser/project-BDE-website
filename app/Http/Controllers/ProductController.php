@@ -31,12 +31,12 @@ class productController extends Controller
     {
         if (Auth::check()) {
             $users = User::where('id', '=', Auth::id())->get();
-            $status = $users::isauthorized();
+            $status = $users{0}->status_id;
         }
         else
-        return view('welcome');
+            return view('welcome');
 
-         if ( $status = 2 )
+            if ($status = 2)
                 return view('products.create');
             else
                 return view('welcome');
@@ -77,7 +77,7 @@ class productController extends Controller
      */
     public function show($id)
     {
-        $product = ProductBDE::where('product_id', $id)->first();
+        $product = ProductBDE::find($id);
         return view('products.show', compact('product'));
     }
 
@@ -89,7 +89,7 @@ class productController extends Controller
      */
     public function edit($id)
     {
-        $product = ProductBDE::where('product_id', $id)->first();
+        $product = ProductBDE::find($id);
 
         return view('products.edit', compact('product'));
     }
@@ -103,7 +103,7 @@ class productController extends Controller
      */
     public function update(Request $request, $id)
     {
-        ProductBDE::where('product_id', $id)->update([
+        ProductBDE::find($id)->update([
             'title' => $request->productName,
             /*'image' => $request->productImg,*/
             'description' => $request->productDescription,
@@ -120,7 +120,7 @@ class productController extends Controller
      */
     public function destroy($id)
     {
-        ProductBDE::where('product_id', $id)->delete();
+        ProductBDE::find($id)->delete();
         return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
     }
 }
