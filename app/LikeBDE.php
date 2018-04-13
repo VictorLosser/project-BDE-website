@@ -13,6 +13,6 @@ class LikeBDE extends Model
     }
 
     protected $fillable = [
-        'likeable_id','likeable_type','id',
+        'likeable_id','likeable_type','user_id',
     ];
 }

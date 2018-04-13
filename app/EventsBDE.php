@@ -30,7 +30,7 @@ class EventsBDE extends Model
 
     /*Sans le fillable, ca ne marche po ! LAISSEZ LE WE NEED IT*/
     protected $fillable = [
-        'title', 'description', 'date_event', 'price', 'recurrence', 'id',
+        'title', 'description', 'date_event', 'price', 'recurrence', 'user_id',
     ];
 
 }

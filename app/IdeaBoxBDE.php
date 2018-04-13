@@ -17,6 +17,6 @@ class IdeaBoxBDE extends Model
     }
 
     protected $fillable = [
-        'title','description','id',
+        'title','description','user_id',
     ];
 }

@@ -17,6 +17,6 @@ class CommentsBDE extends Model
     }
 
     protected $fillable = [
-        'content','id','commentable_id','commentable_type',
+        'content','user_id','commentable_id','commentable_type',
     ];
 }
