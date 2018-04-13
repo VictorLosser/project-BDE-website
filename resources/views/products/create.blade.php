@@ -4,7 +4,8 @@
 
 @section('content')
 
-    <?php use App\ProductCategoryBDE;
+    <?php
+        use App\ProductCategoryBDE;
     ?>
 
     <div id="formProduit">

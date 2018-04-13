@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\EventsBDE;
+use App\ImageBDE;
+use App\User;
+use Storage;
+use File;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -20,14 +24,14 @@ class EventController extends Controller
             $authorisation = Auth::user()->isauthorized();
         }
         else
-            return view('welcome');
+            return redirect('/evenements')->with('status', 'Accès refusé');
 
         if ($authorisation == 'Bde'||'Salarié'){
             $events = EventsBDE::all();
             return view('events.index', compact('events'));}
 
         else
-            return view('welcome');
+            return redirect('/evenements')->with('status', 'Accès refusé');
     }
 
     /**
@@ -41,13 +45,13 @@ class EventController extends Controller
         $authorisation = Auth::user()->isauthorized();
     }
     else
-        return view('welcome');
+        return redirect('/evenements')->with('status', 'Accès refusé');
 
         if ($authorisation == 'Bde'){
             return view('events.create');}
 
         else
-            return view('welcome');
+            return redirect('/evenements')->with('status', 'Accès refusé');
 
     }
 
@@ -59,6 +63,10 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $lastImageId = ImageBDE::orderBy('id', 'DESC')->first()->id;
+
+        Storage::disk('public')->putFileAs('events', $request->eventImg, ($lastImageId + 1) . '.png');
+
         EventsBDE::create([
             'title' => $request->eventName,
             'description' => $request->eventDescription,
@@ -67,6 +75,17 @@ class EventController extends Controller
             'price' => $request->eventPrice,
             'id' => $request->eventIdUser
         ]);
+
+        $lastEventId = EventsBDE::orderBy('id', 'DESC')->first()->id;
+
+        ImageBDE::create([
+            'image_link' => ($lastImageId + 1) . '.png',
+            'alt' => $request->eventAlt,
+            'imageable_id' => $lastEventId,
+            'imageable_type' => 'event',
+            'user_id' => 1
+        ]);
+
 
         return redirect('/evenements')->with('status', "L'évènement a été ajouté avec succés !");
     }
@@ -93,7 +112,14 @@ class EventController extends Controller
     {
         $event = EventsBDE::find($id);
 
-        return view('events.edit', compact('event'));
+        if (Auth::check()) {
+            $status = Auth::user()->status_id;
+            if ($status == 2)
+                return view('events.edit', compact('event'));
+        }
+        else {
+                return redirect('/evenements')->with('status', 'Accès refusé');
+        }
     }
 
     /**
@@ -126,7 +152,23 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        EventsBDE::find($id)->delete();
+        $event = EventsBDE::find($id);
+
+        $event->images->each(function ($img, $key) {
+            $link = $img->image_link;
+            Storage::disk('public')->delete('events/'.$link);
+        });
+        /*foreach ($product->imsages as $img) {
+            $link = $img->image_link;
+            Storage::disk('public')->delete('products/'.$link);
+        }*/
+
+        ImageBDE::where([
+            ['imageable_id', '=', $id],
+            ['imageable_type', '=', 'event'],
+        ])->delete();
+        EventBDE::find($id)->delete();
+
         return redirect('/evenements')->with('status', 'Le produit a bien été supprimé');
     }
 }

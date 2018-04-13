@@ -24,7 +24,7 @@
                 <td>{{ $event->description }}</td>
                 <td>{{ $event->date_event }}</td>
                 <td>{{ $event->recurrence }}</td>
-                <td><img src="{{asset('events/'.$event->images[0]->image_link)}}" alt="{{$event->images[0]->alt}}" style="max-height: 100px;" /></td>
+                <td><img src="{{asset('storage/events/'.$event->images[0]->image_link)}}" alt="{{$event->images[0]->alt}}" style="max-height: 100px;" /></td>
                 <td>{{ $event->price }}</td>
                 <td>
                     <div style="max-width: 150px;">

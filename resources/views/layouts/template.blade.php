@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+use App\User;
+use Illuminate\Support\Facades\Auth;
+?>
+
+        <!DOCTYPE html>
 <html lang="fr">
 <head>
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
@@ -18,57 +23,90 @@
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav m-auto">
-                <li class="nav-item font-weight-bold" id="nav_home">
-                    <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item font-weight-bold" id="nav_produits">
-                    <a class="nav-link" href="/produits">PRODUITS</a>
-                </li>
-                <li class="nav-item font-weight-bold" id="nav_evenements">
-                    <a class="nav-link" href="/evenements">EVENEMENTS</a>
-                </li>
-                <?php use App\User;?>
-                @if (Auth::check()&& Auth::user()->isauthorized() == 'Bde')
-                <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                        GESTION PRODUITS
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/produit/create">Ajouter un produit</a>
-                        <a class="dropdown-item" href="/produit">Modifier ou supprimer un produit</a>
-                    <li class="nav-item font-weight-bold" id="nav_evenements">
-                        <a class="nav-link" href="/idée">Boite à idée</a>
+        @if (Auth::check())
+            @if((Auth::user()->status_id) == 2)
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item font-weight-bold" id="nav_home">
+                            <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                GESTION EVENEMENTS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/evenements">Accueil</a>
+                                <a class="dropdown-item" href="/evenement/create">Ajouter un événement</a>
+                                <a class="dropdown-item" href="/evenement">Modifier ou supprimer un événement</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                GESTION PRODUITS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/produits">Accueil</a>
+                                <a class="dropdown-item" href="/produit/create">Ajouter un produit</a>
+                                <a class="dropdown-item" href="/produit">Modifier ou supprimer un produit</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                GESTION BOITE A IDEES
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/idees">Accueil</a>
+                                <a class="dropdown-item" href="/idee/create">Ajouter une idée</a>
+                                <a class="dropdown-item" href="/idee">Modifier ou supprimer une idée</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            @endif
+        @else
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item font-weight-bold" id="nav_home">
+                        <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                     </li>
-                    </div>
-                </li>
-                 @else
-                    <a class="nav-link" href="/idée">Boite à idée</a>
-                 @endif
+                    <li class="nav-item font-weight-bold" id="nav_produits">
+                        <a class="nav-link" href="/produits">PRODUITS</a>
+                    </li>
+                    <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                            EVENEMENTS
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/evenements">Nos événements</a>
+                            <a class="dropdown-item" href="/idees">Propositions d'événements</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        @endif
 
-            </ul>
-        </div>
+        <?php
+        $userId = Auth::id();
+        $users = User::where('id', '=', $userId)->get();
+        ?>
 
         @if (Auth::check())
-                <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                        {{ Auth::user()->firstname}}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/produit/create">Profil</a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">Logout</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                        <a class="dropdown-item" href="{{ route('logout') }}">Panier</a>
-                <li class="nav-item font-weight-bold" id="nav_evenements">
-                </li>
-                </div>
-                </li>
+            <p style='color:white; margin: 0 10px 0 0; font-size:20px'>Bonjour {{ $users[0]->firstname}} ! </p>
+            <a class="btn-member btn btn-outline-success my-2 my-sm-0" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
         @else
             <a href="{{ url('/register') }}">
                 <button class="btn-member btn btn-outline-success my-2 my-sm-0">Inscription</button>

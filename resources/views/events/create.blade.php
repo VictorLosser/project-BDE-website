@@ -4,7 +4,12 @@
 
 @section('content')
 
-    <form method="post" action="evenement/">
+    <?php
+        use App\EventsBDE;
+        use App\ImageBDE;
+    ?>
+
+    <form method="post" action="/evenement" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
             <div>
@@ -14,7 +19,8 @@
         </div>
         <div class="row">
             <div class="col">
-                    <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3" placeholder="description"
+                    <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3"
+                              placeholder="description"
                               required></textarea>
             </div>
         </div>
@@ -24,18 +30,33 @@
                        value="" required>
             </div>
             <div class="col">
-                <input id="eventRecurrence" name="eventRecurrence" type="text" class="form-control" placeholder="récurrence"
+                <input id="eventRecurrence" name="eventRecurrence" type="text" class="form-control"
+                       placeholder="récurrence"
                        value="" required>
             </div>
             <div class="col">
-                <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix" step="0.01"
+                <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix"
+                       step="0.01"
                        value="" required>
             </div>
             <div class="col">
-                <input id="eventIdUser" name="eventIdUser" type="number" class="form-control" placeholder="user id" step="1"
+                <input id="eventIdUser" name="eventIdUser" type="number" class="form-control" placeholder="user id"
+                       step="1"
                        value="" required>
             </div>
         </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <input type="file" name="eventImg">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input name="eventAlt" type="text" class="form-control" placeholder="Description de l'image" required>
+            </div>
+        </div>
+        <br>
         <br>
         <input type="submit"
                value="ENVOYER"

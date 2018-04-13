@@ -25,7 +25,7 @@ class productController extends Controller
             $authorisation = Auth::user()->isauthorized();
         }
         else
-            return view('welcome');
+            return view('products.index', compact('products'));
 
         if ($authorisation == 'Bde'){
 
@@ -33,7 +33,7 @@ class productController extends Controller
             return view('products.index', compact('products'));}
 
         else
-            return view('welcome');
+            return view('products.index', compact('products'));
 
     }
 
@@ -48,12 +48,12 @@ class productController extends Controller
             $authorisation = Auth::user()->isauthorized();
         }
         else
-            return view('welcome');
+            return redirect('/produits')->with('status', 'Accès refusé');
 
             if ($authorisation == 'Bde')
                 return view('products.create');
             else
-                return view('welcome');
+                return redirect('/produits')->with('status', 'Accès refusé');
 
 
     }
@@ -79,7 +79,6 @@ class productController extends Controller
 
         ProductBDE::create([
             'title' => $request->productName,
-            'image' => $request->productImg,
             'category_id' => $request->productCategory,
             'description' => $request->productDescription,
             'price' => $request->productPrice
@@ -122,7 +121,7 @@ class productController extends Controller
             $authorisation = Auth::user()->isauthorized();
         }
         else
-            return view('welcome');
+            return redirect('/produits')->with('status', 'Accès refusé');
 
         if ($authorisation == 'Bde'){
 
@@ -131,7 +130,7 @@ class productController extends Controller
         return view('products.edit', compact('product'));}
 
         else
-            return view('welcome');
+            return redirect('/produits')->with('status', 'Accès refusé');
 
     }
 
@@ -148,7 +147,7 @@ class productController extends Controller
             $authorisation = Auth::user()->isauthorized();
         }
         else
-            return view('welcome');
+            return redirect('/produits')->with('status', 'Accès refusé');
 
         if ($authorisation == 'Bde'){
 
@@ -161,7 +160,7 @@ class productController extends Controller
 
             return redirect('/produits')->with('status', 'Le produit a bien été modifié');}
         else
-            return view('welcome');
+            return redirect('/produits')->with('status', 'Accès refusé');
 
     }
 
@@ -173,7 +172,23 @@ class productController extends Controller
      */
     public function destroy($id)
     {
+        $product = ProductBDE::find($id);
+
+        $product->images->each(function ($img, $key) {
+            $link = $img->image_link;
+            Storage::disk('public')->delete('products/'.$link);
+        });
+        /*foreach ($product->images as $img) {
+            $link = $img->image_link;
+            Storage::disk('public')->delete('products/'.$link);
+        }*/
+
+        ImageBDE::where([
+            ['imageable_id', '=', $id],
+            ['imageable_type', '=', 'product'],
+        ])->delete();
         ProductBDE::find($id)->delete();
+
         return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
     }
 }

@@ -102,7 +102,7 @@
                     <h1 class="rt-title">{{$event->title}}</h1>
                 </div>
                 <div>
-                    <img class="rt-image" src="{{asset('events/'.$imgMorphLink)}}"
+                    <img class="rt-image" src="{{asset('storage/events/'.$imgMorphLink)}}"
                          alt="{{$event->images[0]->alt}}" style="height: 200px; max-width: 100%;"/>
                 </div>
                 <div class="event-description">

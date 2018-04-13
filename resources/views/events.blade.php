@@ -4,45 +4,39 @@
 
 @section('content')
 
-    <nav id="sousNav">
-        <div id="addEvent">
-            <h5><a href="/evenement/create">Ajouter un evenement</a></h5>
-        </div>
-        <div id="updateEvent">
-            <h5><a href="/evenement">Modifier ou supprimer un evenement</a></h5>
-        </div>
-    </nav>
-
     @if (session('status'))
         <div class="alert alert-success" style="margin: 0px;">
             {{ session('status') }}
         </div>
     @endif
 
-        <div class="row" style="justify-content: space-around;">
-            @foreach ($events as $event)
-                <div class="col-md-3 product-item">
-                    <div class="event-header">
-                        <h1><a href="/evenement/{{$event->id}}">{{$event->title}}</a></h1>
-                    </div>
-                    <div class="event-description">
-                        <p>{{$event->description}}</p>
-                    </div>
-                    <div>
-                        <img src="{{asset('events/'.$event->images[0]->image_link)}}" alt="{{$event->images[0]->alt}}" style="height: 200px; max-width: 100%;" />
-                    </div>
+    <button type="button" class="btn btn-primary btn-lg btn-block"><a class="nav-link" href="/idee/create" style="color: white;"><h2>Ajouter une idée</h2></a></button>
 
-                    <div class="event-date pannelRightAlign">
-                        <p>{{$event->date_event}}</p>
-                    </div>
-                    <div class="event-recurrence pannelRightAlign">
-                        <p>{{$event->recurrence}}</p>
-                    </div>
-                    <div class="event-price pannelRightAlign">
-                        <p id="price">{{$event->price}}€</p>
-                    </div>
+    <div class="row" style="justify-content: space-around;">
+        @foreach ($events as $event)
+            <div class="col-md-3 product-item">
+                <div class="event-header">
+                    <h1><a href="/evenement/{{$event->id}}">{{$event->title}}</a></h1>
                 </div>
-            @endforeach
-        </div>
+                <div class="event-description">
+                    <p>{{$event->description}}</p>
+                </div>
+                <div>
+                    <img src="{{asset('storage/events/'.$event->images[0]->image_link)}}"
+                         alt="{{$event->images[0]->alt}}" style="height: 200px; max-width: 100%;"/>
+                </div>
+
+                <div class="event-date pannelRightAlign">
+                    <p>{{$event->date_event}}</p>
+                </div>
+                <div class="event-recurrence pannelRightAlign">
+                    <p>{{$event->recurrence}}</p>
+                </div>
+                <div class="event-price pannelRightAlign">
+                    <p id="price">{{$event->price}}€</p>
+                </div>
+            </div>
+        @endforeach
+    </div>
 
 @endsection
