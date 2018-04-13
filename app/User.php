@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','status_id'
     ];
 
     public function imagesPosted(){
@@ -59,6 +59,15 @@ class User extends Authenticatable
 
     public function likes(){
         return $this->hasMany('App\LikeBDE','user_id');
+    }
+    public function isauthorized(){
+        $status = $this->status_id;
+
+        switch($status){
+            case 1 : return 'free';
+            case 2 : return 'Bde';
+            case 3 : return 'Salarié';
+        }
     }
 
 }

@@ -21,8 +21,20 @@ class productController extends Controller
      */
     public function index()
     {
-        $products = ProductBDE::all();
-        return view('products.index', compact('products'));
+        if (Auth::check()) {
+            $authorisation = Auth::user()->isauthorized();
+        }
+        else
+            return view('welcome');
+
+        if ($authorisation == 'Bde'){
+
+            $products = ProductBDE::all();
+            return view('products.index', compact('products'));}
+
+        else
+            return view('welcome');
+
     }
 
     /**
@@ -33,12 +45,12 @@ class productController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            $status = Auth::user()->status_id;
+            $authorisation = Auth::user()->isauthorized();
         }
         else
             return view('welcome');
 
-            if ($status == 2)
+            if ($authorisation == 'Bde')
                 return view('products.create');
             else
                 return view('welcome');
@@ -106,9 +118,21 @@ class productController extends Controller
      */
     public function edit($id)
     {
-        $product = ProductBDE::find($id);
+        if (Auth::check()) {
+            $authorisation = Auth::user()->isauthorized();
+        }
+        else
+            return view('welcome');
 
-        return view('products.edit', compact('product'));
+        if ($authorisation == 'Bde'){
+
+           $product = ProductBDE::find($id);
+
+        return view('products.edit', compact('product'));}
+
+        else
+            return view('welcome');
+
     }
 
     /**
@@ -120,13 +144,25 @@ class productController extends Controller
      */
     public function update(Request $request, $id)
     {
-        ProductBDE::find($id)->update([
-            'title' => $request->productName,
-            /*'image' => $request->productImg,*/
-            'description' => $request->productDescription,
-            'price' => $request->productPrice
-        ]);
-        return redirect('/produits')->with('status', 'Le produit a bien été modifié');
+        if (Auth::check()) {
+            $authorisation = Auth::user()->isauthorized();
+        }
+        else
+            return view('welcome');
+
+        if ($authorisation == 'Bde'){
+
+            ProductBDE::find($id)->update([
+                'title' => $request->productName,
+                /*'image' => $request->productImg,*/
+                'description' => $request->productDescription,
+                'price' => $request->productPrice
+            ]);
+
+            return redirect('/produits')->with('status', 'Le produit a bien été modifié');}
+        else
+            return view('welcome');
+
     }
 
     /**

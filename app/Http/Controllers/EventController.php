@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\EventsBDE;
 
+use Illuminate\Support\Facades\Auth;
+
 class EventController extends Controller
 {
     /**
@@ -14,8 +16,18 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = EventsBDE::all();
-        return view('events.index', compact('events'));
+        if (Auth::check()) {
+            $authorisation = Auth::user()->isauthorized();
+        }
+        else
+            return view('welcome');
+
+        if ($authorisation == 'Bde'||'Salarié'){
+            $events = EventsBDE::all();
+            return view('events.index', compact('events'));}
+
+        else
+            return view('welcome');
     }
 
     /**
@@ -25,7 +37,18 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        if (Auth::check()) {
+        $authorisation = Auth::user()->isauthorized();
+    }
+    else
+        return view('welcome');
+
+        if ($authorisation == 'Bde'){
+            return view('events.create');}
+
+        else
+            return view('welcome');
+
     }
 
     /**

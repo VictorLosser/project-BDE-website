@@ -29,7 +29,8 @@
                 <li class="nav-item font-weight-bold" id="nav_evenements">
                     <a class="nav-link" href="/evenements">EVENEMENTS</a>
                 </li>
-                @if (Auth::check())
+                <?php use App\User;?>
+                @if (Auth::check()&& Auth::user()->isauthorized() == 'Bde')
                 <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
@@ -49,19 +50,25 @@
 
             </ul>
         </div>
-        <?php use App\User;
-        $userId = Auth::id();
-        $users = User::where('id','=',$userId)->get(); ?>
+
         @if (Auth::check())
-            <p style='color:white; margin: 0 10px 0 0; font-size:20px'>Bonjour : {{ $users[0]->firstname}} ! </p>
-            <a class="btn-member btn btn-outline-success my-2 my-sm-0" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                Logout
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
+                <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                        {{ Auth::user()->firstname}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/produit/create">Profil</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                        <a class="dropdown-item" href="{{ route('logout') }}">Panier</a>
+                <li class="nav-item font-weight-bold" id="nav_evenements">
+                </li>
+                </div>
+                </li>
         @else
             <a href="{{ url('/register') }}">
                 <button class="btn-member btn btn-outline-success my-2 my-sm-0">Inscription</button>
