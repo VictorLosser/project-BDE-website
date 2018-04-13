@@ -56,7 +56,7 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $event = EventsBDE::where('event_id', $id)->first();
+        $event = EventsBDE::find($id);
         return view('events.show', compact('event'));
     }
 
@@ -68,7 +68,7 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        $event = EventsBDE::where('event_id', $id)->first();
+        $event = EventsBDE::find($id);
 
         return view('events.edit', compact('event'));
     }
@@ -82,7 +82,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        EventsBDE::where('event_id', $id)->update([
+        EventsBDE::find($id)->update([
             'title' => $request->eventName,
             'description' => $request->eventDescription,
             'date_event' => $request->eventDate,
@@ -103,7 +103,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        EventsBDE::where('event_id', $id)->delete();
+        EventsBDE::find($id)->delete();
         return redirect('/evenements')->with('status', 'Le produit a bien été supprimé');
     }
 }

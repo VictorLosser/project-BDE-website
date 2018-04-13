@@ -61,7 +61,7 @@
             <div class="product-header">
                 <h1>{{ $product->title }}</h1>
             </div>
-            <div class="product-image"><img src="/products/{{ $product->images[0]->image_link }}">
+            <div class="product-image"><img src="storage//products/{{ $product->images[0]->image_link }}">
             </div>
             <div class="product-description">
                 <p>{{ $product->description }}</p>
@@ -80,7 +80,7 @@
             <div class="product-header">
                 <h1 class="rt-title">{{ $product->title }}</h1>
             </div>
-            <div class="product-image"><img src="/products/{{ $product->images[0]->image_link }}">
+            <div class="product-image"><img src="storage//products/{{ $product->images[0]->image_link }}">
             </div>
             <div class="product-description">
                 <p class="rt-description">{{ $product->description }}</p>

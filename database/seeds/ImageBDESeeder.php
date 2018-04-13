@@ -67,5 +67,19 @@ class ImageBDESeeder extends Seeder
             'imageable_type' => 'event',
             'user_id' => 1
         ]);
+        DB::table('image-bde')->insert([
+            'image_link' => 'soiree-boom.jpg',
+            'alt' => 'soiree boom dj ambiance explosive souvenirs exia',
+            'imageable_id' => 3,
+            'imageable_type' => 'event',
+            'user_id' => 1
+        ]);
+        DB::table('image-bde')->insert([
+            'image_link' => 'soiree-boom.jpg',
+            'alt' => 'soiree boom dj ambiance explosive souvenirs exia',
+            'imageable_id' => 4,
+            'imageable_type' => 'event',
+            'user_id' => 1
+        ]);
     }
 }

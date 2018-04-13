@@ -17,8 +17,26 @@
         </div>
         <div class="row">
             <div class="col">
-                    <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3" placeholder="description"
-                               required>{{ $event->description }}</textarea>
+                <select name="eventImg" id="imgChoice" class="form-control" required>
+                    <option value="" selected>Choissiez une image</option>
+                    <?php
+                    if ($dossier = opendir(public_path('/events'))) {
+                        while (false !== ($fichier = readdir($dossier))) {
+                            if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
+                                echo "<option value=\"" . $fichier . "\">" . $fichier . "</option>";
+                            }
+                        }
+                        closedir($dossier);
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                    <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3"
+                              placeholder="description"
+                              required>{{ $event->description }}</textarea>
             </div>
         </div>
         <div class="row">
@@ -27,15 +45,18 @@
                        value="{{ $event->event_date }}" required>
             </div>
             <div class="col">
-                <input id="eventRecurrence" name="eventRecurrence" type="text" class="form-control" placeholder="récurrence"
+                <input id="eventRecurrence" name="eventRecurrence" type="text" class="form-control"
+                       placeholder="récurrence"
                        value="{{ $event->recurrence }}" required>
             </div>
             <div class="col">
-                <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix" step="0.01"
+                <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix"
+                       step="0.01"
                        value="{{ $event->price }}" required>
             </div>
             <div class="col">
-                <input id="eventIdUser" name="eventIdUser" type="number" class="form-control" placeholder="user id" step="1"
+                <input id="eventIdUser" name="eventIdUser" type="number" class="form-control" placeholder="user id"
+                       step="1"
                        value="{{ $event->id }}" required>
             </div>
         </div>
@@ -55,6 +76,10 @@
                 <div class="event-header">
                     <h1>{{$event->title}}</h1>
                 </div>
+                <div>
+                    <img src="{{asset('events/'.$event->images[0]->image_link)}}" alt="{{$event->images[0]->alt}}"
+                         style="height: 200px; max-width: 100%;"/>
+                </div>
                 <div class="event-description">
                     <p>{{$event->description}}</p>
                 </div>
@@ -69,11 +94,16 @@
                 </div>
             </div>
 
-        <!-- CURRENTLY MODIFIED EVENT -->
+            <!-- CURRENTLY MODIFIED EVENT -->
+            <?php $imgMorphLink = $event->images[0]->image_link; ?>
             <h3>Nouveau : </h3>
             <div class="col-md-3 product-item">
                 <div class="event-header">
                     <h1 class="rt-title">{{$event->title}}</h1>
+                </div>
+                <div>
+                    <img class="rt-image" src="{{asset('events/'.$imgMorphLink)}}"
+                         alt="{{$event->images[0]->alt}}" style="height: 200px; max-width: 100%;"/>
                 </div>
                 <div class="event-description">
                     <p class="rt-description">{{$event->description}}</p>
@@ -99,11 +129,15 @@
             $('.rt-title').text($('#eventName').val());
         });
 
-        $('#eventDescription').on('input', function () {
-            $('.rt-description').text($('#eventDescription').val());
+        $('#eventImg').on('change keyup keydown', function () {
+            $('.rt-image').attr('src',($('#eventImg').val()));
         });
 
-        $('#eventDate').on('change', function () {
+        $('#eventDescription').on('input', function () {
+            $('.rt-description').text(events/+$('#eventDescription').val());
+        });
+
+        $('#eventDate').on('change keyup keydown', function () {
             $('.rt-date').text($('#eventDate').val());
         });
 

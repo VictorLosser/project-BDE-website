@@ -4,12 +4,15 @@
 
 @section('content')
 
+    <?php use App\ProductCategoryBDE;
+    ?>
+
     <div id="formProduit">
         <div class="alert alert-info" role="alert">
             Vous êtes sur une page réservée aux administrateurs. (vous en avez de la chance)
         </div>
 
-        <form method="post" action="/produit">
+        <form method="post" action="/produit" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col">
@@ -17,16 +20,12 @@
                            required>
                 </div>
                 <div class="col">
-                    <select name="productImg" id="inputState" class="form-control" required>
-                        <option value="" selected>Choissiez une image</option>
+                    <select name="productCategory" id="inputState" class="form-control" required>
+                        <option value="" selected>Catégorie</option>
                         <?php
-                        if ($dossier = opendir(public_path('/products'))) {
-                            while (false !== ($fichier = readdir($dossier))) {
-                                if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
-                                    echo "<option value=\"" . $fichier . "\">" . $fichier . "</option>";
-                                }
-                            }
-                            closedir($dossier);
+                        $category = ProductCategoryBDE::all();
+                        foreach ($category as $cat) {
+                            echo "<option value=\"" . $cat->id . "\">" . $cat->category_name . "</option>";
                         }
                         ?>
                     </select>
@@ -43,25 +42,27 @@
                            required>
                 </div>
             </div>
+            <br/>
+            <div class="row">
+                <div class="col">
+                    <input type="file" name="productImg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input name="productAlt" type="text" class="form-control" placeholder="Description de l'image" required>
+                </div>
+            </div>
             <br>
-            <input type="submit"
-                   value="ENVOYER VOTRE NOUVEAU PRODUIT EN APPUYANT SUR CE BOUTON QUI EST BEAUCOUP TROP LONG AHHH"
-                   class="btn btn-sm btn-secondary"/>
+            <br>
+                <input type="submit"
+                       value="ENVOYER VOTRE NOUVEAU PRODUIT EN APPUYANT SUR CE BOUTON QUI EST BEAUCOUP TROP LONG AHHH"
+                       class="btn btn-sm btn-secondary"/>
         </form>
     </div>
-
     <br>
     <br>
 
-    @if (!isset($_FILES['img_recu']))
-        <form action="ajouter-un-produit" method="post" enctype="multipart/form-data">
-            <input type="file" name="img_recu">
-            <br>
-            <br>
-            <input type="submit" value="Envoyer le fichier" class="btn btn-sm btn-secondary"/>
-        </form>
-    @else
-        L'envoi a bien été effectué !
-    @endif
+
 
 @endsection

@@ -9,7 +9,7 @@ class ImageBDE extends Model
     protected $table = "image-bde";
 
     protected $fillable = [
-        'image_link','alt','imageable_id','imageable_type','user_id',
+        'image_link','alt','imageable_id','imageable_type','id','user_id',
     ];
 
     public function usersPost(){

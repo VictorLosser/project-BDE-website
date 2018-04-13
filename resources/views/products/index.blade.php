@@ -30,7 +30,7 @@
                     <th>{{ $product->id }}</th>
                     <td>{{ $product->title }}</td>
                     <td>{{ $product->description }}</td>
-                    <td><img src="products/{{ $product->images[0]->image_link }}" style="max-height: 100px;"></td>
+                    <td><img src="storage/products/{{ $product->images[0]->image_link }}" style="max-height: 100px;"></td>
                     <td>{{ $product->price }}</td>
                     <td>
                         <a href="{{ URL::to('produit/' . $product->id . '/edit') }}">

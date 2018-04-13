@@ -52,7 +52,7 @@
                     <a href="/produit/{{ $product->id }}">
                         <h1>{{ $product->title }}</h1></a>
                 </div>
-                <div class="product-image"><img src="{{asset('products/'.$products[$key]->images[0]->image_link)}}" alt="{{$products[$key]->images[0]->alt}}">
+                <div class="product-image"><img src="{{asset('storage/products/'.$products[$key]->images[0]->image_link)}}" alt="{{$products[$key]->images[0]->alt}}">
                 </div>
                 <div class="product-description">
                     <p>{{ $product->description }}</p>

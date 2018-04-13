@@ -24,6 +24,7 @@
     <div class="container" style="text-align: center">
         <button type="" class="trollBtn" style="display: block;margin:auto;"><a href="/evenements">< Retour</a></button>
         <h1>{{ $event->title }}</h1>
+        <div><img src="{{asset('events/'.$event->images[0]->image_link)}}" alt="{{$event->images[0]->alt}}" style="max-height: 400px;" /></div>
         <p><strong>Description : </strong>{{ $event->description }}</p>
         <p><strong>Récurrence : </strong>{{$event->recurrence}}</p>
         <p><strong>Prix : </strong><span style="color: red">{{ $event->price }}€</span></p>

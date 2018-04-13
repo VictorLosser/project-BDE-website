@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\ProductBDE;
+use App\ImageBDE;
 use Illuminate\Http\Request;
 use App\User;
+use Storage;
+use File;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -58,11 +61,26 @@ class productController extends Controller
 //            'price' => 'required'
 //        ]);
 
+        $lastImageId = ImageBDE::orderBy('id', 'DESC')->first()->id;
+
+        Storage::disk('public')->putFileAs('products', $request->productImg, ($lastImageId+1).'.png');
+
         ProductBDE::create([
             'title' => $request->productName,
             'image' => $request->productImg,
+            'category_id' => $request->productCategory,
             'description' => $request->productDescription,
             'price' => $request->productPrice
+        ]);
+
+        $lastProductId = ProductBDE::orderBy('id', 'DESC')->first()->id;
+
+        ImageBDE::create([
+            'image_link' => ($lastImageId+1).'.png',
+            'alt' => $request->productAlt,
+            'imageable_id' => $lastProductId,
+            'imageable_type' => 'product',
+            'user_id' => 1
         ]);
 
         return redirect('/produits')->with('status', 'Nouveau produit ajouté');
