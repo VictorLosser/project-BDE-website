@@ -19,11 +19,11 @@
                        value="{{ $product->title }}"
                        required>
             </div>
-            <div class="col">
+            <!--<div class="col">
                 <select name="productImg" id="imgChoice" class="form-control" required>
                     <option value="" selected>Choissiez une image</option>
                     <?php
-                    if ($dossier = opendir(public_path('/products'))) {
+                    if ($dossier = opendir(public_path('/storage/products'))) {
                         while (false !== ($fichier = readdir($dossier))) {
                             if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
                                 echo "<option value=\"" . $fichier . "\">" . $fichier . "</option>";
@@ -33,7 +33,7 @@
                     }
                     ?>
                 </select>
-            </div>
+            </div>-->
         </div>
         <br>
         <div class="row">
@@ -61,7 +61,7 @@
             <div class="product-header">
                 <h1>{{ $product->title }}</h1>
             </div>
-            <div class="product-image"><img src="storage//products/{{ $product->images[0]->image_link }}">
+            <div class="product-image"><img src="{{asset("storage/products/".$product->images[0]->image_link)}}">
             </div>
             <div class="product-description">
                 <p>{{ $product->description }}</p>
@@ -80,7 +80,7 @@
             <div class="product-header">
                 <h1 class="rt-title">{{ $product->title }}</h1>
             </div>
-            <div class="product-image"><img src="storage/products/{{ $product->images[0]->image_link }}">
+            <div class="product-image"><img src="{{ asset("storage/products/".$product->images[0]->image_link)}}">
             </div>
             <div class="product-description">
                 <p class="rt-description">{{ $product->description }}</p>

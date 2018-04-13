@@ -30,17 +30,19 @@
                     <th>{{ $product->id }}</th>
                     <td>{{ $product->title }}</td>
                     <td>{{ $product->description }}</td>
-                    <td><img src="storage/products/{{ $product->images[0]->image_link }}" style="max-height: 100px;"></td>
+                    <td><img src="{{ asset("storage/products/".$product->images[0]->image_link)}}" style="max-height: 100px;"></td>
                     <td>{{ $product->price }}</td>
                     <td>
-                        <a href="{{ URL::to('produit/' . $product->id . '/edit') }}">
-                            <button class="btn btn-info" type="submit">Modifier</button>
-                        </a>
-                        <form action="{{url('produit', [$product->id])}}" method="post">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger" type="submit">Supprimer</button>
-                        </form>
+                        <div style="max-width: 150px;">
+                            <a href="{{ URL::to('produit/' . $product->id . '/edit') }}">
+                                <button class="btn btn-info" type="submit" style="width: 100%;">Modifier</button>
+                            </a>
+                            <form action="{{url('produit', [$product->id])}}" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger" type="submit" style="width: 100%;">Supprimer</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach

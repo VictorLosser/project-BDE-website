@@ -10,13 +10,13 @@
         </div>
     @endif
 
-    <button type="button" class="btn btn-primary btn-lg btn-block"><a class="nav-link" href="/idee/create" style="color: white;"><h2>Ajouter une idée</h2></a></button>
+    <div style="margin: 1% 5% 3% 5%;"><button type="button" class="btn btn-primary btn-lg btn-block"><a class="nav-link" href="/idee/create" style="color: white;"><h2>Ajouter une idée</h2></a></button></div>
 
     <div class="row" style="justify-content: space-around;">
         @foreach ($events as $event)
             <div class="col-md-3 product-item">
                 <div class="event-header">
-                    <h1><a href="/evenement/{{$event->id}}">{{$event->title}}</a></h1>
+                    <h1><a href="/evenement/{{$event->id}}"><h2>{{$event->title}}</h2></a></h1>
                 </div>
                 <div class="event-description">
                     <p>{{$event->description}}</p>

@@ -17,23 +17,6 @@
         </div>
         <div class="row">
             <div class="col">
-                <select name="eventImg" id="imgChoice" class="form-control" required>
-                    <option value="" selected>Choissiez une image</option>
-                    <?php
-                    if ($dossier = opendir(public_path('/events'))) {
-                        while (false !== ($fichier = readdir($dossier))) {
-                            if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
-                                echo "<option value=\"" . $fichier . "\">" . $fichier . "</option>";
-                            }
-                        }
-                        closedir($dossier);
-                    }
-                    ?>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
                     <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3"
                               placeholder="description"
                               required>{{ $event->description }}</textarea>
@@ -77,7 +60,7 @@
                     <h1>{{$event->title}}</h1>
                 </div>
                 <div>
-                    <img src="{{asset('events/'.$event->images[0]->image_link)}}" alt="{{$event->images[0]->alt}}"
+                    <img src="{{asset('storage/events/'.$event->images[0]->image_link)}}" alt="{{$event->images[0]->alt}}"
                          style="height: 200px; max-width: 100%;"/>
                 </div>
                 <div class="event-description">
