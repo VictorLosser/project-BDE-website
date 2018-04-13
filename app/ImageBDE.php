@@ -13,7 +13,7 @@ class ImageBDE extends Model
     ];
 
     public function usersPost(){
-        return $this->belongsTo('App\User','id','id');
+        return $this->belongsTo('App\User','user_id');
     }
 
     public function likes(){

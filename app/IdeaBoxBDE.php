@@ -9,7 +9,7 @@ class IdeaBoxBDE extends Model
     protected $table = "idea-box-bde";
 
     public function users(){
-        return $this->belongsTo('App\User', 'id','id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     public function likes(){

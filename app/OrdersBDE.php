@@ -11,11 +11,13 @@ class OrdersBDE extends Model
     public function products() {
         return $this->belongsToMany('App\ProductBDE', 'contain-product-bde', 'order_id', 'product_id')
             ->withPivot('quantity')
-            ->as('contain-product-bde');
+            ->as('containProduct')
+            ->withTimestamps()
+            ->using('App\ContainProductBDE');
     }
 
     public function usersOrder(){
-        return $this->belongsTo('App\User','id','id');
+        return $this->belongsTo('App\User','user_id');
     }
 
     protected $fillable = [

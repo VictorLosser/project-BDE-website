@@ -30,44 +30,37 @@ class User extends Authenticatable
     ];
 
     public function imagesPosted(){
-        return $this->hasMany('App\ImageBDE','id','id');
-    }
-
-    public function imagesLiked(){
-        return $this->belongsToMany('App\ImageBDE', 'like-image-bde', 'id', 'image_id');
+        return $this->hasMany('App\ImageBDE','user_id');
     }
 
     public function orders(){
-        return $this->hasMany('App\OrdersBDE','id','id');
+        return $this->hasMany('App\OrdersBDE','user_id');
     }
 
     public function status(){
-        return $this->belongsTo('App\StatusBDE','status_id','status_id');
+        return $this->belongsTo('App\StatusBDE','status_id');
     }
 
     public function events(){
-        return $this->hasMany('App\EventsBDE','id','id');
+        return $this->hasMany('App\EventsBDE','user_id');
     }
 
     public function comments(){
-        return $this->hasMany('App\CommentsBDE','id','id');
-    }
-
-    public function eventsLiked(){
-        return $this->belongsToMany('App\EventsBDE', 'like-event-bde', 'id', 'event_id');
+        return $this->hasMany('App\CommentsBDE','user_id');
     }
 
     public function eventsParticipated(){
-        return $this->belongsToMany('App\EventsBDE', 'participates-bde', 'event_id', 'id');
+        return $this->belongsToMany('App\EventsBDE', 'participates-bde', 'user_id', 'event_id');
     }
 
     public function ideas(){
-        return $this->hasMany('App\IdeaBoxBDE','id','id');
+        return $this->hasMany('App\IdeaBoxBDE','user_id');
     }
 
-    public function ideasLiked(){
-        return $this->belongsToMany('App\IdeaBoxBDE','like-idea-bde','id','idea_box_id');
+    public function likes(){
+        return $this->hasMany('App\LikeBDE','user_id');
     }
+
     public function isauthorized(){
         $statu = $this[0]->status_id;
         return $statu;

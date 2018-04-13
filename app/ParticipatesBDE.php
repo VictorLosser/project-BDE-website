@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ParticipatesBDE extends Model
+class ParticipatesBDE extends Pivot
 {
     protected $table = "participates-bde";
 
     protected $fillable = [
-        'event_id','id',
+        'event_id','user_id',
     ];
 }

@@ -9,11 +9,11 @@ class EventsBDE extends Model
     protected $table = "events-bde";
 
     public function users(){
-        return $this->belongsTo('App\User','id','id');
+        return $this->belongsTo('App\User','user_id');
     }
 
     public function usersParticipate(){
-        return $this->belongsToMany('App\User', 'participates-bde', 'event_id', 'id');
+        return $this->belongsToMany('App\User', 'participates-bde', 'event_id', 'user_id');
     }
 
     public function likes(){

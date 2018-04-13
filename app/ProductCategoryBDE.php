@@ -9,7 +9,7 @@ class ProductCategoryBDE extends Model
     protected $table = "product-category-bde";
 
     public function products(){
-        return $this->hasMany('App\ProductBDE','category_id', 'category_id');
+        return $this->hasMany('App\ProductBDE','category_id');
     }
 
     protected $fillable = [

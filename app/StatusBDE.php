@@ -9,7 +9,7 @@ class StatusBDE extends Model
     protected $table = "status-bde";
 
     public function users(){
-        return $this->hasMany('App\User','status_id','status_id');
+        return $this->hasMany('App\User','status_id');
     }
     protected $fillable = [
         'status',

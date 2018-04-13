@@ -13,12 +13,15 @@ class ProductBDE extends Model
     ];
 
     public function category(){
-        return $this->belongsTo('App\ProductCategoryBDE', 'category_id', 'category_id');
+        return $this->belongsTo('App\ProductCategoryBDE', 'category_id');
     }
 
     public function orders() {
         return $this->belongsToMany('App\OrdersBDE', 'contain-product-bde', 'product_id', 'order_id')
-            ->withPivot('quantity');
+            ->withPivot('quantity')
+            ->as('containProduct')
+            ->withTimestamps()
+            ->using('App\ContainProductBDE');
     }
 
     public function images(){

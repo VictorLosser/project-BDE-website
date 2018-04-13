@@ -12,6 +12,10 @@ class LikeBDE extends Model
         return $this->morphTo();
     }
 
+    public function users(){
+        return $this->belongsTo('App\User','user_id');
+    }
+
     protected $fillable = [
         'likeable_id','likeable_type','id',
     ];
