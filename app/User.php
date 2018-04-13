@@ -61,9 +61,4 @@ class User extends Authenticatable
         return $this->hasMany('App\LikeBDE','user_id');
     }
 
-    public function isauthorized(){
-        $statu = $this[0]->status_id;
-        return $statu;
-    }
-
 }

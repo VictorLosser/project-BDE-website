@@ -21,6 +21,6 @@ class OrdersBDE extends Model
     }
 
     protected $fillable = [
-        'total_price','order_date','id',
+        'total_price','order_date','user_id',
     ];
 }

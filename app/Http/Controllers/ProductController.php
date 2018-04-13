@@ -30,13 +30,12 @@ class productController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            $users = User::where('id', '=', Auth::id())->get();
-            $status = $users{0}->status_id;
+            $status = Auth::user()->status_id;
         }
         else
             return view('welcome');
 
-            if ($status = 2)
+            if ($status == 2)
                 return view('products.create');
             else
                 return view('welcome');
