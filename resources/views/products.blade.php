@@ -2,6 +2,10 @@
 
 @section('title', 'Produits')
 
+@section('custom_css')
+    <script src="{{ asset('js/categories.js') }}"></script>
+@endsection
+
 @section('content')
 
     @if (session('status'))
@@ -42,6 +46,32 @@
         </div>
     </FORM>
 
+    @foreach ($categories as $category)
+        <form action="/produits" method="get">
+            <button class="btn btn-info"
+                    type="submit"
+                    name="category"
+                    value="{{ $category->id }}">
+                {{ $category->category_name }}
+            </button>
+        </form>
+    @endforeach
+
+{{--    @foreach ($categories as $category)
+        <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get">
+            {{ csrf_field() }}
+            <button class="btn btn-info"
+                    id="category-{{ $category->category_name }}"
+                    type="submit"
+                    name="category-{{ $category->category_name }}"
+                    value="{{ $category->category_name }}">
+                {{ $category->category_name }}
+            </button>
+        </form>
+    @endforeach--}}
+
+    <p id="tut"></p>
+
     <!-- PRODUCTS DISPLAY -->
     <div class="row" style="justify-content: space-around">
 
@@ -68,3 +98,38 @@
     </div>
 
 @endsection
+
+@section('aside')
+    <div class="col-md product-item">
+        <div class="product-header">
+            <a href="/produit/{{ $product->id }}">
+                <h1>{{ $product->title }}</h1></a>
+        </div>
+        <div class="product-image"><img src="{{asset('products/'.$products[$key]->images[0]->image_link)}}"
+                                        alt="{{$products[$key]->images[0]->alt}}">
+        </div>
+        <div class="product-description">
+            <p>{{ $product->description }}</p>
+        </div>
+        <div class="product-price">
+            {{--@if ($product->old_price !== null)--}}
+            {{--<p id="old-price">{{ $product->old_price }}€</p>--}}
+            {{--@endif--}}
+            <p id="price">{{ $product->price }}€</p>
+        </div>
+    </div>
+@endsection
+
+<!--
+{{--PISTES DE RECHERCHE POUR LES 3 ARTICLES LES PLUS COMMANDES--}}
+
+{{--orderBy('quantity', 'desc')->take(3)--}}
+
+{{--<?php--}}
+{{--foreach ($most->flatMap->products as $oui) {--}}
+{{--$non = $oui->containProduct;--}}
+{{--echo $non->quantity;--}}
+{{--echo ' '.$oui->title.'<br>';--}}
+{{--}--}}
+{{--?>--}}
+        -->

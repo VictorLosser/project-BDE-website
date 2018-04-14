@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\ProductBDE;
 use App\EventsBDE;
 use App\ImageBDE;
+use App\ContainProductBDE;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,18 +23,9 @@ Route::get('/', function () {
 
 });
 
-Route::get('/produits', function (Request $request) {
-    $priceAVG = ProductBDE::avg('price');
-    $products = ProductBDE::
-        when($request->orderBy, function ($query) use ($request) {
-            return $query->orderBy($request->orderBy);
-        })
-        ->get();
+Route::get('/produits', 'productController@shows');
+Route::get('/produits/categorie', 'productController@showCategory');
 
-    return view('products',
-        compact('products'),
-        compact('priceAVG'));
-});
 
 Route::get('/evenements', function () {
    $events = EventsBDE::all();

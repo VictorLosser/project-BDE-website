@@ -279,9 +279,12 @@ use Illuminate\Support\Facades\Auth;
     </nav>
 </header>
 
-<div style="margin: 0px;">
+<div class="cont" style="margin: 0px;">
     @yield('content')
 </div>
+<aside class="aside">
+    @yield('aside')
+</aside>
 
 <head>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>

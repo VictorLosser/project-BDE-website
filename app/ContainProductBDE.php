@@ -12,5 +12,4 @@ class ContainProductBDE extends Pivot
         'quantity','product_id','order_id',
     ];
 
-
 }

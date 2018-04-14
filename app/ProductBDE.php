@@ -27,4 +27,5 @@ class ProductBDE extends Model
     public function images(){
         return $this->morphMany('App\ImageBDE','imageable');
     }
+
 }

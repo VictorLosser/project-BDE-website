@@ -109,6 +109,41 @@ class productController extends Controller
         return view('products.show', compact('product'));
     }
 
+    public function shows(Request $request)
+    {
+        $priceAVG = ProductBDE::avg('price');
+        $products = ProductBDE::
+        when($request->orderBy, function ($query) use ($request) {
+            return $query->orderBy($request->orderBy);
+        })
+            ->when($request->category, function ($query) use ($request) {
+                return $query->where('category_id', $request->category);
+            })
+            ->get();
+
+        $categories = \App\ProductCategoryBDE::all();
+
+        return view('products',
+            compact('products','priceAVG', 'categories')
+        );
+    }
+
+    public function showCategory(Request $request){
+        if($request->has('category')){
+            $products = ProductBDE::
+            when($request->orderBy, function ($query) use ($request) {
+                return $query->orderBy($request->orderBy);
+            })
+                ->when($request->category, function ($query) use ($request) {
+                    return $query->where('category_id', $request->category);
+                })
+                ->get();
+        }
+        else{
+            echo "BONJOUR";
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

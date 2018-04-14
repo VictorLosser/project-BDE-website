@@ -1,3 +1,30 @@
+@media screen and (min-width: 1000px) {
+    .cont {
+        margin: 0px;
+        float: left;
+        width: 80%;
+    }
+
+    .aside {
+        float: right;
+        width: 300px;
+        background-color: black;
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .aside{
+        width:100%;
+        background-color: blue;
+
+    }
+
+    .aside div {
+        float:left;
+    }
+}
+
 /*----------------Header------------------*/
 html {
     margin: 0px;
