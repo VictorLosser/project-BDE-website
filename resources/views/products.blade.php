@@ -57,7 +57,7 @@
         </form>
     @endforeach
 
-{{--    @foreach ($categories as $category)
+    @foreach ($categories as $category)
         <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get">
             {{ csrf_field() }}
             <button class="btn btn-info"
@@ -68,12 +68,12 @@
                 {{ $category->category_name }}
             </button>
         </form>
-    @endforeach--}}
+    @endforeach
 
     <p id="test"></p>
 
     <!-- PRODUCTS DISPLAY -->
-    <div class="row" style="justify-content: space-around">
+    <div id="products-display" class="row" style="justify-content: space-around">
 
         @foreach ($products as $key => $product)
 

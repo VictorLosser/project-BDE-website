@@ -11,7 +11,8 @@ $(function () {
         var category = $('#category-Vetements').val();
 
         $.get($(formVetements).attr('action'), {category: category}, function (data) {
-            $('#test').after(data);
+            $('#products-display').html('');
+            $('#products-display').append(data);
 
         }, "html");
     });
@@ -21,7 +22,8 @@ $(function () {
         var category = $('#category-Vaisselle').val();
 
         $.get($(formVaisselle).attr('action'), {category: category}, function (data) {
-            $('#test').after(data);
+            $('#products-display').html('');
+            $('#products-display').append(data);
 
         });
     });
@@ -31,7 +33,8 @@ $(function () {
         var category = $('#category-Accessoires').val();
 
         $.get($(formAccessoires).attr('action'), {category: category}, function (data) {
-            $('#test').after(data);
+            $('#products-display').html('');
+            $('#products-display').append(data);
 
         });
     });
