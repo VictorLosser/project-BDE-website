@@ -64,13 +64,13 @@
                     id="category-{{ $category->category_name }}"
                     type="submit"
                     name="category-{{ $category->category_name }}"
-                    value="{{ $category->category_name }}">
+                    value="{{ $category->id }}">
                 {{ $category->category_name }}
             </button>
         </form>
     @endforeach--}}
 
-    <p id="tut"></p>
+    <p id="test"></p>
 
     <!-- PRODUCTS DISPLAY -->
     <div class="row" style="justify-content: space-around">

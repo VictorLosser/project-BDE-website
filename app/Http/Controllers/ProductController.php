@@ -130,14 +130,28 @@ class productController extends Controller
 
     public function showCategory(Request $request){
         if($request->has('category')){
-            $products = ProductBDE::
-            when($request->orderBy, function ($query) use ($request) {
-                return $query->orderBy($request->orderBy);
-            })
-                ->when($request->category, function ($query) use ($request) {
-                    return $query->where('category_id', $request->category);
-                })
-                ->get();
+
+            $products = ProductBDE::where('category_id', $request->category)->get();
+            ?>
+
+            <?php foreach ($products as $key => $product) { ?>
+
+            <div class="col-md-3 product-item">
+                <div class="product-header">
+                    <a href="/produit/<?php $product->id ?>">
+                        <h1><?php $product->title ?></h1></a>
+                </div>
+                <div class="product-image"><img src="<?php asset('storage/products/'.$products[$key]->images[0]->image_link) ?>" alt="<?php $products[$key]->images[0]->alt ?>">
+                </div>
+                <div class="product-description">
+                    <p><?php $product->description ?></p>
+                </div>
+                <div class="product-price">
+                    <p id="price"><?php $product->price ?>€</p>
+                </div>
+            </div>
+            <?php } ?>
+            <?php
         }
         else{
             echo "BONJOUR";
