@@ -49,7 +49,7 @@
         </FORM>
 
         @foreach ($categories as $category)
-            <form action="/produits" method="get">
+            <form action="/produits" method="get" class="btnInline">
                 <button class="btn btn-info"
                         type="submit"
                         name="category"
@@ -58,9 +58,10 @@
                 </button>
             </form>
         @endforeach
-
+        <br />
+        <br />
         @foreach ($categories as $category)
-            <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get">
+            <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get" class="btnInline">
                 {{ csrf_field() }}
                 <button class="btn btn-info"
                         id="category-{{ $category->category_name }}"
