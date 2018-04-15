@@ -42,6 +42,9 @@ Route::resources([
     'idee' => 'ideeController',
     'evenement' => 'eventController'
 ]);
+Route::resource('comment', 'commentController')->only([
+    'store', 'destroy'
+]);
 
 Auth::routes();
 

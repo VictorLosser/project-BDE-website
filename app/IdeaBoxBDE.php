@@ -16,6 +16,10 @@ class IdeaBoxBDE extends Model
         return $this->morphMany('App\LikeBDE', 'likeable');
     }
 
+    public function comments(){
+        return $this->morphMany('App\CommentsBDE','commentable');
+    }
+
     protected $fillable = [
         'title','description','user_id',
     ];

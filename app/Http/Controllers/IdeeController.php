@@ -38,8 +38,6 @@ class IdeeController extends Controller
      */
     public function create()
     {
-        return view('idees.create');
-
     }
 
     /**

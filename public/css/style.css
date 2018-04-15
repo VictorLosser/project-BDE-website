@@ -16,6 +16,7 @@
     top: 20vh;
     right: 0px;
     background-color: rgba(250, 5, 5, 0.75);
+    box-shadow: -6px 6px 6px rgba(50, 50, 50, 0.5);
 }
 
 .aside .product-item {
@@ -29,9 +30,46 @@
     font-weight: bold;
     top: -20px;
     left: -1em;
-    transition: 0.5s;
     cursor: pointer;
 }
+#eventComm {
+    text-align: left;
+}
+.comments {
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.comments:nth-child(odd) {
+    background-color: #FAF0E6;          /*rgb(250, 250, 230)*/
+}
+.comments:nth-child(even) {
+    background-color: rgb(240, 240, 240);
+}
+.commUser {
+    color: grey;
+}
+.commDate {
+    color: silver;
+    font-size: 0.75em;
+}
+.commContent:before {
+    content: '> ';
+    color: red;
+    font-weight: bold;
+}
+#leaveAcomment {
+    border: 1px black solid;
+    border-radius: 10px;
+    padding: 2%;
+}
+#newCommContent {
+    color: black !important;
+}
+.commDelete {
+    text-align: right;
+}
+
 
 /*----------------Header------------------*/
 html {

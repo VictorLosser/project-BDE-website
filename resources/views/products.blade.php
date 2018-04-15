@@ -129,7 +129,7 @@
         </div>
         <script>
             $('#asideCroix').click(function () {
-                $('.aside').toggle();
+                $('.aside').slideToggle(250);
             });
             $('.aside .product-item').click(function () {
                 window.location = "/produit/" + {{ $lastProduct->id }};
