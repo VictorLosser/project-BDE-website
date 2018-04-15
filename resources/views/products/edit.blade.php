@@ -19,19 +19,19 @@
                        value="{{ $product->title }}"
                        required>
             </div>
-            <!--<div class="col">
+        <!--<div class="col">
                 <select name="productImg" id="imgChoice" class="form-control" required>
                     <option value="" selected>Choissiez une image</option>
                     <?php
-                    if ($dossier = opendir(public_path('/storage/products'))) {
-                        while (false !== ($fichier = readdir($dossier))) {
-                            if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
-                                echo "<option value=\"" . $fichier . "\">" . $fichier . "</option>";
-                            }
-                        }
-                        closedir($dossier);
-                    }
-                    ?>
+        if ($dossier = opendir(public_path('/storage/products'))) {
+            while (false !== ($fichier = readdir($dossier))) {
+                if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
+                    echo "<option value=\"" . $fichier . "\">" . $fichier . "</option>";
+                }
+            }
+            closedir($dossier);
+        }
+        ?>
                 </select>
             </div>-->
         </div>
@@ -47,6 +47,21 @@
                        required>
             </div>
         </div>
+        <br/>
+        <input id="changeImg" type="checkbox" name="changeImg" value=""> Changer d'image ?
+        <div id="divImgUpload" style="display: none;">
+            <div class="row">
+                <div class="col">
+                    <input id="productImg" type="file" accept="image/*" name="eventImg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input name="productAlt" type="text" class="form-control" placeholder="Description de l'image">
+                </div>
+            </div>
+        </div>
+        <br>
         <br>
         <input type="submit"
                value="CONFIRMER LES MODIFICATIONS"
@@ -57,11 +72,13 @@
 
     <div class="row" style="display:flex; justify-content: center;">
         <!-- PRODUCT AT ORIGIN -->
+        <h3>Ancien : </h3>
         <div class="col-md-3 product-item">
             <div class="product-header">
                 <h1>{{ $product->title }}</h1>
             </div>
-            <div class="product-image"><img src="{{asset("storage/products/".$product->images[0]->image_link)}}">
+            <div class="product-image"><img src="{{asset("storage/products/".$product->images[0]->image_link)}}"
+                                            alt="{{$product->images[0]->alt}}">
             </div>
             <div class="product-description">
                 <p>{{ $product->description }}</p>
@@ -76,11 +93,13 @@
         </div>
 
         <!-- PRODUCT CURRENTLY MODIFIED -->
+        <h3>Nouveau : </h3>
         <div class="col-md-3 product-item">
             <div class="product-header">
                 <h1 class="rt-title">{{ $product->title }}</h1>
             </div>
-            <div class="product-image"><img src="{{ asset("storage/products/".$product->images[0]->image_link)}}">
+            <div class="product-image"><img id="rt-image" src="{{ asset("storage/products/".$product->images[0]->image_link)}}"
+                                            alt="{{$product->images[0]->alt}}">
             </div>
             <div class="product-description">
                 <p class="rt-description">{{ $product->description }}</p>
@@ -109,6 +128,20 @@
 
         $('#productPrice').on('keyup keydown change', function () {
             $('.rt-price').text($('#productPrice').val());
+        });
+
+        $('#changeImg').on('change', function () {
+            if (this.checked) {
+                $('#divImgUpload').slideDown();
+            }
+            else {
+                $('#divImgUpload').slideUp();
+            }
+        });
+
+        $('#productImg').on('change', function (event) {
+            var output = document.getElementById('rt-image');
+            output.src = URL.createObjectURL(event.target.files[0]);
         });
     </script>
 @endsection

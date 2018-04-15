@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form method="post" action="{{url('evenement', [$event->event_id])}}">
+    <form method="post" action="{{url('evenement', [$event->id])}}">
         {{ csrf_field() }}
 
         <input type="hidden" name="_method" value="PUT">
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col">
                 <input id="eventDate" name="eventDate" type="date" class="form-control" placeholder="date"
-                       value="{{ $event->event_date }}" required>
+                       value="{{ $event->date_event }}" required>
             </div>
             <div class="col">
                 <input id="eventRecurrence" name="eventRecurrence" type="text" class="form-control"
@@ -37,12 +37,22 @@
                        step="0.01"
                        value="{{ $event->price }}" required>
             </div>
-            <div class="col">
-                <input id="eventIdUser" name="eventIdUser" type="number" class="form-control" placeholder="user id"
-                       step="1"
-                       value="{{ $event->id }}" required>
+        </div>
+        <br/>
+        <input id="changeImg" type="checkbox" name="changeImg" value=""> Changer d'image ?
+        <div id="divImgUpload" style="display: none;">
+            <div class="row">
+                <div class="col">
+                    <input id="eventImg" type="file" accept="image/*" name="eventImg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input name="eventAlt" type="text" class="form-control" placeholder="Description de l'image">
+                </div>
             </div>
         </div>
+        <br>
         <br>
         <input type="submit"
                value="CONFIRMER LES MODIFICATIONS"
@@ -60,7 +70,8 @@
                     <h1>{{$event->title}}</h1>
                 </div>
                 <div>
-                    <img src="{{asset('storage/events/'.$event->images[0]->image_link)}}" alt="{{$event->images[0]->alt}}"
+                    <img src="{{asset('storage/events/'.$event->images[0]->image_link)}}"
+                         alt="{{$event->images[0]->alt}}"
                          style="height: 200px; max-width: 100%;"/>
                 </div>
                 <div class="event-description">
@@ -85,7 +96,7 @@
                     <h1 class="rt-title">{{$event->title}}</h1>
                 </div>
                 <div>
-                    <img class="rt-image" src="{{asset('storage/events/'.$imgMorphLink)}}"
+                    <img id="rt-image" src="{{asset('storage/events/'.$imgMorphLink)}}"
                          alt="{{$event->images[0]->alt}}" style="height: 200px; max-width: 100%;"/>
                 </div>
                 <div class="event-description">
@@ -112,12 +123,8 @@
             $('.rt-title').text($('#eventName').val());
         });
 
-        $('#eventImg').on('change keyup keydown', function () {
-            $('.rt-image').attr('src',($('#eventImg').val()));
-        });
-
         $('#eventDescription').on('input', function () {
-            $('.rt-description').text(events/+$('#eventDescription').val());
+            $('.rt-description').text($('#eventDescription').val());
         });
 
         $('#eventDate').on('change keyup keydown', function () {
@@ -129,7 +136,22 @@
         });
 
         $('#eventPrice').on('change keyup keydown', function () {
-            $('.rt-price').text($('#eventPrice').val());
+            $('.rt-price').text($('#eventPrice').val()+"€");
         });
+
+        $('#changeImg').on('change', function () {
+            if (this.checked) {
+                $('#divImgUpload').slideDown();
+            }
+            else {
+                $('#divImgUpload').slideUp();
+            }
+        });
+
+        $('#eventImg').on('change', function (event) {
+            var output = document.getElementById('rt-image');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        });
+
     </script>
 @endsection

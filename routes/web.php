@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\ProductBDE;
 use App\EventsBDE;
+use App\IdeaBoxBDE;
 use App\ImageBDE;
 use App\ContainProductBDE;
 
@@ -31,9 +32,14 @@ Route::get('/evenements', function () {
    $events = EventsBDE::all();
     return view('events', compact('events'));
 });
+Route::get('/idees', function () {
+    $idees = IdeaBoxBDE::all();
+    return view('idees', compact('idees'));
+});
 
 Route::resources([
     'produit' => 'productController',
+    'idee' => 'ideeController',
     'evenement' => 'eventController'
 ]);
 

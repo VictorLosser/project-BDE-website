@@ -39,16 +39,11 @@
                        step="0.01"
                        value="" required>
             </div>
-            <div class="col">
-                <input id="eventIdUser" name="eventIdUser" type="number" class="form-control" placeholder="user id"
-                       step="1"
-                       value="" required>
-            </div>
         </div>
         <br/>
         <div class="row">
             <div class="col">
-                <input type="file" name="eventImg">
+                <input id="eventImg" type="file" accept="image/*" name="eventImg">
             </div>
         </div>
         <div class="row">
@@ -74,6 +69,10 @@
             <div class="col-md-3 product-item">
                 <div class="event-header">
                     <h1 class="rt-title"><i>Titre</i></h1>
+                </div>
+                <div>
+                    <img id="rt-image" src=""
+                         style="height: 200px; max-width: 100%;"/>
                 </div>
                 <div class="event-description">
                     <p class="rt-description"><i>Description</i></p>
@@ -112,7 +111,13 @@
         });
 
         $('#eventPrice').on('change keyup keydown', function () {
-            $('.rt-price').text($('#eventPrice').val());
+            $('.rt-price').text($('#eventPrice').val()+"€");
         });
+
+        $('#eventImg').on('change', function (event) {
+            var output = document.getElementById('rt-image');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        });
+
     </script>
 @endsection
