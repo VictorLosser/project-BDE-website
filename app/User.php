@@ -64,6 +64,7 @@ class User extends Authenticatable
         $status = $this->status_id;
 
         switch($status){
+            case 0 : return 'visiteur';
             case 1 : return 'free';
             case 2 : return 'Bde';
             case 3 : return 'Salarié';

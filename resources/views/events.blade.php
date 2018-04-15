@@ -10,8 +10,6 @@
         </div>
     @endif
 
-    <div style="margin: 1% 5% 3% 5%;"><button type="button" class="btn btn-primary btn-lg btn-block"><a class="nav-link" href="/idee/create" style="color: white;"><h2>Ajouter une idée</h2></a></button></div>
-
     <div class="row" style="justify-content: space-around;">
         @foreach ($events as $event)
             <div class="col-md-3 product-item">

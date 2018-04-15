@@ -22,15 +22,13 @@ class EventController extends Controller
     {
         if (Auth::check()) {
             $authorisation = Auth::user()->isauthorized();
-        }
-        else
+        } else
             return redirect('/evenements')->with('status', 'Accès refusé');
 
-        if ($authorisation == 'Bde'||'Salarié'){
+        if ($authorisation == 'Bde' || 'Salarié') {
             $events = EventsBDE::all();
-            return view('events.index', compact('events'));}
-
-        else
+            return view('events.index', compact('events'));
+        } else
             return redirect('/evenements')->with('status', 'Accès refusé');
     }
 
@@ -42,15 +40,13 @@ class EventController extends Controller
     public function create()
     {
         if (Auth::check()) {
-        $authorisation = Auth::user()->isauthorized();
-    }
-    else
-        return redirect('/evenements')->with('status', 'Accès refusé');
+            $authorisation = Auth::user()->isauthorized();
+        } else
+            return redirect('/evenements')->with('status', 'Accès refusé');
 
-        if ($authorisation == 'Bde'){
-            return view('events.create');}
-
-        else
+        if ($authorisation == 'Bde') {
+            return view('events.create');
+        } else
             return redirect('/evenements')->with('status', 'Accès refusé');
 
     }
@@ -58,11 +54,12 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $userID = Auth::user()->id;
         $lastImageId = ImageBDE::orderBy('id', 'DESC')->first()->id;
 
         Storage::disk('public')->putFileAs('events', $request->eventImg, ($lastImageId + 1) . '.png');
@@ -73,7 +70,7 @@ class EventController extends Controller
             'date_event' => $request->eventDate,
             'recurrence' => $request->eventRecurrence,
             'price' => $request->eventPrice,
-            'id' => $request->eventIdUser
+            'user_id' => $userID
         ]);
 
         $lastEventId = EventsBDE::orderBy('id', 'DESC')->first()->id;
@@ -83,7 +80,7 @@ class EventController extends Controller
             'alt' => $request->eventAlt,
             'imageable_id' => $lastEventId,
             'imageable_type' => 'event',
-            'user_id' => 1
+            'user_id' => $userID
         ]);
 
 
@@ -93,7 +90,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -105,7 +102,7 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -116,38 +113,40 @@ class EventController extends Controller
             $status = Auth::user()->status_id;
             if ($status == 2)
                 return view('events.edit', compact('event'));
-        }
-        else {
-                return redirect('/evenements')->with('status', 'Accès refusé');
+        } else {
+            return redirect('/evenements')->with('status', 'Accès refusé');
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+        $userID = Auth::user()->id;
+
+
         EventsBDE::find($id)->update([
             'title' => $request->eventName,
             'description' => $request->eventDescription,
             'date_event' => $request->eventDate,
             'recurrence' => $request->eventRecurrence,
             'price' => $request->eventPrice,
-            'id' => $request->eventIdUser
+            'user_id' => $userID
         ]);
 
-        return redirect('/evenements')->with('status', "Le produit a bien été modifié !");
+        return redirect('/evenements')->with('status', "L'événement a bien été modifié !");
     }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -156,7 +155,7 @@ class EventController extends Controller
 
         $event->images->each(function ($img, $key) {
             $link = $img->image_link;
-            Storage::disk('public')->delete('events/'.$link);
+            Storage::disk('public')->delete('events/' . $link);
         });
         /*foreach ($product->imsages as $img) {
             $link = $img->image_link;
@@ -169,6 +168,6 @@ class EventController extends Controller
         ])->delete();
         EventBDE::find($id)->delete();
 
-        return redirect('/evenements')->with('status', 'Le produit a bien été supprimé');
+        return redirect('/evenements')->with('status', "L'événement a bien été supprimé");
     }
 }

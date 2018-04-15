@@ -1,93 +1,106 @@
-@media screen and (min-width: 1000px) {
-    .cont {
-        margin: 0px;
-        float: left;
-        width: 80%;
-    }
-
-    .aside {
-        float: right;
-        width: 300px;
-        background-color: black;
-        width: 20%;
-    }
+/*--------------Produits-------------------*/
+.btnInline {
+    display: inline;
+}
+.aside h5 {
+    text-transform: uppercase;
+    font-size: 1em;
+    color: white;
 }
 
-@media screen and (max-width: 1000px) {
-    .aside{
-        width:100%;
-        background-color: blue;
-
-    }
-
-    .aside div {
-        float:left;
-    }
+.aside {
+    position: fixed;
+    text-align: center;
+    padding: 1%;
+    top: 20vh;
+    right: 0px;
+    background-color: rgba(250, 5, 5, 0.75);
+}
+.aside .product-item {
+    cursor: pointer;
+}
+#asideCroix {
+    position: absolute;
+    font-size: 2em;
+    color: black;
+    font-weight: bold;
+    top: -20px;
+    left: -1em;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
 /*----------------Header------------------*/
 html {
+    overflow-x: hidden;
     margin: 0px;
     padding: 0px;
 }
-header
-{
+
+header {
     position: relative;
     z-index: 100;
     background-color: rgba(200, 200, 200, 1);
     transition: 0.5s;
 }
+
 header .nav-link {
-    color: rgba(50,50,50,.5) !important;
+    color: rgba(50, 50, 50, .5) !important;
 }
+
 header .nav-link:hover {
-    color: rgba(240,0,0,1) !important;
+    color: rgba(240, 0, 0, 1) !important;
 }
+
 .navItems {
     position: relative;
     margin: 0px;
     padding: 0px;
 }
+
 header .nav-item:after {
     content: '';
     position: absolute;
     left: 0px;
     width: 0px;
     height: 1px;
-    background-color: rgba(240,0,0,0);
+    background-color: rgba(240, 0, 0, 0);
     transition: 0.5s;
 }
+
 header .nav-item:hover:after {
     content: '';
     position: absolute;
     width: 100%;
     height: 3px;
-    background-color: rgba(240,0,0,1);
+    background-color: rgba(240, 0, 0, 1);
 }
-header:hover, header:focus, header:active
-{
+
+header:hover, header:focus, header:active {
     transform: translateY(2px);
-    box-shadow: 0px 3px 30px  rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.75);
 }
+
 header .navbar-brand, header .navbar-brand img {
     margin-top: 0px;
     margin-bottom: 0px;
     padding-top: 0px;
     height: 75px;
 }
-#btnInsCo
-{
+
+#btnInsCo {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-#btnConnexion, #btnInscription
-{
+
+#btnConnexion, #btnInscription {
     cursor: pointer;
     margin: 0px;
     padding: 5px;
     transition: 0.5s;
 }
+
 #btnProfil {
     text-align: center;
     border-radius: 50%;
@@ -97,39 +110,40 @@ header .navbar-brand, header .navbar-brand img {
     background-image: linear-gradient(to right bottom, #ff002f, #d00029, #a20022, #760019, #4d010e);
     border: 2px red outset;*/
 }
+
 #divBtnProfil:hover:after {
-    background-color: rgba(240,0,0,0);
+    background-color: rgba(240, 0, 0, 0);
 }
+
 #btnProfil::before {
     content: '';
     position: absolute;
     left: 0px;
     width: 100%;
     height: 1px;
-    background-color: rgba(240,0,0,1);
+    background-color: rgba(240, 0, 0, 1);
     transition: 0.5s;
 }
+
 #btnProfil:hover::before {
     content: '';
     position: absolute;
     left: 0px;
     width: 100%;
     height: 2px;
-    background-color: rgba(240,0,0,1);
+    background-color: rgba(240, 0, 0, 1);
     transition: 0.5s;
 }
+
 #btnProfil:active::before {
     content: '';
     position: absolute;
     left: 0px;
     width: 100%;
     height: 2px;
-    background-color: rgba(240,0,0,1);
+    background-color: rgba(240, 0, 0, 1);
     transition: 0.5s;
 }
-
-
-
 
 /*------------Carrousel------------*/
 #carouselid {
@@ -250,7 +264,6 @@ textarea {
     resize: none;
 }
 
-
 /*-------------FOOTER-------------*/
 footer {
     text-align: center;
@@ -260,8 +273,8 @@ footer {
     color: rgb(240, 0, 0);
     background-color: white;
 }
-footer a:hover, footer a:visited,footer a:link,footer a:active
-{
+
+footer a:hover, footer a:visited, footer a:link, footer a:active {
     color: rgb(240, 0, 0);
     text-decoration: none;
 }
