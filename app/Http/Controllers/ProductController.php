@@ -138,16 +138,16 @@ class productController extends Controller
 
             <div class="col-md-3 product-item">
                 <div class="product-header">
-                    <a href="/produit/<?php $product->id ?>">
-                        <h1><?php $product->title ?></h1></a>
+                    <a href="/produit/<? echo $product->id ?>">
+                        <h1><?php echo $product->title ?></h1></a>
                 </div>
-                <div class="product-image"><img src="<?php asset('storage/products/'.$products[$key]->images[0]->image_link) ?>" alt="<?php $products[$key]->images[0]->alt ?>">
+                <div class="product-image"><img src="<?php echo asset('storage/products/'.$products[$key]->images[0]->image_link) ?>" alt="<?php echo $products[$key]->images[0]->alt ?>">
                 </div>
                 <div class="product-description">
-                    <p><?php $product->description ?></p>
+                    <p><?php echo $product->description ?></p>
                 </div>
                 <div class="product-price">
-                    <p id="price"><?php $product->price ?>€</p>
+                    <p id="price"><?php echo $product->price ?>€</p>
                 </div>
             </div>
             <?php } ?>
