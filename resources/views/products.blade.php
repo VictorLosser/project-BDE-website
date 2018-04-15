@@ -48,6 +48,7 @@
             </div>
         </FORM>
 
+        <p>Formulaires PHP normal</p>
         @foreach ($categories as $category)
             <form action="/produits" method="get" class="btnInline">
                 <button class="btn btn-info"
@@ -58,10 +59,12 @@
                 </button>
             </form>
         @endforeach
-        <br />
-        <br />
+        <br/>
+        <br/>
+        <p>Formulaires en AJAX</p>
         @foreach ($categories as $category)
-            <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get" class="btnInline">
+            <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get"
+                  class="btnInline">
                 {{ csrf_field() }}
                 <button class="btn btn-info"
                         id="category-{{ $category->category_name }}"
@@ -109,7 +112,7 @@
         <?php $lastProduct = $products->last(); ?>
         <div class="col-md product-item">
             <div class="product-header">
-                    <h1>{{ $lastProduct->title }}</h1>
+                <h1>{{ $lastProduct->title }}</h1>
             </div>
             <div class="product-image"><img src="{{asset('storage/products/'.$lastProduct->images[0]->image_link)}}"
                                             alt="{{$lastProduct->images[0]->alt}}">
@@ -125,10 +128,10 @@
             </div>
         </div>
         <script>
-            $('#asideCroix').click(function() {
-               $('.aside').toggle();
+            $('#asideCroix').click(function () {
+                $('.aside').toggle();
             });
-            $('.aside .product-item').click(function(){
+            $('.aside .product-item').click(function () {
                 window.location = "/produit/" + {{ $lastProduct->id }};
             });
         </script>

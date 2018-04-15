@@ -1,6 +1,5 @@
 /*----------------Popup------------------*/
-#popupAll
-{
+#popupAll {
     position: fixed;
     z-index: 997;
     display: flex;
@@ -10,17 +9,17 @@
     height: 100vh;
     width: 100vw;
 }
-#popupBackground
-{
+
+#popupBackground {
     z-index: 998;
     position: absolute;
-    background-color: rgba(50,50,50,0.75);
+    background-color: rgba(50, 50, 50, 0.75);
 
     height: 100vh;
     width: 100vw;
 }
-.popupFenetre
-{
+
+.popupFenetre {
     z-index: 999;
     position: absolute;
     background-color: white;
@@ -39,51 +38,55 @@
     animation-name: down;
     animation-duration: 0.5s;
 }
+
 #formulaireInterne input {
     width: 100%;
 }
-#popupFenetreTitre
-{
+
+#popupFenetreTitre {
     font-size: 2em;
     font-weight: bold;
     margin: 25px 0px 50px 0px;
 }
-.popupFenetre form
-{
+
+.popupFenetre form {
     text-align: center;
 }
+
 #divCheckBox {
     display: flex;
     justify-content: flex-start;
     flex-direction: row-reverse;
 }
+
 .checkbox label {
     order: -1;
     color: grey;
 }
+
 .checkbox input {
     width: auto !important;
     display: inline;
 }
-#popupMenuBackground
-{
+
+#popupMenuBackground {
     z-index: 99;
     position: fixed;
-    background-color: rgba(50,50,50,0.75);
+    background-color: rgba(50, 50, 50, 0.75);
 
     height: 100vh;
     width: 100vw;
 }
-.croixIcon
-{
+
+.croixIcon {
     position: absolute;
     font-size: 2.2em;
     margin: 0px !important;
     top: 0px;
     right: 10px;
 }
-.croixIcon path
-{
+
+.croixIcon path {
     stroke-width: 55;
     stroke: red;
     fill-opacity: 0;
@@ -91,12 +94,20 @@
 
 /* Déclaration animation (Chrome, Safari, Opera) */
 @-webkit-keyframes down {
-    from {transform: translateY(200px);}
-    to {transform: translateY(0px);}
+    from {
+        transform: translateY(200px);
+    }
+    to {
+        transform: translateY(0px);
+    }
 }
 
 /* Déclaration animation (Standard) */
 @keyframes down {
-    from {transform: translateY(200px);}
-    to {transform: translateY(0px);}
+    from {
+        transform: translateY(200px);
+    }
+    to {
+        transform: translateY(0px);
+    }
 }

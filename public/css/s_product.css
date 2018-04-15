@@ -2,15 +2,15 @@
     font-size: 30px;
     text-align: center;
     background-color: forestgreen;
-    color:white;
+    color: white;
     width: fit-content;
     padding: 0 40px 0 40px;
-    display:block;
+    display: block;
     margin: auto;
 }
 
 .s-product-image img {
-    display:block;
+    display: block;
     margin: 20px auto 20px auto;
     width: auto;
     height: 300px;
@@ -25,10 +25,10 @@
     text-align: center;
     font-size: 25px;
     font-weight: bold;
-    color:white;
+    color: white;
     background-color: limegreen;
     width: fit-content;
     padding: 0 20px 0 20px;
-    display:block;
+    display: block;
     margin: auto;
 }
