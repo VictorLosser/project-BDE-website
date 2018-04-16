@@ -101,11 +101,13 @@
                         <input type="hidden" name="urlType" value="{{$urlType}}"/>
                         <div class="row">
                             <div class="col">
-                                <textarea id="newCommContent" name="newCommContent" class="form-control"
+                                <textarea id="newCommContent"
+                                          name="newCommContent"
+                                          class="form-control"
                                           style="color: black !important;"
                                           maxlength="5000"
-                                          required>
-                                </textarea>
+                                          required></textarea>
+
                             </div>
                         </div>
                         <br/>
