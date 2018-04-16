@@ -32,6 +32,26 @@
     left: -1em;
     cursor: pointer;
 }
+
+
+/*-----Evenements-----*/
+.imgList {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+
+    min-width: 50%;
+    height: 102px;
+    box-sizing: content-box;
+    border: 1px grey solid;
+}
+.imgList img {
+    height: 100px;
+    margin: 0px 2% 0px 2%;
+}
+
+
+/*-----Commentaires-----*/
 #eventComm {
     text-align: left;
 }
@@ -66,7 +86,7 @@
 #newCommContent {
     color: black !important;
 }
-.commDelete {
+.rightEditBtn {
     text-align: right;
 }
 

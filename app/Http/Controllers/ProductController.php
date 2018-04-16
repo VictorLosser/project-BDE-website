@@ -72,7 +72,7 @@ class productController extends Controller
 //            'description' => 'required',
 //            'price' => 'required'
 //        ]);
-
+        $userID = Auth::user()->id;
         $lastImageId = ImageBDE::orderBy('id', 'DESC')->first()->id;
 
         Storage::disk('public')->putFileAs('products', $request->productImg, ($lastImageId+1).'.png');
@@ -91,7 +91,7 @@ class productController extends Controller
             'alt' => $request->productAlt,
             'imageable_id' => $lastProductId,
             'imageable_type' => 'product',
-            'user_id' => 1
+            'user_id' => $userID
         ]);
 
         return redirect('/produits')->with('status', 'Nouveau produit ajouté');
