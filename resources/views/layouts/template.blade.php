@@ -136,6 +136,7 @@ use Illuminate\Support\Facades\Auth;
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="_token" content="{{csrf_token()}}" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
@@ -143,7 +144,7 @@ use Illuminate\Support\Facades\Auth;
     <script src="{{asset('js/formLogin.js')}}"></script>
     <!-- Font-Awesome (CDN) -->
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    @yield('custom_css')
+    @yield('custom_head')
     <title>@yield('title') - eboutique BDE eXia</title>
 </head>
 <div id="popupMenuBackground" style="display: none;"></div>
@@ -152,8 +153,8 @@ use Illuminate\Support\Facades\Auth;
 <header>
     <nav class="navbar navbar-expand-md" id="the-navbar">
         <a class="navbar-brand" href="./"><img src="{{ asset('img/exia-logo.png') }}"
-                                               alt="Accueil - CESI.eXia BDE Strasbourg"
-                                               title="Accueil - CESI.eXia BDE Strasbourg"/></a>
+                                                 alt="Accueil - CESI.eXia BDE Strasbourg"
+                                                 title="Accueil - CESI.eXia BDE Strasbourg"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -240,7 +241,6 @@ use Illuminate\Support\Facades\Auth;
                         </ul>
                     </div>
             @endif
-
         @else
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav m-auto">
@@ -279,8 +279,7 @@ use Illuminate\Support\Facades\Auth;
         @if (Auth::check())
             <div id="divBtnProfil" class="nav-item dropdown font-weight-bold">
 
-                <a id="btnProfil" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                   data-toggle="dropdown"
+                <a id="btnProfil" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
                     {{ Auth::user()->firstname}} </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -313,6 +312,7 @@ use Illuminate\Support\Facades\Auth;
 <div style="margin: 0px;">
     @yield('content')
 </div>
+
 
 
 <head>

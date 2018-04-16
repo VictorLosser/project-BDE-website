@@ -37,6 +37,12 @@ class productController extends Controller
 
     }
 
+    public function indexData()
+    {
+        $products = ProductBDE::all()->toJson();
+        echo $products;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -238,6 +244,7 @@ class productController extends Controller
         ])->delete();
         ProductBDE::find($id)->delete();
 
-        return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
+        // DON'T USE THIS LINE WHEN AJAX IS WORKING
+        //return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
     }
 }

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ImageBDE extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['created_at','updated_at','deleted_at'];
     protected $table = "image-bde";
 
     protected $fillable = [

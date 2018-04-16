@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EventsBDE extends Model
 {
     protected $table = "events-bde";
+    use SoftDeletes;
+    protected $dates = ['created_at','updated_at','deleted_at'];
 
     public function users(){
         return $this->belongsTo('App\User','user_id');
@@ -32,5 +35,7 @@ class EventsBDE extends Model
     protected $fillable = [
         'title', 'description', 'date_event', 'price', 'recurrence', 'user_id',
     ];
+
+
 
 }

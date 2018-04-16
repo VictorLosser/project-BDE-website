@@ -31,6 +31,12 @@ class IdeeController extends Controller
             return redirect('/idees')->with('status', 'Accès refusé');
     }
 
+    public function indexData()
+    {
+        $ideas = IdeaBoxBDE::all()->toJson();
+        echo $ideas;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -122,6 +128,7 @@ class IdeeController extends Controller
     {
         IdeaBoxBDE::find($id)->delete();
 
-        return redirect('/idees')->with('status', "L'événement a bien été supprimé");
+        // DON'T USE THIS LINE WHEN AJAX IS WORKING
+//        return redirect('/idees')->with('status', "L'événement a bien été supprimé");
     }
 }

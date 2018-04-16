@@ -20,6 +20,7 @@ class CreateImageBdeTable extends Migration
             $table->morphs('imageable');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->engine = 'InnoDB';
         });

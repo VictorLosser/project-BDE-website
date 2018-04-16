@@ -13,7 +13,6 @@ $(function () {
         $.get($(formVetements).attr('action'), {category: category}, function (data) {
             $('#products-display').html('');
             $('#products-display').append(data);
-
         }, "html");
     });
     $(formVaisselle).submit(function (event) {
@@ -25,7 +24,7 @@ $(function () {
             $('#products-display').html('');
             $('#products-display').append(data);
 
-        });
+        }, "html");
     });
     $(formAccessoires).submit(function (event) {
         event.preventDefault();
@@ -36,6 +35,6 @@ $(function () {
             $('#products-display').html('');
             $('#products-display').append(data);
 
-        });
+        }, "html");
     });
 });

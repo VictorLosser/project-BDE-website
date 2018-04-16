@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductBDE extends Model
 {
     protected $table = "product-bde";
+    use SoftDeletes;
+    protected $dates = ['created_at','updated_at','deleted_at'];
 
     protected $fillable = [
         'title', 'description', 'price', 'category_id'

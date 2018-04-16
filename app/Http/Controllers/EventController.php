@@ -32,6 +32,12 @@ class EventController extends Controller
             return redirect('/evenements')->with('status', 'Accès refusé');
     }
 
+    public function indexData()
+    {
+        $events = EventsBDE::all()->toJson();
+        echo $events;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -68,7 +74,7 @@ class EventController extends Controller
             'title' => $request->eventName,
             'description' => $request->eventDescription,
             'date_event' => $request->eventDate,
-            'recurrence' => $request->eventRecurrence,
+            'repeat_interval' => $request->eventRecurrence,
             'price' => $request->eventPrice,
             'user_id' => $userID
         ]);
@@ -168,6 +174,7 @@ class EventController extends Controller
         ])->delete();
         EventBDE::find($id)->delete();
 
-        return redirect('/evenements')->with('status', "L'événement a bien été supprimé");
+        // DON'T USE THIS LINE WHEN AJAX IS WORKING
+        //return redirect('/evenements')->with('status', "L'événement a bien été supprimé");
     }
 }

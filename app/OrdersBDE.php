@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class OrdersBDE extends Model
 {
     protected $table = "orders-bde";
+
+    protected $dates = ['created_at','updated_at'];
 
     public function products() {
         return $this->belongsToMany('App\ProductBDE', 'contain-product-bde', 'order_id', 'product_id')

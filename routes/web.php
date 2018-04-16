@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\ProductBDE;
 use App\EventsBDE;
 use App\IdeaBoxBDE;
-use App\ImageBDE;
-use App\ContainProductBDE;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,24 +21,31 @@ Route::get('/', function () {
 
 });
 
+Route::resources([
+    'produit' => 'productController',
+    'idee' => 'ideeController',
+    'evenement' => 'eventController'
+]);
+
 Route::get('/produits', 'productController@shows');
 Route::get('/produits/categorie', 'productController@showCategory');
+Route::get('/produits/indexdata', 'productController@indexData');
 
 
 Route::get('/evenements', function () {
    $events = EventsBDE::all();
     return view('events', compact('events'));
 });
+Route::get('/evenements/indexdata', 'EventController@indexData');
+
+
 Route::get('/idees', function () {
     $idees = IdeaBoxBDE::all();
     return view('idees', compact('idees'));
 });
+Route::get('/idees/indexdata', 'IdeeController@indexData');
 
-Route::resources([
-    'produit' => 'productController',
-    'idee' => 'ideeController',
-    'evenement' => 'eventController'
-]);
+
 Route::resource('comment', 'commentController')->only([
     'store', 'destroy'
 ]);

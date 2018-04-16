@@ -8,6 +8,8 @@ class LikeBDE extends Model
 {
     protected $table = "likes-bde";
 
+    protected $dates = ['created_at','updated_at'];
+
     public function likeable(){
         return $this->morphTo();
     }

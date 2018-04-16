@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class IdeaBoxBDE extends Model
 {
     protected $table = "idea-box-bde";
+    use SoftDeletes;
+    protected $dates = ['created_at','updated_at','deleted_at'];
 
     public function users(){
         return $this->belongsTo('App\User', 'user_id');
