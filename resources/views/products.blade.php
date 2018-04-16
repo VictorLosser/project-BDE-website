@@ -48,19 +48,17 @@
             </div>
         </FORM>
 
-        <p>Formulaires PHP normal</p>
-        @foreach ($categories as $category)
-            <form action="/produits" method="get" class="btnInline">
-                <button class="btn btn-info"
-                        type="submit"
-                        name="category"
-                        value="{{ $category->id }}">
-                    {{ $category->category_name }}
-                </button>
-            </form>
-        @endforeach
-        <br/>
-        <br/>
+        {{--        <p>Formulaires PHP normal</p>
+                @foreach ($categories as $category)
+                    <form action="/produits" method="get" class="btnInline">
+                        <button class="btn btn-info"
+                                type="submit"
+                                name="category"
+                                value="{{ $category->id }}">
+                            {{ $category->category_name }}
+                        </button>
+                    </form>
+                @endforeach--}}
         <p>Formulaires en AJAX</p>
         @foreach ($categories as $category)
             <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get"

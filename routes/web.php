@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\ProductBDE;
 use App\EventsBDE;
 use App\IdeaBoxBDE;
-use App\ImageBDE;
-use App\ContainProductBDE;
 
 /*
 |--------------------------------------------------------------------------

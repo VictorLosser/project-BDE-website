@@ -25,7 +25,7 @@ $(function () {
             $('#products-display').html('');
             $('#products-display').append(data);
 
-        });
+        }, "html");
     });
     $(formAccessoires).submit(function (event) {
         event.preventDefault();
@@ -36,6 +36,6 @@ $(function () {
             $('#products-display').html('');
             $('#products-display').append(data);
 
-        });
+        }, "html");
     });
 });
