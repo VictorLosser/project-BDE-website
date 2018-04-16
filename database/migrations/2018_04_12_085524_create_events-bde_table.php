@@ -22,6 +22,7 @@ class CreateEventsBdeTable extends Migration
             $table->string('recurrence',255);
             $table->integer('user_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->engine = 'InnoDB';
 

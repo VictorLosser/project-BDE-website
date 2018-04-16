@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProductBDE extends Model
 {
     protected $table = "product-bde";
+    use SoftDeletes;
+    protected $dates = ['created_at','updated_at','deleted_at'];
 
     protected $fillable = [
         'title', 'description', 'price', 'category_id'

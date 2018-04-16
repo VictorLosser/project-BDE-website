@@ -19,6 +19,7 @@ class CreateCommentsBdeTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->morphs('commentable');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->engine = 'InnoDB';
 

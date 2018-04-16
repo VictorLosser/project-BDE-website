@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ImageBDE extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['created_at','updated_at','deleted_at'];
     protected $table = "image-bde";
 
     protected $fillable = [

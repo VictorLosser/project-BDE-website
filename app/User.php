@@ -10,6 +10,8 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $table = "users";
+    use SoftDeletes;
+    protected $dates = ['created_at','updated_at','deleted_at'];
 
     /**
      * The attributes that are mass assignable.
