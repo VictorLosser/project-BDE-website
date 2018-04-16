@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\Auth;
     <div class="popupFenetre" id="inscriptionPopup" style="display: none;">
         <div class="croixIcon croixIconPopup"><i class="fas fa-times"></i></div>
         <div id="formulaireInterne">
-            <form class="form-horizontal" method="POST" action="{{ route('login') }}" autocomplete="on">
+            <form class="form-horizontal" method="POST" action="{{ route('register') }}" autocomplete="on">
                 {{ csrf_field() }}
                 <div><p id="popupFenetreTitre">Inscription</p></div>
                 <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
@@ -136,6 +136,7 @@ use Illuminate\Support\Facades\Auth;
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>

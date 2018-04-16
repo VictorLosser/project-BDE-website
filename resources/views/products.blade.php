@@ -59,7 +59,7 @@
                         </button>
                     </form>
                 @endforeach--}}
-        <p>Formulaires en AJAX</p>
+        <p>Trier par catégories</p>
         @foreach ($categories as $category)
             <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get"
                   class="btnInline">

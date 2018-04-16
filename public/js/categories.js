@@ -13,7 +13,6 @@ $(function () {
         $.get($(formVetements).attr('action'), {category: category}, function (data) {
             $('#products-display').html('');
             $('#products-display').append(data);
-
         }, "html");
     });
     $(formVaisselle).submit(function (event) {

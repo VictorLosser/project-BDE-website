@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::get('/produits', 'productController@shows');
 Route::get('/produits/categorie', 'productController@showCategory');
+Route::get('/produits/indexdata', 'productController@indexData');
 
 
 Route::get('/evenements', function () {
