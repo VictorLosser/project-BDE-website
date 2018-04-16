@@ -68,8 +68,8 @@
         </button>
         <div class="showFlex">
             <div class="showImg">
-                <a href="{{asset('storage/events/'.$event->images[0]->image_link)}}">
-                    <img src="{{asset('storage/events/'.$event->images[0]->image_link)}}"
+                <a href="{{asset('storage/'.$event->images[0]->image_link)}}">
+                    <img src="{{asset('storage/'.$event->images[0]->image_link)}}"
                          alt="{{$event->images[0]->alt}}"
                          id="imgShowing"/>
                 </a>
@@ -93,7 +93,7 @@
         </div>
         <div class="imgList">
             @foreach($event->images as $image)
-                <img src="{{asset('/storage/events/'.$image->image_link)}}"
+                <img src="{{asset('/storage/'.$image->image_link)}}"
                      alt="{{$image->alt}}"
                      title="{{$image->alt}}"
                      class="imgListing"/>

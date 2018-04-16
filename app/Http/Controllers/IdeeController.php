@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\IdeaBoxBDE;
 use Illuminate\Http\Request;
 use App\User;
-use Storage;
-use File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 use Illuminate\Support\Facades\Auth;
 

@@ -17,8 +17,8 @@
         <h1>{{ $product->title }}</h1>
     </div>
     <div class="s-product-image">
-        <a href="{{asset('storage/products/'.$product->images[0]->image_link)}}">
-            <img src="{{asset('storage/products/'.$product->images[0]->image_link)}}" alt="{{$product->images[0]->alt}}">
+        <a href="{{asset('storage/'.$product->images[0]->image_link)}}">
+            <img src="{{asset('storage/'.$product->images[0]->image_link)}}" alt="{{$product->images[0]->alt}}">
         </a>
     </div>
     <div class="s-product-description">

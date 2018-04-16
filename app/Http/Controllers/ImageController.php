@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ImageBDE;
-use Storage;
-use File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 use Illuminate\Support\Facades\Auth;
 

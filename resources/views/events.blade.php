@@ -20,7 +20,7 @@
                     <p>{{$event->description}}</p>
                 </div>
                 <div>
-                    <img src="{{asset('storage/events/'.$event->images[0]->image_link)}}"
+                    <img src="{{asset('storage/'.$event->images[0]->image_link)}}"
                          alt="{{$event->images[0]->alt}}" style="height: 200px; max-width: 100%;"/>
                 </div>
 

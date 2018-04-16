@@ -87,7 +87,7 @@
                             <h1>{{ $product->title }}</h1></a>
                     </div>
                     <div class="product-image"><img
-                                src="{{asset('storage/products/'.$products[$key]->images[0]->image_link)}}"
+                                src="{{asset('storage/'.$products[$key]->images[0]->image_link)}}"
                                 alt="{{$products[$key]->images[0]->alt}}">
                     </div>
                     <div class="product-description">
@@ -112,7 +112,7 @@
             <div class="product-header">
                 <h1>{{ $lastProduct->title }}</h1>
             </div>
-            <div class="product-image"><img src="{{asset('storage/products/'.$lastProduct->images[0]->image_link)}}"
+            <div class="product-image"><img src="{{asset('storage/'.$lastProduct->images[0]->image_link)}}"
                                             alt="{{$lastProduct->images[0]->alt}}">
             </div>
             <div class="product-description">

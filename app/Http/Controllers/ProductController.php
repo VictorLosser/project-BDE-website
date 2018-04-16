@@ -6,8 +6,8 @@ use App\ProductBDE;
 use App\ImageBDE;
 use Illuminate\Http\Request;
 use App\User;
-use Storage;
-use File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -60,8 +60,6 @@ class productController extends Controller
                 return view('products.create');
             else
                 return redirect('/produits')->with('status', 'Accès refusé');
-
-
     }
 
     /**
@@ -79,9 +77,8 @@ class productController extends Controller
 //            'price' => 'required'
 //        ]);
         $userID = Auth::user()->id;
-        $lastImageId = ImageBDE::orderBy('id', 'DESC')->first()->id;
 
-        Storage::disk('public')->putFileAs('products', $request->productImg, ($lastImageId+1).'.png');
+        $path = Storage::putFile('products', $request->file('productImg'));
 
         ProductBDE::create([
             'title' => $request->productName,
@@ -93,14 +90,14 @@ class productController extends Controller
         $lastProductId = ProductBDE::orderBy('id', 'DESC')->first()->id;
 
         ImageBDE::create([
-            'image_link' => ($lastImageId+1).'.png',
+            'image_link' => $path,
             'alt' => $request->productAlt,
             'imageable_id' => $lastProductId,
             'imageable_type' => 'product',
             'user_id' => $userID
         ]);
 
-        return redirect('/produits')->with('status', 'Nouveau produit ajouté');
+        return redirect('/produits')->with('status', 'Nouveau produit ajouté avec succès !');
     }
 
     /**
@@ -231,7 +228,7 @@ class productController extends Controller
 
         $product->images->each(function ($img, $key) {
             $link = $img->image_link;
-            Storage::disk('public')->delete('products/'.$link);
+            Storage::delete('products/'.$link);
         });
         /*foreach ($product->images as $img) {
             $link = $img->image_link;
