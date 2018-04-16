@@ -2,7 +2,7 @@
 
 @section('title', "Supprimer un produit")
 
-@section('custom_css')
+@section('custom_head')
     <script src="{{ asset('js/products-ajax.js') }}"></script>
 @endsection
 

@@ -143,7 +143,7 @@ use Illuminate\Support\Facades\Auth;
     <script src="{{asset('js/formLogin.js')}}"></script>
     <!-- Font-Awesome (CDN) -->
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    @yield('custom_css')
+    @yield('custom_head')
     <title>@yield('title') - eboutique BDE eXia</title>
 </head>
 <div id="popupMenuBackground" style="display: none;"></div>

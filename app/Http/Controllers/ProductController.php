@@ -244,6 +244,7 @@ class productController extends Controller
         ])->delete();
         ProductBDE::find($id)->delete();
 
-//        return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
+        // DON'T USE THIS LINE WHEN AJAX IS WORKING
+        //return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
     }
 }

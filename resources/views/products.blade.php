@@ -2,7 +2,7 @@
 
 @section('title', 'Produits')
 
-@section('custom_css')
+@section('custom_head')
     <script src="{{ asset('js/categories.js') }}"></script>
 @endsection
 
