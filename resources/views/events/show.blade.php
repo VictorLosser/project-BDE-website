@@ -26,7 +26,7 @@
                 <div id="divImgLike" onclick="addLikeEventImg({{$event->images[0]->id}})">
                     <p class="eventImgLikes">
                         <span id="countEventImgLikes">{{$event->images[0]->likes()->count()}} </span><i
-                                class="far fa-thumbs-up" style="background-color: transparent;"></i>
+                                class="far fa-thumbs-up" style="background-color: transparent;" title="Afficher noms des likes->users"></i>
                     </p>
                 </div>
             </div>
@@ -147,13 +147,14 @@
                                         });*/
 
                     $("#addImgFormMsg").fadeIn();
-                    $("#addImgFormMsg").css({color: 'green'});
-                    $("#addImgFormMsg").text('Loading ...');
+                    $("#addImgFormMsg").css({color: 'green'}).text('Loading ...');
 
                     eventImgType = $(this).find('#eventImgType').val();
                     eventId = $(this).find('#eventId').val();
                     eventImg = $(this).find('#eventImg').val();
                     eventImgAlt = $(this).find('#eventImgAlt').val();
+
+                    alert(eventId+"\n"+eventImgType+"\n"+eventImgAlt+"\n"+eventImg);
 
                     $.ajaxSetup({
                         headers: {
@@ -242,7 +243,7 @@
                         url: "/like/" + $likeId,
                         success: function (data) {
                             console.log(data);
-                            $('#countEventImgLikes').text(($('#countEventImgLikes').text)-1);
+                            $('#countEventImgLikes').text(($('#countEventImgLikes').text())-1);
                         },
                         error: function (data) {
                             console.log("Errors for supprimation : ", data);

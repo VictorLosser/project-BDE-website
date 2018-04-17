@@ -140,7 +140,7 @@ class EventController extends Controller
             'title' => $request->eventName,
             'description' => $request->eventDescription,
             'date_event' => $request->eventDate,
-            'recurrence' => $request->eventRecurrence,
+            'repeat_interval' => $request->eventRecurrence,
             'price' => $request->eventPrice,
             'user_id' => $userID
         ]);
