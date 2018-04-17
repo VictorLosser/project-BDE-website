@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ContainProductBDE;
 use App\ProductBDE;
 use App\ImageBDE;
 use Illuminate\Http\Request;
@@ -112,8 +113,7 @@ class productController extends Controller
     public function shows(Request $request)
     {
         $priceAVG = ProductBDE::avg('price');
-        $products = ProductBDE::
-        when($request->orderBy, function ($query) use ($request) {
+        $products = ProductBDE::when($request->orderBy, function ($query) use ($request) {
             return $query->orderBy($request->orderBy);
         })->get();
 

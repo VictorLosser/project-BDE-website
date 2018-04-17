@@ -96,9 +96,6 @@
         <div id="slider-range" style="width:300px;"></div>
     </div>
 
-    <p id="test"></p>
-
-    <!-- PRODUCTS DISPLAY -->
     <div id="products-display" class="row" style="justify-content: space-around">
 
         {{-- UNCOMMENT FOLLOWING CODE FOR A CLASSIC PHP WAY (because currently it's run with AJAX --}}
@@ -163,17 +160,3 @@
     </body>
 
 @endsection
-
-<!--
-{{--PISTES DE RECHERCHE POUR LES 3 ARTICLES LES PLUS COMMANDES--}}
-
-{{--orderBy('quantity', 'desc')->take(3)--}}
-
-{{--<?php--}}
-{{--foreach ($most->flatMap->products as $oui) {--}}
-{{--$non = $oui->containProduct;--}}
-{{--echo $non->quantity;--}}
-{{--echo ' '.$oui->title.'<br>';--}}
-{{--}--}}
-{{--?>--}}
-        -->

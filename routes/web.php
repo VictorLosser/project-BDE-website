@@ -15,11 +15,7 @@ use App\IdeaBoxBDE;
 |
 */
 
-Route::get('/', function () {
-
-    return view('welcome');
-
-});
+Route::get('/', 'WelcomeController@getPopularProducts');
 
 Route::resources([
     'produit' => 'productController',
