@@ -89,7 +89,16 @@
                         <p class="sign">Publié par un visiteur le {{$event->created_at}}</p>
                     @endif
                 </div>
+                <form action="/participate" method="post" class="btnInline">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id_event" value="{{$event->id}}"/>
+                    <button class="btn btn-info"
+                            type="submit"
+                            value="{{ $event->id }}">
+                        Je participe</button>
+                </form>
             </div>
+
         </div>
         <div class="imgList">
             @foreach($event->images as $image)

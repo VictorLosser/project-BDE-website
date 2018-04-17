@@ -24,7 +24,8 @@ Route::get('/', function () {
 Route::resources([
     'produit' => 'productController',
     'idee' => 'ideeController',
-    'evenement' => 'eventController'
+    'evenement' => 'eventController',
+    'participate' => 'ParticipateController'
 ]);
 
 Route::get('/produits', 'productController@shows');
