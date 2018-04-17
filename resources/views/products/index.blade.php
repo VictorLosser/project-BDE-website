@@ -1,9 +1,9 @@
 @extends('layouts.template')
 
-@section('title', "Supprimer un produit")
+@section('title', "Gestion des produits")
 
 @section('custom_head')
-    <script src="{{ asset('js/products-ajax.js') }}"></script>
+    <script src="{{ asset('/js/products-index.js') }}"></script>
 @endsection
 
 @section('content')

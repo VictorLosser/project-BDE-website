@@ -1,40 +1,54 @@
 $(function () {
 
-    // Get the form.
-    var formVetements = $('#CategoryVetements');
-    var formVaisselle = $('#CategoryVaisselle');
-    var formAccessoires = $('#CategoryAccessoires');
+    const noCategory = $('#no-category');
+    const formVetements = $('#CategoryVetements');
+    const formVaisselle = $('#CategoryVaisselle');
+    const formAccessoires = $('#CategoryAccessoires');
 
-    $(formVetements).submit(function (event) {
-        event.preventDefault();
+    // When the page is loaded, directly display products
+    getProductsList();
 
-        var category = $('#category-Vetements').val();
+    function getProductsList(){
+        $.get($(noCategory).attr('action'), function (data) {
+            $('#products-display').html('');
+            $('#products-display').append(data);
+        }, "html");
+    }
 
+    function getProductsbyCategory(category){
         $.get($(formVetements).attr('action'), {category: category}, function (data) {
             $('#products-display').html('');
             $('#products-display').append(data);
         }, "html");
+    }
+
+    $(noCategory).submit(function (event) {
+        event.preventDefault();
+
+        getProductsList();
     });
+
+    $(formVetements).submit(function (event) {
+        event.preventDefault();
+
+        const category = $('#category-Vetements').val();
+
+        getProductsbyCategory(category);
+    });
+
     $(formVaisselle).submit(function (event) {
         event.preventDefault();
 
-        var category = $('#category-Vaisselle').val();
+        const category = $('#category-Vaisselle').val();
 
-        $.get($(formVaisselle).attr('action'), {category: category}, function (data) {
-            $('#products-display').html('');
-            $('#products-display').append(data);
-
-        }, "html");
+        getProductsbyCategory(category);
     });
+
     $(formAccessoires).submit(function (event) {
         event.preventDefault();
 
-        var category = $('#category-Accessoires').val();
+        const category = $('#category-Accessoires').val();
 
-        $.get($(formAccessoires).attr('action'), {category: category}, function (data) {
-            $('#products-display').html('');
-            $('#products-display').append(data);
-
-        }, "html");
+        getProductsbyCategory(category);
     });
 });

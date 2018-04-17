@@ -23,16 +23,14 @@ class productController extends Controller
     {
         if (Auth::check()) {
             $authorisation = Auth::user()->isauthorized();
-        }
-        else
+        } else
             return view('products.index', compact('products'));
 
-        if ($authorisation == 'Bde'){
+        if ($authorisation == 'Bde') {
 
             $products = ProductBDE::all();
-            return view('products.index', compact('products'));}
-
-        else
+            return view('products.index', compact('products'));
+        } else
             return view('products.index', compact('products'));
 
     }
@@ -52,14 +50,13 @@ class productController extends Controller
     {
         if (Auth::check()) {
             $authorisation = Auth::user()->isauthorized();
-        }
-        else
+        } else
             return redirect('/produits')->with('status', 'Accès refusé');
 
-            if ($authorisation == 'Bde')
-                return view('products.create');
-            else
-                return redirect('/produits')->with('status', 'Accès refusé');
+        if ($authorisation == 'Bde')
+            return view('products.create');
+        else
+            return redirect('/produits')->with('status', 'Accès refusé');
     }
 
     /**
@@ -127,38 +124,38 @@ class productController extends Controller
         $categories = \App\ProductCategoryBDE::all();
 
         return view('products',
-            compact('products','priceAVG', 'categories')
+            compact('products', 'priceAVG', 'categories')
         );
     }
 
-    public function showCategory(Request $request){
-        if($request->has('category')){
-
+    public function showCategory(Request $request)
+    {
+        if ($request->has('category')) {
             $products = ProductBDE::where('category_id', $request->category)->get();
-            ?>
+        } else {
+            $products = ProductBDE::all();
+        }
+        ?>
 
-            <?php foreach ($products as $key => $product) { ?>
+        <?php foreach ($products as $key => $product) { ?>
 
-            <div class="col-md-3 product-item">
-                <div class="product-header">
-                    <a href="/produit/<? echo $product->id ?>">
-                        <h1><?php echo $product->title ?></h1></a>
-                </div>
-                <div class="product-image"><img src="<?php echo asset('storage/products/'.$products[$key]->images[0]->image_link) ?>" alt="<?php echo $products[$key]->images[0]->alt ?>">
-                </div>
-                <div class="product-description">
-                    <p><?php echo $product->description ?></p>
-                </div>
-                <div class="product-price">
-                    <p id="price"><?php echo $product->price ?>€</p>
-                </div>
+        <div class="col-md-3 product-item">
+            <div class="product-header">
+                <a href="/produit/<? echo $product->id ?>">
+                    <h1><?php echo $product->title ?></h1></a>
             </div>
-            <?php } ?>
-            <?php
-        }
-        else{
-            echo "BONJOUR";
-        }
+            <div class="product-image"><img
+                        src="<?php echo asset('storage/' . $products[$key]->images[0]->image_link) ?>"
+                        alt="<?php echo $products[$key]->images[0]->alt ?>">
+            </div>
+            <div class="product-description">
+                <p><?php echo $product->description ?></p>
+            </div>
+            <div class="product-price">
+                <p id="price"><?php echo $product->price ?>€</p>
+            </div>
+        </div>
+    <?php }
     }
 
     /**
@@ -171,17 +168,15 @@ class productController extends Controller
     {
         if (Auth::check()) {
             $authorisation = Auth::user()->isauthorized();
-        }
-        else
+        } else
             return redirect('/produits')->with('status', 'Accès refusé');
 
-        if ($authorisation == 'Bde'){
+        if ($authorisation == 'Bde') {
 
-           $product = ProductBDE::find($id);
+            $product = ProductBDE::find($id);
 
-        return view('products.edit', compact('product'));}
-
-        else
+            return view('products.edit', compact('product'));
+        } else
             return redirect('/produits')->with('status', 'Accès refusé');
 
     }
@@ -197,11 +192,10 @@ class productController extends Controller
     {
         if (Auth::check()) {
             $authorisation = Auth::user()->isauthorized();
-        }
-        else
+        } else
             return redirect('/produits')->with('status', 'Accès refusé');
 
-        if ($authorisation == 'Bde'){
+        if ($authorisation == 'Bde') {
 
             ProductBDE::find($id)->update([
                 'title' => $request->productName,
@@ -210,8 +204,8 @@ class productController extends Controller
                 'price' => $request->productPrice
             ]);
 
-            return redirect('/produits')->with('status', 'Le produit a bien été modifié');}
-        else
+            return redirect('/produits')->with('status', 'Le produit a bien été modifié');
+        } else
             return redirect('/produits')->with('status', 'Accès refusé');
 
     }
@@ -228,7 +222,7 @@ class productController extends Controller
 
         $product->images->each(function ($img, $key) {
             $link = $img->image_link;
-            Storage::delete('products/'.$link);
+            Storage::delete('products/' . $link);
         });
         /*foreach ($product->images as $img) {
             $link = $img->image_link;

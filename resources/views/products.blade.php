@@ -3,7 +3,7 @@
 @section('title', 'Produits')
 
 @section('custom_head')
-    <script src="{{ asset('js/categories.js') }}"></script>
+    <script src="{{ asset('/js/categories.js') }}"></script>
 @endsection
 
 @section('content')
@@ -60,6 +60,16 @@
                     </form>
                 @endforeach--}}
         <p>Trier par catégories</p>
+        <form id="no-category" action="/produits/categorie" method="get"
+              class="btnInline">
+            {{ csrf_field() }}
+            <button class="btn btn-info"
+                    id="no-category"
+                    type="submit"
+                    name="no-category">
+                Tous les produits
+            </button>
+        </form>
         @foreach ($categories as $category)
             <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get"
                   class="btnInline">
@@ -79,28 +89,32 @@
         <!-- PRODUCTS DISPLAY -->
         <div id="products-display" class="row" style="justify-content: space-around">
 
+            {{-- UNCOMMENT FOLLOWING CODE FOR A CLASSIC PHP WAY (because currently it's run with AJAX --}}
+
+            {{--
             @foreach ($products as $key => $product)
 
-                <div class="col-md-3 product-item">
-                    <div class="product-header">
-                        <a href="/produit/{{ $product->id }}">
-                            <h1>{{ $product->title }}</h1></a>
-                    </div>
-                    <div class="product-image"><img
-                                src="{{asset('storage/'.$products[$key]->images[0]->image_link)}}"
-                                alt="{{$products[$key]->images[0]->alt}}">
-                    </div>
-                    <div class="product-description">
-                        <p>{{ $product->description }}</p>
-                    </div>
-                    <div class="product-price">
-                        {{--@if ($product->old_price !== null)--}}
-                        {{--<p id="old-price">{{ $product->old_price }}€</p>--}}
-                        {{--@endif--}}
-                        <p id="price">{{ $product->price }}€</p>
-                    </div>
-                </div>
-            @endforeach
+                            <div class="col-md-3 product-item">
+                                <div class="product-header">
+                                    <a href="/produit/{{ $product->id }}">
+                                        <h1>{{ $product->title }}</h1></a>
+                                </div>
+                                <div class="product-image"><img
+                                            src="{{asset('storage/'.$products[$key]->images[0]->image_link)}}"
+                                            alt="{{$products[$key]->images[0]->alt}}">
+                                </div>
+                                <div class="product-description">
+                                    <p>{{ $product->description }}</p>
+                                </div>
+                                <div class="product-price">
+                                    --}}{{--@if ($product->old_price !== null)--}}{{--
+                                    --}}{{--<p id="old-price">{{ $product->old_price }}€</p>--}}{{--
+                                    --}}{{--@endif--}}{{--
+                                    <p id="price">{{ $product->price }}€</p>
+                                </div>
+                            </div>
+                        @endforeach
+                        --}}
         </div>
     </section>
 

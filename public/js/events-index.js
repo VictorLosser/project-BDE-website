@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(function () {
 
     /* LARAVEL FORM CHECK SETUP */
     $.ajaxSetup({
@@ -43,9 +43,9 @@ $( document ).ready(function() {
 
     /* DELETE AN EVENT AND REFRESH DATA */
     $("body").on("click",".remove-item",function(){
-        var id = $(this).parent("td").data('id');
-        var c_obj = $(this).parents("tr");
-        var urlWithId = '/evenement/' + id;
+        const id = $(this).parent("td").data('id');
+        const c_obj = $(this).parents("tr");
+        const urlWithId = '/evenement/' + id;
 
         $.ajax({
             dataType: 'json',

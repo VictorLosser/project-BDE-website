@@ -1,9 +1,9 @@
 @extends('layouts.template')
 
-@section('title', "Liste des événements")
+@section('title', "Gestion des événements")
 
 @section('custom_head')
-    <script src="{{ asset('js/events-ajax.js') }}"></script>
+    <script src="{{ asset('/js/events-index.js') }}"></script>
 @endsection
 
 @section('content')

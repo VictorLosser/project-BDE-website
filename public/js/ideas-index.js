@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(function () {
 
     /* LARAVEL FORM CHECK SETUP */
     $.ajaxSetup({
@@ -14,7 +14,7 @@ $( document ).ready(function() {
     function getData() {
         $.ajax({
             dataType: 'json',
-            url: '/produits/indexdata',
+            url: '/idees/indexdata',
         }).done(function (data) {
 
             var	rows = '';
@@ -22,12 +22,11 @@ $( document ).ready(function() {
                 rows = rows + '<tr>';
                 rows = rows + '<td>'+value.id+'</td>';
                 rows = rows + '<td>'+value.title+'</td>';
-                rows = rows + '<td>'+value.description+'</td>';
-                rows = rows + '<td>'+value.price+'</td>';
+                rows = rows + '<td>'+value.description+'</td>'
 
                 rows = rows + '<td data-id="'+value.id+'">';
                 rows = rows +
-                    '<a href="/produit/' + value.id + '/edit">' +
+                    '<a href="/idee/' + value.id + '/edit">' +
                     '<button class="btn btn-info" type="submit" style="width: 100%;">Modifier</button>' +
                     '</a>';
                 rows = rows + '<button class="btn btn-danger remove-item" style="width: 100%;">Supprimer</button>';
@@ -37,14 +36,13 @@ $( document ).ready(function() {
 
             $("tbody").html(rows);
         });
-
     }
 
-    /* DELETE A PRODUCT AND REFRESH DATA */
+    /* DELETE AN EVENT AND REFRESH DATA */
     $("body").on("click",".remove-item",function(){
         var id = $(this).parent("td").data('id');
         var c_obj = $(this).parents("tr");
-        var urlWithId = '/produit/' + id;
+        var urlWithId = '/idee/' + id;
 
         $.ajax({
             dataType: 'json',
