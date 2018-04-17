@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\LikeBDE;
 use App\ImageBDE;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
 
-
-class ImageController extends Controller
+class LikeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,33 +32,49 @@ class ImageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        echo "Requete store recue par le controller 5/5";
         $userID = Auth::user()->id;
+        $return = array();
 
-        echo "Go storage l'image : ";
-        $path = Storage::putFile('events', $request->file('eventImg'));
-        echo "La si tu vois ça, alors le fichier a bien upload ;)";
+        $likeExists = LikeBDE::where([
+            ['likeable_id', '=', $request->imgId],
+            ['likeable_type', '=', $request->likeType],
+            ['user_id', '=', $userID]
+        ])->first();
 
-        ImageBDE::create([
-            'image_link' => $path,
-            'alt' => $request->eventImgAlt,
-            'imageable_id' => $request->eventId,
-            'imageable_type' => $request->eventImgType,
+        if ($likeExists) {
+            $return['likeExists'] = $likeExists->id;
+        }
+
+        /*echo "Bonjour user ".$userID.", lancement firstOrNew : ";*/
+        $like = LikeBDE::firstOrCreate([
+            'likeable_id' => $request->imgId,
+            'likeable_type' => $request->likeType,
             'user_id' => $userID
         ]);
-        echo "Et la, c'est la requete store entière qui est passé sans erreurs. WP";
+        /*echo "Lancement where 1: ";*/
+        $newLikeCount = LikeBDE::where([
+            ['likeable_id', '=', $request->imgId],
+            ['likeable_type', '=', $request->likeType]
+        ])->count();
 
+        if (!empty($like)) {
+
+            $return['likeId'] = $like->id;
+        }
+
+        $return['likeCount'] = $newLikeCount;
+        echo json_encode($return);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -71,7 +85,7 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -82,8 +96,8 @@ class ImageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -94,14 +108,11 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $image = ImageBDE::find($id);
-
-        $link = $image->image_link;
-        Storage::delete('events' . $link);
+        LikeBDE::find($id)->delete();
     }
 }

@@ -35,21 +35,90 @@
 
 
 /*-----Evenements-----*/
-.imgList {
+.trollBtn a {
+    color: black;
+}
+
+.trollBtn a:hover {
+    text-decoration: none;
+}
+
+.trollBtn {
+    position: absolute;
+    left: 95px;
+    transition: 0.1s;
+}
+
+.trollBtn:hover {
+    transform: translate3d(100px, 50px, 0px);
+}
+
+#showImg img {
+    max-height: 400px;
+}
+
+#showFlex {
+    margin: 25px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#showDesc {
+    margin-left: 50px;
+    text-align: left;
+}
+
+.showDesc h1 {
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.sign {
+    text-align: left;
+    font-style: italic;
+    color: grey;
+    font-size: small;
+}
+#imgList {
     display: flex;
     justify-content: center;
     overflow-x: auto;
+    overflow-y: hidden;
 
     min-width: 50%;
     height: 102px;
     box-sizing: content-box;
     border: 1px grey solid;
 }
-.imgList img {
+#imgList img {
     height: 100px;
-    margin: 0px 2% 0px 2%;
+    margin: 0px 10px 0px 10px;
 }
-
+#showImg {
+    position: relative;
+}
+.eventImgLikes {
+    cursor: pointer;
+    position: absolute;
+    right: -10px;
+    bottom: 0px;
+    padding: 0.15em;
+    font-size: 1.5em;
+    color: blue;
+    background-color: rgba(240, 240, 240, 0.95);
+    border-bottom: 2px red solid;
+    box-shadow: 5px 1px 10px rgba(50, 50, 50, 0.5);
+    transition: 0.25s;
+}
+.eventImgLikes:active {
+    transform: scale(0.8);
+}
+#countEventImgLikes, .countEventImgLikes {
+    color: black;
+}
 
 /*-----Commentaires-----*/
 #eventComm {

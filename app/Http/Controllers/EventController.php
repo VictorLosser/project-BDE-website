@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\EventsBDE;
 use App\ImageBDE;
+use App\CommentsBDE;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
@@ -167,6 +168,10 @@ class EventController extends Controller
             Storage::disk('public')->delete('products/'.$link);
         }*/
 
+        CommentsBDE::where([
+            ['imageable_id', '=', $id],
+            ['imageable_type', '=', 'event'],
+        ])->delete();
         ImageBDE::where([
             ['imageable_id', '=', $id],
             ['imageable_type', '=', 'event'],

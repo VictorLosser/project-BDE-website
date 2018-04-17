@@ -52,6 +52,9 @@ Route::resource('comment', 'commentController')->only([
 Route::resource('image', 'imageController')->only([
     'store', 'destroy'
 ]);
+Route::resource('like', 'likeController')->only([
+    'store', 'destroy'
+]);
 
 Auth::routes();
 
