@@ -1,40 +1,81 @@
 $(function () {
 
-    // Get the form.
-    var formVetements = $('#CategoryVetements');
-    var formVaisselle = $('#CategoryVaisselle');
-    var formAccessoires = $('#CategoryAccessoires');
+    const noCategory = $('#no-category');
+    const formVetements = $('#CategoryVetements');
+    const formVaisselle = $('#CategoryVaisselle');
+    const formAccessoires = $('#CategoryAccessoires');
+    const productDisplay = $('#products-display');
+    const slider = $('#slider-range');
+
+    // When the page is loaded, directly display products
+    getProductsList();
+
+    function getProductsList(){
+        $.get($(noCategory).attr('action'), function (data) {
+            $(productDisplay).html('');
+            $(productDisplay).append(data);
+        }, "html");
+    }
+
+    function getProductsbyCategory(category){
+        $.get($(formVetements).attr('action'), {category: category}, function (data) {
+            $(productDisplay).html('');
+            $(productDisplay).append(data);
+        }, "html");
+    }
+
+    function getProductsbyPrices(prices){
+        $.get($(formVetements).attr('action'), {prices: prices}, function (data) {
+            $(productDisplay).html('');
+            $(productDisplay).append(data);
+        }, "html");
+    }
+
+    $(noCategory).submit(function (event) {
+        event.preventDefault();
+
+        getProductsList();
+    });
 
     $(formVetements).submit(function (event) {
         event.preventDefault();
 
-        var category = $('#category-Vetements').val();
+        const category = $('#category-Vetements').val();
 
-        $.get($(formVetements).attr('action'), {category: category}, function (data) {
-            $('#products-display').html('');
-            $('#products-display').append(data);
-        }, "html");
+        getProductsbyCategory(category);
     });
+
     $(formVaisselle).submit(function (event) {
         event.preventDefault();
 
-        var category = $('#category-Vaisselle').val();
+        const category = $('#category-Vaisselle').val();
 
-        $.get($(formVaisselle).attr('action'), {category: category}, function (data) {
-            $('#products-display').html('');
-            $('#products-display').append(data);
-
-        }, "html");
+        getProductsbyCategory(category);
     });
+
     $(formAccessoires).submit(function (event) {
         event.preventDefault();
 
-        var category = $('#category-Accessoires').val();
+        const category = $('#category-Accessoires').val();
 
-        $.get($(formAccessoires).attr('action'), {category: category}, function (data) {
-            $('#products-display').html('');
-            $('#products-display').append(data);
-
-        }, "html");
+        getProductsbyCategory(category);
     });
+
+    $(slider).slider({
+        range: true,
+        min: 0,
+        max: 100,
+        values: [ 0, 100 ],
+        slide: function( event, ui ) {
+            $("#amount").val( ui.values[0] + " € - " + ui.values[1] + " €" );
+        }
+    });
+    $("#amount").val( $(slider).slider( "values", 0 ) + " € - " + $(slider).slider( "values", 1 ) + " €");
+
+    $(slider).on( "slidechange", function() {
+        const prices = $(slider).slider("values");
+
+        getProductsbyPrices(prices);
+
+    } );
 });

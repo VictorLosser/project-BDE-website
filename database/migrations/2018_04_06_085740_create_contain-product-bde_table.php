@@ -15,14 +15,17 @@ class CreateContainProductBdeTable extends Migration
     {
         Schema::create('contain-product-bde', function (Blueprint $table) {
             $table->integer('quantity');
-            $table->integer('product_id');
-            $table->integer('order_id');
+            $table->integer('product_id')->unsigned();
+            $table->integer('order_id')->unsigned();
             $table->timestamps();
 
             $table->primary(array('product_id','order_id'));
 
             $table->engine = 'InnoDB';
-
+        });
+        Schema::table('contain-product-bde', function ($table) {
+            $table->foreign('product_id')->references('id')->on('product-bde');
+            $table->foreign('order_id')->references('id')->on('orders-bde');
         });
     }
 

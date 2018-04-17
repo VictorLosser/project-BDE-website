@@ -277,23 +277,22 @@ header .navbar-brand, header .navbar-brand img {
 
 /*------------Carrousel------------*/
 #carouselid {
-    height: 100%;
-    width: 100%;
     background-color: silver;
     overflow: hidden;
 }
 
 #carouselid img {
-    /*Cette propriété fait que l'image prend toute la hauteur*/
-    height: 100%;
-    width: 100%;
+    height: 300px;
 
-    /*Là je centre mon image, quand sa taille est inférieure à la fenêtre*/
-    /*margin: auto;*/
+    margin: auto;
 
     /*Ces deux lignes permettent à l'image d'être centrée quand l'image est trop grande pour la fenêtre*/
     /*margin-left: 50%;
     transform: translateX(-50%);*/
+}
+
+.carousel-item h2, .carousel-item h5, .carousel-item p {
+    text-align:center;
 }
 
 .nav-item {

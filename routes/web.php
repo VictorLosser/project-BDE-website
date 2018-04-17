@@ -15,20 +15,17 @@ use App\IdeaBoxBDE;
 |
 */
 
-Route::get('/', function () {
-
-    return view('welcome');
-
-});
+Route::get('/', 'WelcomeController@getPopularProducts');
 
 Route::resources([
     'produit' => 'productController',
     'idee' => 'ideeController',
-    'evenement' => 'eventController'
+    'evenement' => 'eventController',
+    'participate' => 'ParticipateController'
 ]);
 
 Route::get('/produits', 'productController@shows');
-Route::get('/produits/categorie', 'productController@showCategory');
+Route::get('/produits/productsData', 'productController@productsData');
 Route::get('/produits/indexdata', 'productController@indexData');
 
 
