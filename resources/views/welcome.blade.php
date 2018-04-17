@@ -5,21 +5,21 @@
 @section('content')
 
     <div class="container">
-        <h1>LES 3 ARTICLES LES PLUS POPULAIRES</h1>
+        <h2>LES 3 ARTICLES LES PLUS POPULAIRES</h2>
         <section id="carouselid">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3000">
                 <div class="carousel-inner">
-                    @foreach ($pop as $key => $value)
+                    @foreach ($pop as $product)
                         <div class="carousel-item
                             @if ($loop->first)
                                 active
                             @endif
                                 ">
                             <h2>#{{ $loop->index+1 }} </h2>
-                            <img class="d-block" src="{{asset('storage/'.$products[$key]->images[0]->image_link)}}"
-                                 alt="{{ $products[$key]->images[0]->alt }}">
-                            <h5>{{ $products[$key]->title }}</h5>
-                            <p>{{ $products[$key]->description }}</p>
+                            <img class="d-block" src="{{asset('storage/'.$product->image_link)}}"
+                                 alt="{{ $product->alt }}">
+                            <h5>{{ $product->title }}</h5>
+                            <p>{{ $product->description }}</p>
                         </div>
                     @endforeach
                 </div>
