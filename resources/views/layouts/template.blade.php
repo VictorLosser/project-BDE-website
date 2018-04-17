@@ -141,6 +141,8 @@ use Illuminate\Support\Facades\Auth;
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}"/>
+    <script src="{{asset('js/jquery-ui.js')}}"></script>
     <script src="{{asset('js/formLogin.js')}}"></script>
     <!-- Font-Awesome (CDN) -->
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>

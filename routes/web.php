@@ -29,7 +29,7 @@ Route::resources([
 ]);
 
 Route::get('/produits', 'productController@shows');
-Route::get('/produits/categorie', 'productController@showCategory');
+Route::get('/produits/productsData', 'productController@productsData');
 Route::get('/produits/indexdata', 'productController@indexData');
 
 

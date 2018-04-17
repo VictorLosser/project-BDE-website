@@ -115,11 +115,7 @@ class productController extends Controller
         $products = ProductBDE::
         when($request->orderBy, function ($query) use ($request) {
             return $query->orderBy($request->orderBy);
-        })
-            ->when($request->category, function ($query) use ($request) {
-                return $query->where('category_id', $request->category);
-            })
-            ->get();
+        })->get();
 
         $categories = \App\ProductCategoryBDE::all();
 
@@ -128,34 +124,36 @@ class productController extends Controller
         );
     }
 
-    public function showCategory(Request $request)
+    public function productsData(Request $request)
     {
-        if ($request->has('category')) {
-            $products = ProductBDE::where('category_id', $request->category)->get();
-        } else {
-            $products = ProductBDE::all();
-        }
-        ?>
+        $products = ProductBDE::
+        when($request->category, function ($query) use ($request) {
+            return $query->where('category_id', $request->category);
+        })
+            ->when($request->prices, function ($query) use ($request) {
+                return $query->whereBetween('price', [$request->prices[0], $request->prices[1]]);
+            })
+            ->get();
 
-        <?php foreach ($products as $key => $product) { ?>
+        foreach ($products as $key => $product) { ?>
 
-        <div class="col-md-3 product-item">
-            <div class="product-header">
-                <a href="/produit/<? echo $product->id ?>">
+            <div class="col-md-3 product-item">
+                <div class="product-header">
+                    <?php echo "<a href=\"/produit/" . $product->id . "\">" ?>
                     <h1><?php echo $product->title ?></h1></a>
+                </div>
+                <div class="product-image"><img
+                            src="<?php echo asset('storage/' . $products[$key]->images[0]->image_link) ?>"
+                            alt="<?php echo $products[$key]->images[0]->alt ?>">
+                </div>
+                <div class="product-description">
+                    <p><?php echo $product->description ?></p>
+                </div>
+                <div class="product-price">
+                    <p id="price"><?php echo $product->price ?>€</p>
+                </div>
             </div>
-            <div class="product-image"><img
-                        src="<?php echo asset('storage/' . $products[$key]->images[0]->image_link) ?>"
-                        alt="<?php echo $products[$key]->images[0]->alt ?>">
-            </div>
-            <div class="product-description">
-                <p><?php echo $product->description ?></p>
-            </div>
-            <div class="product-price">
-                <p id="price"><?php echo $product->price ?>€</p>
-            </div>
-        </div>
-    <?php }
+        <?php }
     }
 
     /**
