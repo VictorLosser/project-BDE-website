@@ -3,7 +3,7 @@
 @section('title', 'Produits')
 
 @section('custom_head')
-    <script src="{{ asset('/js/categories.js') }}"></script>
+    <script src="{{ asset('/js/products-list.js') }}"></script>
 @endsection
 
 @section('content')
@@ -15,6 +15,8 @@
     @endif
 
     <body id="bodyProduct">
+
+    <br>
 
     <div class="flexCenter">
         <div id="divSearch">
@@ -48,35 +50,27 @@
     </div>
 
     <div id="orderByPrice">
-        <form method="get" action="produits">
-            <div id="form-tri" class="form-group">
-                <p id="prix-avg">Le prix moyen est :
-                    <strong>{{ round($priceAVG, 2) }}</strong> €</p>
-                <p id="msg-tri">
-                    @if (isset($_GET['orderBy']))
-                        Actuellement trié par {{ $_GET['orderBy'] }}
-                    @endif
-                </p>
-                <select name="orderBy" class="form-control" id="selectTri">
-                    <option value="title"
-                            @if (isset($_GET['orderBy']))
-                            @if ($_GET['orderBy'] == "title")
-                            selected
-                            @endif
-                            @endif>
-                        nom
-                    </option>
-                    <option value="price"
-                            @if (isset($_GET['orderBy']))
-                            @if ($_GET['orderBy'] == "price")
-                            selected
-                            @endif
-                            @endif>
-                        prix
-                    </option>
-                </select>
-                <input type="submit" value="OK" class="btn btn-sm btn-secondary"/>
-            </div>
+        <form id="byName" action="/produits/productsData" method="get"
+              class="btnInline">
+            {{ csrf_field() }}
+            <button class="btn btn-warning"
+                    id="orderName"
+                    type="submit"
+                    name="title"
+                    value="title">
+                Trier par nom
+            </button>
+        </form>
+        <form id="byPrice" action="/produits/productsData" method="get"
+              class="btnInline">
+            {{ csrf_field() }}
+            <button class="btn btn-warning"
+                    id="orderPrice"
+                    type="submit"
+                    name="price"
+                    value="price">
+                Trier par prix
+            </button>
         </form>
     </div>
 
@@ -92,9 +86,9 @@
                 </form>
             @endforeach--}}
 
+    <br>
 
     <div id="sortByCategory">
-        <p>Filtrer par catégories</p>
         <form id="no-category" action="/produits/productsData" method="get"
               class="btnInline">
             {{ csrf_field() }}
@@ -120,6 +114,8 @@
         @endforeach
     </div>
 
+    <br>
+
     <div id="sortByPrice">
         <p>
             <label for="amount">Prix :</label>
@@ -127,6 +123,8 @@
         </p>
         <div id="slider-range" style="width:300px;"></div>
     </div>
+
+    <br>
 
     <div id="products-display" class="row" style="justify-content: space-around">
 
