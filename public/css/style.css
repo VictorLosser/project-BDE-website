@@ -206,6 +206,7 @@ header {
     z-index: 100;
     background-color: rgba(200, 200, 200, 1);
     transition: 0.5s;
+    margin-bottom:20px;
 }
 
 header .nav-link {
@@ -316,8 +317,16 @@ header .navbar-brand, header .navbar-brand img {
 
 
 /*------------Carrousel------------*/
+.welcome-title {
+    text-align: center;
+}
+
+.fa-hotjar {
+    color: orangered;
+}
+
 #carouselid {
-    background-color: silver;
+    background-color:white;
     overflow: hidden;
 }
 
@@ -411,6 +420,7 @@ header .navbar-brand, header .navbar-brand img {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
 }
 
 .product-price p {
@@ -433,17 +443,29 @@ textarea {
     resize: none;
 }
 
+
+.s-product-price{
+    font-weight: bold;
+    font-size:2em;
+}
+
+.s-product-image img {
+    height:400px;
+}
+
+
 /*-------------FOOTER-------------*/
 footer {
     text-align: center;
     height: 100%;
     width: 100%;
-    padding: 5vh 0px 5vh 0px;
-    color: rgb(240, 0, 0);
-    background-color: white;
+    padding: 10px 0px 10px 0px;
+    margin-top:50px;
+    color: white;
+    background-color: rgb(240, 0, 0);
 }
 
 footer a:hover, footer a:visited, footer a:link, footer a:active {
-    color: rgb(240, 0, 0);
+    color: white;
     text-decoration: none;
 }

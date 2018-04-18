@@ -15,7 +15,7 @@
 
     <div id="eventComm">
         <hr/>
-        <h1>Commentaires :</h1>
+        <h1><i class="fas fa-comments"></i> Commentaires :</h1>
         @foreach($OBJ->comments as $comm)
             <div class="comments">
                 <div class="commUser">{{$comm->users->firstname." ".$comm->users->name}} a dit :</div>
@@ -26,7 +26,7 @@
                         <form action="{{url('comment', [$comm->id])}}" method="post">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i> Supprimer</button>
                         </form>
                     </div>
                 @endif

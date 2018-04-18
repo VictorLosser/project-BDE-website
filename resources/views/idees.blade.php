@@ -63,14 +63,14 @@
 
     </style>
 
-    <div style="margin: 1% 0% 3% 0%;"><button type="button" class="btn btn-primary btn-lg btn-block"><a class="nav-link" href="/idee/create" style="color: white;"><h2>Ajouter une idée</h2></a></button></div>
+    <div style="margin: 1% 0% 3% 0%;"><button type="button" class="btn btn-primary btn-lg btn-block"><a class="nav-link" href="/idee/create" style="color: white;"><h2><i class="fas fa-plus"></i> Ajouter une idée</h2></a></button></div>
 
     <!-- IDEES DISPLAY -->
     <div class="row" style="justify-content: space-around;">
         @foreach ($idees as $idee)
             <div class="col-md-3 product-item">
                 <div class="event-header">
-                    <h1><a href="/idee/{{$idee->id}}"><h2>{{$idee->title}}</h2></a></h1>
+                    <h1><a href="/idee/{{$idee->id}}"><h2><i class="fas fa-lightbulb"></i> {{$idee->title}}</h2></a></h1>
                 </div>
                 <div class="event-description">
                     <p>{{$idee->description}}</p>

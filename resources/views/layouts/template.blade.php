@@ -5,6 +5,23 @@ use Illuminate\Support\Facades\Auth;
 
         <!DOCTYPE html>
 <html lang="fr">
+<head>
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+    <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/bootstrap-social.css')}}"/>
+    <script src="{{asset('js/jquery-ui.js')}}"></script>
+    <script src="{{asset('js/formLogin.js')}}"></script>
+    <!-- Font-Awesome (CDN) -->
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    @yield('custom_head')
+    <title>@yield('title') - eboutique BDE eXia</title>
+</head>
 
 <body>
 
@@ -131,23 +148,6 @@ use Illuminate\Support\Facades\Auth;
     </div>
 </div>
 
-
-<head>
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
-    <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}"/>
-    <script src="{{asset('js/jquery-ui.js')}}"></script>
-    <script src="{{asset('js/formLogin.js')}}"></script>
-    <!-- Font-Awesome (CDN) -->
-    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    @yield('custom_head')
-    <title>@yield('title') - eboutique BDE eXia</title>
-</head>
 <div id="popupMenuBackground" style="display: none;"></div>
 <!--POPUP END-->
 
@@ -298,12 +298,12 @@ use Illuminate\Support\Facades\Auth;
             <div id="btnInsCo">
                 <a> <!--href="double-crochets/* url('/register') */double-crochets"-->
                     <button id="btnInscription" class="btn-member btn btn-outline-danger my-2 my-sm-0 eventInscription">
-                        Inscription
+                        <i class="fas fa-user-plus"></i> Inscription
                     </button>
                 </a>
                 <a><!--href="double-crochets/* url('/login') */double-crochets"-->
                     <button id="btnConnexion" class="btn member btn btn-outline-danger my-2 my-sm-0 eventConnexion">
-                        Connexion
+                        <i class="fas fa-sign-in-alt"></i> Connexion
                     </button>
                 </a>
             </div>
@@ -408,7 +408,16 @@ use Illuminate\Support\Facades\Auth;
 </head>
 
 <footer>
-    <p><a href="#">BDE CESI.eXia Strasbourg</a> © 2018</p>
+    <a href="https://www.facebook.com/BdeExiaStrasbourg/">
+        <i class="fab fa-facebook-square fa-3x"></i>
+    </a>
+    <a href="https://twitter.com/BdeExiaStrg">
+        <i class="fab fa-twitter-square fa-3x"></i>
+    </a>
+    <a href="https://pbs.twimg.com/media/CupgL0cVIAEujP7.jpg">
+        <i class="fab fa-snapchat-square fa-3x"></i>
+    </a>
+    <p>BDE CESI.eXia Strasbourg © 2018</p>
     <p><a href="/mentions-legales">MENTIONS LÉGALES</a></p>
 </footer>
 

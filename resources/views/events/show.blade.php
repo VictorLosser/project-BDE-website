@@ -36,7 +36,7 @@
                     <p><strong>Description : </strong>{{ $event->description }}</p>
                     <p><strong>Récurrence : </strong> Tous les {{$event->repeat_interval}} jour(s)</p>
                     <p><strong>Prix : </strong><span style="color: red">{{ $event->price }}€</span></p>
-                    <p><strong>Date de l'évènement : </strong>{{$event->date_event}}</p>
+                    <p><strong><i class="fas fa-calendar-alt"></i> Date de l'évènement : </strong>{{$event->date_event}}</p>
                     @if($event->users->id != 0)
                         <p class="sign">Publié par {{$event->users->firstname." ".$event->users->name}}
                             le {{$event->created_at}}</p>
@@ -50,11 +50,11 @@
                     <button class="btn btn-info"
                             type="submit"
                             value="{{ $event->id }}">
-                        Je participe</button>
+                        <i class="fas fa-plus"></i> Je participe</button>
                 </form>
                 <a href="/participate/{{ $event->id }}" class="btnInline">
                     <button class="btn btn-info">
-                        Voir les participants</button>
+                        <i class="fas fa-users"></i> Voir les participants</button>
                 </a>
             </div>
 
