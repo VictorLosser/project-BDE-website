@@ -52,6 +52,10 @@
                             value="{{ $event->id }}">
                         Je participe</button>
                 </form>
+                <a href="/participate/{{ $event->id }}" class="btnInline">
+                    <button class="btn btn-info">
+                        Voir les participants</button>
+                </a>
             </div>
 
         </div>

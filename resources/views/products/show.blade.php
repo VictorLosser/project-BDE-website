@@ -27,5 +27,11 @@
         </div>
         <div class="s-product-price" style="font-weight: bold;"><p>{{ $product->price }}€</p></div>
     </div>
+    <div class="s-product-price"><p>{{ $product->price }}€</p></div>
+    <form action="/commande" method="post">
+        {{ csrf_field() }}
+        <input type="hidden" name="id_product" value="{{ $product->id }}"/>
+        <button class="stylebouton" type="submit">Ajouter au panier</button>
+    </form>
 
 @endsection

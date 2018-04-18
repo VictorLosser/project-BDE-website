@@ -21,12 +21,16 @@ Route::resources([
     'produit' => 'productController',
     'idee' => 'ideeController',
     'evenement' => 'eventController',
-    'participate' => 'ParticipateController'
+    'participate' => 'ParticipateController',
+    'commande' =>'OrderController'
 ]);
+
 
 Route::get('/produits', 'productController@shows');
 Route::get('/produits/productsData', 'productController@productsData');
 Route::get('/produits/indexdata', 'productController@indexData');
+
+Route::get('/downloadPDF/{eventID}','ParticipateController@downloadPDF');
 
 
 Route::get('/evenements', function () {
@@ -41,7 +45,6 @@ Route::get('/idees', function () {
     return view('idees', compact('idees'));
 });
 Route::get('/idees/indexdata', 'IdeeController@indexData');
-
 
 Route::resource('comment', 'commentController')->only([
     'store', 'destroy'
