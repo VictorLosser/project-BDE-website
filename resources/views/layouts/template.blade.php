@@ -163,7 +163,7 @@ use Illuminate\Support\Facades\Auth;
         @if (Auth::check())
             @if((Auth::user()->status_id) == 2)
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav m-auto">
+                    <ul class="navbar-nav">
                         <div class="navItems">
                             <li class="font-weight-bold" id="nav_home">
                                 <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
@@ -215,7 +215,7 @@ use Illuminate\Support\Facades\Auth;
                 </div>
             @elseif((Auth::user()))
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav m-auto">
+                    <ul class="navbar-nav">
                         <div class="navItems">
                             <li class="font-weight-bold" id="nav_home">
                                 <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
@@ -244,7 +244,7 @@ use Illuminate\Support\Facades\Auth;
             @endif
         @else
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav m-auto">
+                <ul class="navbar-nav">
                     <div class="navItems">
                         <li class="font-weight-bold" id="nav_home">
                             <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
@@ -317,91 +317,86 @@ use Illuminate\Support\Facades\Auth;
     <div style="position: relative;">
 
         <div id="headMenu" style="display: none;">
-            <ul>Menu
+            <ul>
+                Menu<br/><br/>
                 @if (Auth::check())
                     @if((Auth::user()->status_id) == 2)
                         <li class="font-weight-bold" id="nav_home">
                             <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="font-weight-bold" id="nav_gest_produits">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                                GESTION EVENEMENTS
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/evenements">Accueil</a>
-                                <a class="dropdown-item" href="/evenement/create">Ajouter un événement</a>
-                                <a class="dropdown-item" href="/evenement">Modifier ou supprimer un événement</a>
+                        <li class="headMenu_title nav-link font-weight-bold">
+                            GESTION EVENEMENTS
+                            <div>
+                                <p><a class="headMenu_subTitle" href="/evenements">Accueil</a></p>
+                                <p><a class="headMenu_subTitle" href="/evenement/create">Ajouter un événement</a></p>
+                                <p><a class="headMenu_subTitle" href="/evenement">Modifier ou supprimer un événement</a>
+                                </p>
                             </div>
                         </li>
-                        <li class="font-weight-bold" id="nav_gest_produits">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                                GESTION PRODUITS
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/produits">Accueil</a>
-                                <a class="dropdown-item" href="/produit/create">Ajouter un produit</a>
-                                <a class="dropdown-item" href="/produit">Modifier ou supprimer un produit</a>
+                        <li class="headMenu_title nav-link font-weight-bold">
+                            GESTION PRODUITS
+                            <div>
+                                <p><a class="headMenu_subTitle" href="/produits">Accueil</a></p>
+                                <p><a class="headMenu_subTitle" href="/produit/create">Ajouter un produit</a></p>
+                                <p><a class="headMenu_subTitle" href="/produit">Modifier ou supprimer un produit</a></p>
                             </div>
                         </li>
-                        <li class="font-weight-bold" id="nav_gest_produits">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                                GESTION BOITE A IDEES
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/idees">Accueil</a>
-                                <a class="dropdown-item" href="/idee/create">Ajouter une idée</a>
-                                <a class="dropdown-item" href="/idee">Modifier ou supprimer une idée</a>
+                        <li class="headMenu_title nav-link font-weight-bold">
+                            GESTION BOITE A IDEES
+                            <div>
+                                <p><a class="headMenu_subTitle" href="/idees">Accueil</a></p>
+                                <p><a class="headMenu_subTitle" href="/idee/create">Ajouter une idée</a></p>
+                                <p><a class="headMenu_subTitle" href="/idee">Modifier ou supprimer une idée</a></p>
                             </div>
                         </li>
                     @elseif((Auth::user()))
-                            <li class="font-weight-bold" id="nav_home">
-                                <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="font-weight-bold" id="nav_produits">
-                                <a class="nav-link" href="/produits">PRODUITS</a>
-                            </li>
-                            <li class="font-weight-bold" id="nav_gest_produits">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                                    EVENEMENTS
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="/evenements">Nos événements</a>
-                                    <a class="dropdown-item" href="/idees">Propositions d'événements</a>
-                                </div>
-                            </li>
+
+                        <li class="font-weight-bold" id="nav_home">
+                            <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class=" nav-link font-weight-bold">
+                            <a class="headMenu_subTitle" href="/produits">PRODUITS</a>
+                        </li>
+                        <li class=" nav-link font-weight-bold">
+                            <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
+                        </li>
+                        <li class=" nav-link font-weight-bold">
+                            <a class="headMenu_subTitle" href="/idees">BOITE A IDEES</a>
+                        </li>
                     @endif
                 @else
-                        <li class="font-weight-bold" id="nav_home">
-                            <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="font-weight-bold" id="nav_produits">
-                            <a class="nav-link" href="/produits">PRODUITS</a>
-                        </li>
-                        <li class="font-weight-bold" id="nav_gest_produits">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                                EVENEMENTS
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/evenements">Nos événements</a>
-                                <a class="dropdown-item" href="/idees">Propositions d'événements</a>
-                            </div>
-                        </li>
+                    <li class="font-weight-bold" id="nav_home">
+                        <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class=" nav-link font-weight-bold">
+                        <a class="headMenu_subTitle" href="/produits">PRODUITS</a>
+                    </li>
+                    <li class=" nav-link font-weight-bold">
+                        <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
+                    </li>
+                    <li class=" nav-link font-weight-bold">
+                        <a class="headMenu_subTitle" href="/idees">BOITE A IDEES</a>
+                    </li>
+                    <div id="responsiveBtnInsCo">
+                        <a> <!--href="double-crochets/* url('/register') */double-crochets"-->
+                            <button id="btnInscription"
+                                    class="btn-member btn btn-outline-danger my-2 my-sm-0 eventInscription">
+                                Inscription
+                            </button>
+                        </a>
+                        <a><!--href="double-crochets/* url('/login') */double-crochets"-->
+                            <button id="btnConnexion"
+                                    class="btn member btn btn-outline-danger my-2 my-sm-0 eventConnexion">
+                                Connexion
+                            </button>
+                        </a>
+                    </div>
                 @endif
             </ul>
 
 </header>
 
-<div class="container">
+<div id="templateContainer" class="container">
     @yield('content')
 </div>
 

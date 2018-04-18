@@ -222,7 +222,7 @@ header .nav-link:hover {
     padding: 0px;
 }
 
-header .nav-item:after {
+header .navItems:after {
     content: '';
     position: absolute;
     left: 0px;
@@ -232,7 +232,7 @@ header .nav-item:after {
     transition: 0.5s;
 }
 
-header .nav-item:hover:after {
+header .navItems:hover:after {
     content: '';
     position: absolute;
     width: 100%;
@@ -308,6 +308,12 @@ header .navbar-brand, header .navbar-brand img {
     background-color: rgba(240, 0, 0, 1);
     transition: 0.5s;
 }
+.navbar-nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
 
 /*------------Carrousel------------*/
 #carouselid {
