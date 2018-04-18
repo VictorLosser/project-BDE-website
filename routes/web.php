@@ -25,6 +25,7 @@ Route::resources([
     'commande' =>'OrderController'
 ]);
 
+Route::get('/commande/panier','productController@show');
 
 Route::get('/produits', 'productController@shows');
 Route::get('/produits/productsData', 'productController@productsData');

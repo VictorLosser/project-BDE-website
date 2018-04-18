@@ -37,74 +37,91 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $date = now();
         $userID = Auth::id();
-        $userorder = OrdersBDE::where('user_id','=',$userID)->where('validated','=',0)->get();
+        $userorder = OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->get();
 
 
-        if ($userorder == '[]'){
+        if ($userorder == '[]') {
             $status = 'produit ajouté à un panier nouvellement crée';
             OrdersBDE::create([
                 'validated' => 0,
-                'order_date'=>$date,
-                'user_id' => $userID,]);
+                'order_date' => $date,
+                'user_id' => $userID,
+            ]);
 
-           $orderID = OrdersBDE::select('id')->where('user_id','=',$userID)->where('validated','=',0)->first();
+            $orderID = OrdersBDE::select('id')->where('user_id', '=', $userID)->where('validated', '=', 0)->first();
 
             ContainProductBDE::create([
                 'quantity' => 1,
                 'order_id' => $orderID->id,
                 'product_id' => $request->id_product
-            ]);}
+            ]);
+            $total_price = DB::select('SELECT SUM(quantity*price) as totaux FROM `orders-bde` LEFT JOIN `contain-product-bde` ON `orders-bde`.id = `contain-product-bde`.order_id LEFT JOIN `product-bde` ON `product-bde`.id = `contain-product-bde`.product_id WHERE `orders-bde`.validated = 0 AND `orders-bde`.`user_id`= ?', [$userID]);
 
-
-        else {
+            OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->update([
+                'total_price' => $total_price[0]->totaux,
+            ]);
+        } else {
             $orderID = OrdersBDE::select('id')->where('user_id', '=', $userID)->where('validated', '=', 0)->first();
             $orderproduit = DB::table('contain-product-bde')->where('order_id', '=', $orderID->id)->where('product_id', "=", $request->id_product)->first();
-
             $status = 'produit ajouté à un panier existant';
-            OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->update([
-                'order_date' => $date,
-            ]);
 
-
-            if ($orderproduit == [])
+            if ($orderproduit == []) {
                 ContainProductBDE::create([
                     'quantity' => 1,
                     'order_id' => $orderID->id,
                     'product_id' => $request->id_product]);
-             else
-                DB::table('contain-product-bde')->where('order_id', '=', $orderID->id)->where('product_id', "=", $request->id_product)->increment('quantity',1);
+
+                $total_price = DB::select('SELECT SUM(quantity*price) as totaux FROM `orders-bde` LEFT JOIN `contain-product-bde` ON `orders-bde`.id = `contain-product-bde`.order_id LEFT JOIN `product-bde` ON `product-bde`.id = `contain-product-bde`.product_id WHERE `orders-bde`.validated = 0 AND `orders-bde`.`user_id`= ?', [$userID]);
+
+                OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->update([
+                    'order_date' => $date,
+                    'total_price' => $total_price[0]->totaux
+                ]);
+            } else {
+
+                DB::table('contain-product-bde')->where('order_id', '=', $orderID->id)->where('product_id', "=", $request->id_product)->increment('quantity', 1);
+                $total_price = DB::select('SELECT SUM(quantity*price) as totaux FROM `orders-bde` LEFT JOIN `contain-product-bde` ON `orders-bde`.id = `contain-product-bde`.order_id LEFT JOIN `product-bde` ON `product-bde`.id = `contain-product-bde`.product_id WHERE `orders-bde`.validated = 0 AND `orders-bde`.`user_id`= ?', [$userID]);
+
+
+                OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->update([
+                    'order_date' => $date,
+                    'total_price' => $total_price[0]->totaux
+                ]);
+            }
 
         }
 
 
-
-
-
-        return redirect('produits')->with('status',$status);
+        return redirect('produits')->with('status', $status);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $userID = Auth::id();
+        $order = DB::table('orders-bde')->where('user_id', $userID)->get();
+        $userorder = $order[0]->id;
+        $products = DB::table('contain-product-bde')->where('order_id', $userorder)->get();
+        //$order = OrdersBDE::all()->where($id, '=', $id);
+        return view('Basket', compact('order', 'products'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -115,8 +132,8 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -127,7 +144,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
