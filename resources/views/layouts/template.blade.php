@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\Auth;
     <div class="popupFenetre" id="inscriptionPopup" style="display: none;">
         <div class="croixIcon croixIconPopup"><i class="fas fa-times"></i></div>
         <div id="formulaireInterne">
-            <form class="form-horizontal" method="POST" action="{{ route('login') }}" autocomplete="on">
+            <form class="form-horizontal" method="POST" action="{{ route('register') }}" autocomplete="on">
                 {{ csrf_field() }}
                 <div><p id="popupFenetreTitre">Inscription</p></div>
                 <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
@@ -136,13 +136,17 @@ use Illuminate\Support\Facades\Auth;
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="_token" content="{{csrf_token()}}" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}"/>
+    <script src="{{asset('js/jquery-ui.js')}}"></script>
     <script src="{{asset('js/formLogin.js')}}"></script>
     <!-- Font-Awesome (CDN) -->
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    @yield('custom_css')
+    @yield('custom_head')
     <title>@yield('title') - eboutique BDE eXia</title>
 </head>
 <div id="popupMenuBackground" style="display: none;"></div>
@@ -210,6 +214,34 @@ use Illuminate\Support\Facades\Auth;
                         </div>
                     </ul>
                 </div>
+            @elseif((Auth::user()))
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav m-auto">
+                            <div class="navItems">
+                                <li class="nav-item font-weight-bold" id="nav_home">
+                                    <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                                </li>
+                            </div>
+                            <div class="navItems">
+                                <li class="nav-item font-weight-bold" id="nav_produits">
+                                    <a class="nav-link" href="/produits">PRODUITS</a>
+                                </li>
+                            </div>
+                            <div class="navItems">
+                                <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                        EVENEMENTS
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="/evenements">Nos événements</a>
+                                        <a class="dropdown-item" href="/idees">Propositions d'événements</a>
+                                    </div>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
             @endif
         @else
             <div class="collapse navbar-collapse" id="navbarCollapse">

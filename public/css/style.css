@@ -32,6 +32,99 @@
     left: -1em;
     cursor: pointer;
 }
+
+
+/*-----Evenements-----*/
+.trollBtn a {
+    color: black;
+}
+
+.trollBtn a:hover {
+    text-decoration: none;
+}
+
+.trollBtn {
+    position: absolute;
+    left: 95px;
+    transition: 0.1s;
+}
+
+.trollBtn:hover {
+    transform: translate3d(100px, 50px, 0px);
+}
+
+#showImg img {
+    max-height: 400px;
+}
+
+#showFlex {
+    margin: 25px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#showDesc {
+    margin-left: 50px;
+    text-align: left;
+}
+
+.showDesc h1 {
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.sign {
+    text-align: left;
+    font-style: italic;
+    color: grey;
+    font-size: small;
+}
+#imgList {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    min-width: 50%;
+    height: 102px;
+    box-sizing: content-box;
+    border: 1px grey solid;
+}
+#imgList img {
+    height: 100px;
+    margin: 0px 10px 0px 10px;
+}
+#showImg {
+    position: relative;
+}
+.eventImgLikes, .ideeLikes {
+    cursor: pointer;
+    position: absolute;
+    right: -10px;
+    bottom: 0px;
+    padding: 0.15em;
+    font-size: 1.5em;
+    color: blue;
+    background-color: rgba(240, 240, 240, 0.95);
+    border-bottom: 2px red solid;
+    box-shadow: 5px 1px 10px rgba(50, 50, 50, 0.5);
+    transition: 0.25s;
+}
+.ideeLikes {
+    position: absolute;
+    bottom: -3em;
+}
+.eventImgLikes:active, .ideeLikes:active {
+    transform: scale(0.8);
+}
+#countEventImgLikes, .countEventImgLikes {
+    color: black;
+}
+
+/*-----Commentaires-----*/
 #eventComm {
     text-align: left;
 }
@@ -66,7 +159,7 @@
 #newCommContent {
     color: black !important;
 }
-.commDelete {
+.rightEditBtn {
     text-align: right;
 }
 
@@ -188,23 +281,22 @@ header .navbar-brand, header .navbar-brand img {
 
 /*------------Carrousel------------*/
 #carouselid {
-    height: 100%;
-    width: 100%;
     background-color: silver;
     overflow: hidden;
 }
 
 #carouselid img {
-    /*Cette propriété fait que l'image prend toute la hauteur*/
-    height: 100%;
-    width: 100%;
+    height: 300px;
 
-    /*Là je centre mon image, quand sa taille est inférieure à la fenêtre*/
-    /*margin: auto;*/
+    margin: auto;
 
     /*Ces deux lignes permettent à l'image d'être centrée quand l'image est trop grande pour la fenêtre*/
     /*margin-left: 50%;
     transform: translateX(-50%);*/
+}
+
+.carousel-item h2, .carousel-item h5, .carousel-item p {
+    text-align:center;
 }
 
 .nav-item {

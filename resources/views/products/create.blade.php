@@ -5,7 +5,7 @@
 @section('content')
 
     <?php
-        use App\ProductCategoryBDE;
+    use App\ProductCategoryBDE;
     ?>
 
     <div id="formProduit">
@@ -17,7 +17,8 @@
             {{ csrf_field() }}
             <div class="row">
                 <div class="col">
-                    <input id="productName" name="productName" type="text" class="form-control" placeholder="Nom du produit"
+                    <input id="productName" name="productName" type="text" class="form-control"
+                           placeholder="Nom du produit"
                            required>
                 </div>
                 <div class="col">
@@ -35,11 +36,13 @@
             <br>
             <div class="row">
                 <div class="col">
-                    <textarea id="productDescription" name="productDescription" class="form-control" rows="3" placeholder="description"
+                    <textarea id="productDescription" name="productDescription" class="form-control" rows="3"
+                              placeholder="description"
                               required></textarea>
                 </div>
                 <div class="col">
-                    <input id="productPrice" name="productPrice" type="number" class="form-control" placeholder="prix" step="0.01"
+                    <input id="productPrice" name="productPrice" type="number" class="form-control" placeholder="prix"
+                           step="0.01"
                            required>
                 </div>
             </div>
@@ -51,14 +54,15 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input name="productAlt" type="text" class="form-control" placeholder="Description de l'image" required>
+                    <input name="productAlt" type="text" class="form-control" placeholder="Description de l'image"
+                           required>
                 </div>
             </div>
             <br>
             <br>
-                <input type="submit"
-                       value="ENVOYER VOTRE NOUVEAU PRODUIT EN APPUYANT SUR CE BOUTON QUI EST BEAUCOUP TROP LONG AHHH"
-                       class="btn btn-sm btn-secondary"/>
+            <input type="submit"
+                   value="CREER CE NOUVEAU PRODUIT"
+                   class="btn btn-sm btn-secondary"/>
         </form>
     </div>
     <br>
@@ -95,7 +99,7 @@
         });
 
         $('#productPrice').on('keyup keydown change', function () {
-            $('.rt-price').text($('#productPrice').val()+"€");
+            $('.rt-price').text($('#productPrice').val() + "€");
         });
 
         $('#productImg').on('change', function (event) {

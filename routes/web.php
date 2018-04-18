@@ -15,33 +15,42 @@ use App\IdeaBoxBDE;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', 'WelcomeController@getPopularProducts');
 
-    return view('welcome');
-
-});
+Route::resources([
+    'produit' => 'productController',
+    'idee' => 'ideeController',
+    'evenement' => 'eventController',
+    'participate' => 'ParticipateController',
+    'commande' =>'OrderController'
+]);
 
 
 Route::get('/produits', 'productController@shows');
-Route::get('/produits/categorie', 'productController@showCategory');
+Route::get('/produits/productsData', 'productController@productsData');
+Route::get('/produits/indexdata', 'productController@indexData');
 
 
 Route::get('/evenements', function () {
    $events = EventsBDE::all();
     return view('events', compact('events'));
 });
+Route::get('/evenements/indexdata', 'EventController@indexData');
+
+
 Route::get('/idees', function () {
     $idees = IdeaBoxBDE::all();
     return view('idees', compact('idees'));
 });
+Route::get('/idees/indexdata', 'IdeeController@indexData');
 
-Route::resources([
-    'produit' => 'productController',
-    'idee' => 'ideeController',
-    'evenement' => 'eventController',
-    'commande' =>'OrderController'
-]);
 Route::resource('comment', 'commentController')->only([
+    'store', 'destroy'
+]);
+Route::resource('image', 'imageController')->only([
+    'store', 'destroy'
+]);
+Route::resource('like', 'likeController')->only([
     'store', 'destroy'
 ]);
 

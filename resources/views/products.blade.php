@@ -2,8 +2,8 @@
 
 @section('title', 'Produits')
 
-@section('custom_css')
-    <script src="{{ asset('js/categories.js') }}"></script>
+@section('custom_head')
+    <script src="{{ asset('/js/categories.js') }}"></script>
 @endsection
 
 @section('content')
@@ -15,9 +15,9 @@
     @endif
 
     <body id="bodyProduct">
-    <!-- DROPDOWN LIST TO CHOOSE THE TYPE TO ORDER PRODUCTS -->
-    <section>
-        <FORM method="get" action="produits">
+
+    <div id="orderByPrice">
+        <form method="get" action="produits">
             <div id="form-tri" class="form-group">
                 <p id="prix-avg">Le prix moyen est :
                     <strong>{{ round($priceAVG, 2) }}</strong> €</p>
@@ -26,42 +26,55 @@
                         Actuellement trié par {{ $_GET['orderBy'] }}
                     @endif
                 </p>
-                <SELECT name="orderBy" class="form-control" id="selectTri">
-                    <OPTION value="title"
+                <select name="orderBy" class="form-control" id="selectTri">
+                    <option value="title"
                             @if (isset($_GET['orderBy']))
                             @if ($_GET['orderBy'] == "title")
                             selected
                             @endif
                             @endif>
                         nom
-                    </OPTION>
-                    <OPTION value="price"
+                    </option>
+                    <option value="price"
                             @if (isset($_GET['orderBy']))
                             @if ($_GET['orderBy'] == "price")
                             selected
                             @endif
                             @endif>
                         prix
-                    </OPTION>
-                </SELECT>
+                    </option>
+                </select>
                 <input type="submit" value="OK" class="btn btn-sm btn-secondary"/>
             </div>
-        </FORM>
+        </form>
+    </div>
 
-        {{--        <p>Formulaires PHP normal</p>
-                @foreach ($categories as $category)
-                    <form action="/produits" method="get" class="btnInline">
-                        <button class="btn btn-info"
-                                type="submit"
-                                name="category"
-                                value="{{ $category->id }}">
-                            {{ $category->category_name }}
-                        </button>
-                    </form>
-                @endforeach--}}
-        <p>Formulaires en AJAX</p>
+    {{--        <p>Formulaires PHP normal</p>
+            @foreach ($categories as $category)
+                <form action="/produits" method="get" class="btnInline">
+                    <button class="btn btn-info"
+                            type="submit"
+                            name="category"
+                            value="{{ $category->id }}">
+                        {{ $category->category_name }}
+                    </button>
+                </form>
+            @endforeach--}}
+
+    <div id="sortByCategory">
+        <p>Filtrer par catégories</p>
+        <form id="no-category" action="/produits/productsData" method="get"
+              class="btnInline">
+            {{ csrf_field() }}
+            <button class="btn btn-info"
+                    id="no-category"
+                    type="submit"
+                    name="no-category">
+                Tous les produits
+            </button>
+        </form>
         @foreach ($categories as $category)
-            <form id="Category{{ $category->category_name }}" action="/produits/categorie" method="get"
+            <form id="Category{{ $category->category_name }}" action="/produits/productsData" method="get"
                   class="btnInline">
                 {{ csrf_field() }}
                 <button class="btn btn-info"
@@ -73,36 +86,45 @@
                 </button>
             </form>
         @endforeach
+    </div>
 
-        <p id="test"></p>
+    <div id="sortByPrice">
+        <p>
+            <label for="amount">Prix :</label>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </p>
+        <div id="slider-range" style="width:300px;"></div>
+    </div>
 
-        <!-- PRODUCTS DISPLAY -->
-        <div id="products-display" class="row" style="justify-content: space-around">
+    <div id="products-display" class="row" style="justify-content: space-around">
 
-            @foreach ($products as $key => $product)
+        {{-- UNCOMMENT FOLLOWING CODE FOR A CLASSIC PHP WAY (because currently it's run with AJAX --}}
 
-                <div class="col-md-3 product-item">
-                    <div class="product-header">
-                        <a href="/produit/{{ $product->id }}">
-                            <h1>{{ $product->title }}</h1></a>
-                    </div>
-                    <div class="product-image"><img
-                                src="{{asset('storage/products/'.$products[$key]->images[0]->image_link)}}"
-                                alt="{{$products[$key]->images[0]->alt}}">
-                    </div>
-                    <div class="product-description">
-                        <p>{{ $product->description }}</p>
-                    </div>
-                    <div class="product-price">
-                        {{--@if ($product->old_price !== null)--}}
-                        {{--<p id="old-price">{{ $product->old_price }}€</p>--}}
-                        {{--@endif--}}
-                        <p id="price">{{ $product->price }}€</p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </section>
+        {{--
+        @foreach ($products as $key => $product)
+
+                        <div class="col-md-3 product-item">
+                            <div class="product-header">
+                                <a href="/produit/{{ $product->id }}">
+                                    <h1>{{ $product->title }}</h1></a>
+                            </div>
+                            <div class="product-image"><img
+                                        src="{{asset('storage/'.$products[$key]->images[0]->image_link)}}"
+                                        alt="{{$products[$key]->images[0]->alt}}">
+                            </div>
+                            <div class="product-description">
+                                <p>{{ $product->description }}</p>
+                            </div>
+                            <div class="product-price">
+                                --}}{{--@if ($product->old_price !== null)--}}{{--
+                                --}}{{--<p id="old-price">{{ $product->old_price }}€</p>--}}{{--
+                                --}}{{--@endif--}}{{--
+                                <p id="price">{{ $product->price }}€</p>
+                            </div>
+                        </div>
+                    @endforeach
+                    --}}
+    </div>
 
     <aside class="aside">
         <p id="asideCroix">x</p>
@@ -112,7 +134,7 @@
             <div class="product-header">
                 <h1>{{ $lastProduct->title }}</h1>
             </div>
-            <div class="product-image"><img src="{{asset('storage/products/'.$lastProduct->images[0]->image_link)}}"
+            <div class="product-image"><img src="{{asset('storage/'.$lastProduct->images[0]->image_link)}}"
                                             alt="{{$lastProduct->images[0]->alt}}">
             </div>
             <div class="product-description">
@@ -138,17 +160,3 @@
     </body>
 
 @endsection
-
-<!--
-{{--PISTES DE RECHERCHE POUR LES 3 ARTICLES LES PLUS COMMANDES--}}
-
-{{--orderBy('quantity', 'desc')->take(3)--}}
-
-{{--<?php--}}
-{{--foreach ($most->flatMap->products as $oui) {--}}
-{{--$non = $oui->containProduct;--}}
-{{--echo $non->quantity;--}}
-{{--echo ' '.$oui->title.'<br>';--}}
-{{--}--}}
-{{--?>--}}
-        -->

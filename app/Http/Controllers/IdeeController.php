@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\IdeaBoxBDE;
 use Illuminate\Http\Request;
 use App\User;
-use Storage;
-use File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +29,12 @@ class IdeeController extends Controller
             return view('idees.index', compact('idees'));
         } else
             return redirect('/idees')->with('status', 'Accès refusé');
+    }
+
+    public function indexData()
+    {
+        $ideas = IdeaBoxBDE::all()->toJson();
+        echo $ideas;
     }
 
     /**
@@ -122,6 +128,7 @@ class IdeeController extends Controller
     {
         IdeaBoxBDE::find($id)->delete();
 
-        return redirect('/idees')->with('status', "L'événement a bien été supprimé");
+        // DON'T USE THIS LINE WHEN AJAX IS WORKING
+//        return redirect('/idees')->with('status', "L'événement a bien été supprimé");
     }
 }

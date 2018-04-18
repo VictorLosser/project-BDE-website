@@ -1,8 +1,8 @@
-@extends('layouts.template')
+@extends('layouts.tempWthComments')
 
-@section('title', "Supprimer un événement")
+@section('title', $idee->title)
 
-@section('content')
+@section('onContent')
     <style>
         .trollBtn a {
             color: black;
@@ -50,7 +50,7 @@
         <button type="" class="trollBtn" style="display: block;margin:auto;"><a href="/idees">< Retour</a>
         </button>
 
-        <div class="showDesc">
+        <div class="showDesc" style="position: relative; margin-bottom: 2em;">
             <div><h1>{{ $idee->title }}</h1></div>
             <div id="texte">
                 <h3>Principe de l'événement proposé : </h3>
@@ -64,63 +64,83 @@
                     @endif
                 </div>
             </div>
+            <p class="ideeLikes" onclick="addLikeIdeeImg({{$idee->id}})">
+                <span id="countIdeeLikes">{{$idee->likes()->count()}} </span><i
+                        class="far fa-thumbs-up" style="background-color: transparent;" title="Afficher noms des likes->users"></i>
+            </p>
         </div>
 
-        <div id="eventComm">
-            <hr/>
-            <h1>Commentaires :</h1>
-            @foreach($idee->comments as $comm)
-                <div class="comments">
-                    <div class="commUser">{{$comm->users->firstname." ".$comm->users->name}} a dit :</div>
-                    <div class="commDate">{{$comm->created_at}}</div>
-                    <div class="commContent">{{$comm->content}}</div>
-                    @if(Auth::check())
-                        <div class="commDelete">
-                            <form action="{{url('comment', [$comm->id])}}" method="post">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger" type="submit">Supprimer</button>
-                            </form>
-                        </div>
-                    @endif
-                </div>
-            @endforeach
-            <hr/>
-            @if (Auth::check())
-                <div id="leaveAcomment">
-                    <h4>Lachez un commentaire !</h4>
-                    <form method="post" action="/comment" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <?php
-                        $currentUrl = url()->current();
-                        $urlExplode = explode("/", $currentUrl);
-                        $urlType = $urlExplode[3];
-                        $urlId = $urlExplode[4];
-                        ?>
-                        <input type="hidden" name="urlId" value="{{$urlId}}"/>
-                        <input type="hidden" name="urlType" value="{{$urlType}}"/>
-                        <div class="row">
-                            <div class="col">
-                                <textarea id="newCommContent"
-                                          name="newCommContent"
-                                          class="form-control"
-                                          style="color: black !important;"
-                                          maxlength="5000"
-                                          required></textarea>
-
-                            </div>
-                        </div>
-                        <br/>
-                        <input type="submit"
-                               value="Poster"
-                               class="btn btn-sm btn-secondary"/>
-                    </form>
-                </div>
-            @else
-                <div class="alert alert-danger" style="text-align: center;">
-                    <p style="margin: 0px;">Vous devez être connecté pour répondre !</p>
-                </div>
-            @endif
+        <!--
         </div>
-    </div>
+        Les commentaires seront affichés ici
+        -->
+
+@endsection
+
+        @section('scripts')
+            <script>
+                function addLikeIdeeImg($id) {
+                    ideeId = $id;
+                    likeType = 'idea';
+
+                    /*alert('Go add ton like sur une ' + likeType + ', imgID = ' + imgId);*/
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        dataType: 'json',
+                        type: "POST",
+                        url: "/like",
+                        data: {
+                            imgId: ideeId,
+                            likeType: likeType
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            if (!data.likeExists) {
+                                $('#countIdeeLikes').text(data.likeCount);
+                            } else {
+                                removeLikeEventImg(data.likeId);
+                            }
+                        },
+                        error: function (data) {
+                            console.log("Errors for ajoutation : ", data);
+                        }
+                    });
+
+                    return false;
+                }
+
+                function removeLikeEventImg($likeId) {
+
+                    /*alert('Go supprimer ton like, likeID = ' + $id);*/
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        dataType: 'json',
+                        type: "DELETE",
+                        url: "/like/" + $likeId,
+                        success: function (data) {
+                            console.log(data);
+                            $('#countIdeeLikes').text(($('#countIdeeLikes').text())-1);
+                        },
+                        error: function (data) {
+                            console.log("Errors for supprimation : ", data);
+                            //Meme avec erreurs, la requete marche bien, donc bon !
+                            $('#countIdeeLikes').text(parseInt($('#countIdeeLikes').text())-1);
+                        }
+                    });
+
+                    return false;
+                }
+
+            </script>
 @endsection

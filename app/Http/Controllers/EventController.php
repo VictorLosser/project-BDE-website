@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\EventsBDE;
 use App\ImageBDE;
+use App\CommentsBDE;
 use App\User;
-use Storage;
-use File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +31,12 @@ class EventController extends Controller
             return view('events.index', compact('events'));
         } else
             return redirect('/evenements')->with('status', 'Accès refusé');
+    }
+
+    public function indexData()
+    {
+        $events = EventsBDE::all()->toJson();
+        echo $events;
     }
 
     /**
@@ -60,15 +67,14 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $userID = Auth::user()->id;
-        $lastImageId = ImageBDE::orderBy('id', 'DESC')->first()->id;
 
-        Storage::disk('public')->putFileAs('events', $request->eventImg, ($lastImageId + 1) . '.png');
+        $path = Storage::putFile('events', $request->file('eventImg'));
 
         EventsBDE::create([
             'title' => $request->eventName,
             'description' => $request->eventDescription,
             'date_event' => $request->eventDate,
-            'recurrence' => $request->eventRecurrence,
+            'repeat_interval' => $request->eventRecurrence,
             'price' => $request->eventPrice,
             'user_id' => $userID
         ]);
@@ -76,7 +82,7 @@ class EventController extends Controller
         $lastEventId = EventsBDE::orderBy('id', 'DESC')->first()->id;
 
         ImageBDE::create([
-            'image_link' => ($lastImageId + 1) . '.png',
+            'image_link' => $path,
             'alt' => $request->eventAlt,
             'imageable_id' => $lastEventId,
             'imageable_type' => 'event',
@@ -84,7 +90,7 @@ class EventController extends Controller
         ]);
 
 
-        return redirect('/evenements')->with('status', "L'évènement a été ajouté avec succés !");
+        return redirect('/evenements')->with('status', "Nouvel évènement ajouté avec succès !");
     }
 
     /**
@@ -134,7 +140,7 @@ class EventController extends Controller
             'title' => $request->eventName,
             'description' => $request->eventDescription,
             'date_event' => $request->eventDate,
-            'recurrence' => $request->eventRecurrence,
+            'repeat_interval' => $request->eventRecurrence,
             'price' => $request->eventPrice,
             'user_id' => $userID
         ]);
@@ -155,19 +161,24 @@ class EventController extends Controller
 
         $event->images->each(function ($img, $key) {
             $link = $img->image_link;
-            Storage::disk('public')->delete('events/' . $link);
+            Storage::delete('events/' . $link);
         });
         /*foreach ($product->imsages as $img) {
             $link = $img->image_link;
             Storage::disk('public')->delete('products/'.$link);
         }*/
 
+        CommentsBDE::where([
+            ['imageable_id', '=', $id],
+            ['imageable_type', '=', 'event'],
+        ])->delete();
         ImageBDE::where([
             ['imageable_id', '=', $id],
             ['imageable_type', '=', 'event'],
         ])->delete();
-        EventBDE::find($id)->delete();
+        EventsBDE::find($id)->delete();
 
-        return redirect('/evenements')->with('status', "L'événement a bien été supprimé");
+        // DON'T USE THIS LINE WHEN AJAX IS WORKING
+        //return redirect('/evenements')->with('status', "L'événement a bien été supprimé");
     }
 }
