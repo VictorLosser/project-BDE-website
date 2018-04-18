@@ -21,8 +21,12 @@
 
     <div>
         <a href="{{action('ParticipateController@downloadPDF', $eventID)}}">
-            <button type="button" class="btn btn-outline-danger">Télécharger la liste</button>
+            <button type="button" class="btn btn-outline-danger">Télécharger la liste (pdf)</button>
         </a>
+        <a href="{{action('CsvController@downloadCSV', $eventID)}}">
+            <button type="button" class="btn btn-outline-danger">Télécharger la liste (csv)</button>
+        </a>
+
     </div>
 
 
