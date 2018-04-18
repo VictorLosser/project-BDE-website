@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 });
 
+
 Route::get('/produits', 'productController@shows');
 Route::get('/produits/categorie', 'productController@showCategory');
 
@@ -37,7 +38,8 @@ Route::get('/idees', function () {
 Route::resources([
     'produit' => 'productController',
     'idee' => 'ideeController',
-    'evenement' => 'eventController'
+    'evenement' => 'eventController',
+    'commande' =>'OrderController'
 ]);
 Route::resource('comment', 'commentController')->only([
     'store', 'destroy'
