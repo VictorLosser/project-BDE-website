@@ -31,7 +31,7 @@
     <form action="/commande" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="id_product" value="{{ $product->id }}"/>
-        <button class="stylebouton" type="submit">Ajouter au panier</button>
+        <button class="btn btn-danger" type="submit">Ajouter au panier</button>
     </form>
 
 @endsection

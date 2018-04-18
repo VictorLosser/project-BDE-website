@@ -110,17 +110,14 @@ class productController extends Controller
         return view('products.show', compact('product'));
     }
 
-    public function shows(Request $request)
+    public function shows()
     {
-        $priceAVG = ProductBDE::avg('price');
-        $products = ProductBDE::when($request->orderBy, function ($query) use ($request) {
-            return $query->orderBy($request->orderBy);
-        })->get();
+        $products = ProductBDE::all();
 
         $categories = \App\ProductCategoryBDE::all();
 
         return view('products',
-            compact('products', 'priceAVG', 'categories')
+            compact('products','categories')
         );
     }
 
@@ -130,13 +127,15 @@ class productController extends Controller
         when($request->category, function ($query) use ($request) {
             return $query->where('category_id', $request->category);
         })
+            ->when($request->orderBy, function ($query) use ($request) {
+                return $query->orderBy($request->orderBy);
+            })
             ->when($request->prices, function ($query) use ($request) {
                 return $query->whereBetween('price', [$request->prices[0], $request->prices[1]]);
             })
             ->get();
 
         foreach ($products as $key => $product) { ?>
-
             <div class="col-md-3 product-item">
                 <div class="product-header">
                     <?php echo "<a href=\"/produit/" . $product->id . "\">" ?>

@@ -4,6 +4,8 @@ $(function () {
     const formVetements = $('#CategoryVetements');
     const formVaisselle = $('#CategoryVaisselle');
     const formAccessoires = $('#CategoryAccessoires');
+    const formName = $('#byName');
+    const formPrice = $('#byPrice');
     const productDisplay = $('#products-display');
     const slider = $('#slider-range');
 
@@ -30,6 +32,15 @@ $(function () {
             $(productDisplay).append(data);
         }, "html");
     }
+
+
+    function orderProductsby(orderBy){
+        $.get($(formVetements).attr('action'), {orderBy: orderBy}, function (data) {
+            $(productDisplay).html('');
+            $(productDisplay).append(data);
+        }, "html");
+    }
+
 
     $(noCategory).submit(function (event) {
         event.preventDefault();
@@ -60,6 +71,26 @@ $(function () {
 
         getProductsbyCategory(category);
     });
+
+
+
+    $(formName).submit(function (event) {
+        event.preventDefault();
+
+        const orderType = $('#orderName').val();
+
+        orderProductsby(orderType);
+    });
+
+    $(formPrice).submit(function (event) {
+        event.preventDefault();
+
+        const orderType = $('#orderPrice').val();
+
+        orderProductsby(orderType);
+    });
+
+
 
     $(slider).slider({
         range: true,
