@@ -24,13 +24,14 @@
         </div>
         <div class="row">
             <div class="col">
-                <input id="eventDate" name="eventDate" type="date" class="form-control" placeholder="date"
+                <input id="eventDate" name="eventDate" type="datetime-local" class="form-control" placeholder="date"
                        value="{{ $event->date_event }}" required>
             </div>
             <div class="col">
-                <input id="eventRecurrence" name="eventRecurrence" type="text" class="form-control"
-                       placeholder="récurrence"
-                       value="{{ $event->recurrence }}" required>
+                <input id="eventRecurrence" name="eventRecurrence" type="number" class="form-control"
+                       placeholder="Récurrence (ex: 7 -> événement hebdo)"
+                       step="1"
+                       value="{{ $event->repeat_interval }}" required>
             </div>
             <div class="col">
                 <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix"
@@ -43,7 +44,7 @@
         <div id="divImgUpload" style="display: none;">
             <div class="row">
                 <div class="col">
-                    <input id="eventImg" type="file" accept="image/*" name="eventImg">
+                    <input id="eventImg" type="file" name="eventImg">
                 </div>
             </div>
             <div class="row">
@@ -70,7 +71,7 @@
                     <h1>{{$event->title}}</h1>
                 </div>
                 <div>
-                    <img src="{{asset('storage/events/'.$event->images[0]->image_link)}}"
+                    <img src="{{asset('storage/'.$event->images[0]->image_link)}}"
                          alt="{{$event->images[0]->alt}}"
                          style="height: 200px; max-width: 100%;"/>
                 </div>
@@ -81,7 +82,7 @@
                     <p>{{$event->date_event}}</p>
                 </div>
                 <div class="event-recurrence pannelRightAlign">
-                    <p>{{$event->recurrence}}</p>
+                    <p>{{$event->repeat_interval}}</p>
                 </div>
                 <div class="event-price pannelRightAlign">
                     <p id="price">{{$event->price}}€</p>
@@ -96,7 +97,7 @@
                     <h1 class="rt-title">{{$event->title}}</h1>
                 </div>
                 <div>
-                    <img id="rt-image" src="{{asset('storage/events/'.$imgMorphLink)}}"
+                    <img id="rt-image" src="{{asset('storage/'.$imgMorphLink)}}"
                          alt="{{$event->images[0]->alt}}" style="height: 200px; max-width: 100%;"/>
                 </div>
                 <div class="event-description">
@@ -106,7 +107,7 @@
                     <p class="rt-date">{{$event->date_event}}</p>
                 </div>
                 <div class="event-recurrence pannelRightAlign">
-                    <p class="rt-recurrence">{{$event->recurrence}}</p>
+                    <p class="rt-recurrence">{{$event->repeat_interval}}</p>
                 </div>
                 <div class="event-price pannelRightAlign">
                     <p id="price" class="rt-price">{{$event->price}}€</p>

@@ -16,6 +16,37 @@
 
     <body id="bodyProduct">
 
+    <div class="flexCenter">
+        <div id="divSearch">
+            <input id="searchBar" type="text" placeholder="Votre recherche ici ..." />
+            <div id="searchBarCompletion">
+                <script>
+                    /*creations du selecteur :contains en case non-sensitive !!!*/
+                    $.extend($.expr[":"], {
+                        "containsIN": function(elem, i, match, array) {
+                            return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                        }
+                    });
+
+                    $('#searchBar').on('change input focusin', function () {
+                        $('#searchBarCompletion').slideDown(100);
+
+                        searchText = $(this).val();
+                        $('#searchBarCompletion').text("");
+                        $('.product-header:containsIN('+searchText+')').each(function(){
+                            text = $("h1", this).text();
+                            href = $("a", this).attr("href");
+                            $('#searchBarCompletion').append('<a href="' + href + '">' + '<p>' + text + '</p>' + '</a>');
+                        });
+                    });
+                    $('#searchBar').on('focusout', function () {
+                        $('#searchBarCompletion').delay(150).fadeOut(250);
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
     <div id="orderByPrice">
         <form method="get" action="produits">
             <div id="form-tri" class="form-group">
@@ -60,6 +91,7 @@
                     </button>
                 </form>
             @endforeach--}}
+
 
     <div id="sortByCategory">
         <p>Filtrer par catégories</p>
@@ -130,9 +162,9 @@
         <p id="asideCroix">x</p>
         <h5>Notre dernier produit !</h5>
         <?php $lastProduct = $products->last(); ?>
-        <div class="col-md product-item">
-            <div class="product-header">
-                <h1>{{ $lastProduct->title }}</h1>
+        <div class="col-md aside-item">
+            <div>
+                <h1 style="font-size: 1.3em; padding: 10px 0px 5px 0px;">{{ $lastProduct->title }}</h1>
             </div>
             <div class="product-image"><img src="{{asset('storage/'.$lastProduct->images[0]->image_link)}}"
                                             alt="{{$lastProduct->images[0]->alt}}">

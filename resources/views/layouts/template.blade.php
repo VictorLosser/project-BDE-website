@@ -136,8 +136,7 @@ use Illuminate\Support\Facades\Auth;
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="_token" content="{{csrf_token()}}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>
@@ -155,8 +154,8 @@ use Illuminate\Support\Facades\Auth;
 <header>
     <nav class="navbar navbar-expand-md" id="the-navbar">
         <a class="navbar-brand" href="./"><img src="{{ asset('img/exia-logo.png') }}"
-                                                 alt="Accueil - CESI.eXia BDE Strasbourg"
-                                                 title="Accueil - CESI.eXia BDE Strasbourg"/></a>
+                                               alt="Accueil - CESI.eXia BDE Strasbourg"
+                                               title="Accueil - CESI.eXia BDE Strasbourg"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -166,12 +165,12 @@ use Illuminate\Support\Facades\Auth;
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav m-auto">
                         <div class="navItems">
-                            <li class="nav-item font-weight-bold" id="nav_home">
+                            <li class="font-weight-bold" id="nav_home">
                                 <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                             </li>
                         </div>
                         <div class="navItems">
-                            <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                            <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
@@ -185,7 +184,7 @@ use Illuminate\Support\Facades\Auth;
                             </li>
                         </div>
                         <div class="navItems">
-                            <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                            <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
@@ -199,7 +198,7 @@ use Illuminate\Support\Facades\Auth;
                             </li>
                         </div>
                         <div class="navItems">
-                            <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                            <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
@@ -215,49 +214,49 @@ use Illuminate\Support\Facades\Auth;
                     </ul>
                 </div>
             @elseif((Auth::user()))
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav m-auto">
-                            <div class="navItems">
-                                <li class="nav-item font-weight-bold" id="nav_home">
-                                    <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
-                                </li>
-                            </div>
-                            <div class="navItems">
-                                <li class="nav-item font-weight-bold" id="nav_produits">
-                                    <a class="nav-link" href="/produits">PRODUITS</a>
-                                </li>
-                            </div>
-                            <div class="navItems">
-                                <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                       data-toggle="dropdown"
-                                       aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                                        EVENEMENTS
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="/evenements">Nos événements</a>
-                                        <a class="dropdown-item" href="/idees">Propositions d'événements</a>
-                                    </div>
-                                </li>
-                            </div>
-                        </ul>
-                    </div>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav m-auto">
+                        <div class="navItems">
+                            <li class="font-weight-bold" id="nav_home">
+                                <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                            </li>
+                        </div>
+                        <div class="navItems">
+                            <li class="font-weight-bold" id="nav_produits">
+                                <a class="nav-link" href="/produits">PRODUITS</a>
+                            </li>
+                        </div>
+                        <div class="navItems">
+                            <li class="dropdown font-weight-bold" id="nav_gest_produits">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                    EVENEMENTS
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/evenements">Nos événements</a>
+                                    <a class="dropdown-item" href="/idees">Propositions d'événements</a>
+                                </div>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
             @endif
         @else
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav m-auto">
                     <div class="navItems">
-                        <li class="nav-item font-weight-bold" id="nav_home">
+                        <li class="font-weight-bold" id="nav_home">
                             <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
                     </div>
                     <div class="navItems">
-                        <li class="nav-item font-weight-bold" id="nav_produits">
+                        <li class="font-weight-bold" id="nav_produits">
                             <a class="nav-link" href="/produits">PRODUITS</a>
                         </li>
                     </div>
                     <div class="navItems">
-                        <li class="nav-item dropdown font-weight-bold" id="nav_gest_produits">
+                        <li class="dropdown font-weight-bold" id="nav_gest_produits">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
@@ -279,9 +278,10 @@ use Illuminate\Support\Facades\Auth;
         ?>
 
         @if (Auth::check())
-            <div id="divBtnProfil" class="nav-item dropdown font-weight-bold">
+            <div id="divBtnProfil" class="dropdown font-weight-bold">
 
-                <a id="btnProfil" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                <a id="btnProfil" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
                     {{ Auth::user()->firstname}} </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -308,17 +308,108 @@ use Illuminate\Support\Facades\Auth;
                 </a>
             </div>
         @endif
+        <div id="headSandwichIcone" style="display: none;">
+            <div id="croixBarre1" class="croixBarres"></div>
+            <div id="croixBarre2" class="croixBarres"></div>
+            <div id="croixBarre3" class="croixBarres"></div>
+        </div>
     </nav>
+    <div style="position: relative;">
+
+        <div id="headMenu" style="display: none;">
+            <ul>Menu
+                @if (Auth::check())
+                    @if((Auth::user()->status_id) == 2)
+                        <li class="font-weight-bold" id="nav_home">
+                            <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="font-weight-bold" id="nav_gest_produits">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                GESTION EVENEMENTS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/evenements">Accueil</a>
+                                <a class="dropdown-item" href="/evenement/create">Ajouter un événement</a>
+                                <a class="dropdown-item" href="/evenement">Modifier ou supprimer un événement</a>
+                            </div>
+                        </li>
+                        <li class="font-weight-bold" id="nav_gest_produits">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                GESTION PRODUITS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/produits">Accueil</a>
+                                <a class="dropdown-item" href="/produit/create">Ajouter un produit</a>
+                                <a class="dropdown-item" href="/produit">Modifier ou supprimer un produit</a>
+                            </div>
+                        </li>
+                        <li class="font-weight-bold" id="nav_gest_produits">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                GESTION BOITE A IDEES
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/idees">Accueil</a>
+                                <a class="dropdown-item" href="/idee/create">Ajouter une idée</a>
+                                <a class="dropdown-item" href="/idee">Modifier ou supprimer une idée</a>
+                            </div>
+                        </li>
+                    @elseif((Auth::user()))
+                            <li class="font-weight-bold" id="nav_home">
+                                <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="font-weight-bold" id="nav_produits">
+                                <a class="nav-link" href="/produits">PRODUITS</a>
+                            </li>
+                            <li class="font-weight-bold" id="nav_gest_produits">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                    EVENEMENTS
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/evenements">Nos événements</a>
+                                    <a class="dropdown-item" href="/idees">Propositions d'événements</a>
+                                </div>
+                            </li>
+                    @endif
+                @else
+                        <li class="font-weight-bold" id="nav_home">
+                            <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="font-weight-bold" id="nav_produits">
+                            <a class="nav-link" href="/produits">PRODUITS</a>
+                        </li>
+                        <li class="font-weight-bold" id="nav_gest_produits">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                EVENEMENTS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/evenements">Nos événements</a>
+                                <a class="dropdown-item" href="/idees">Propositions d'événements</a>
+                            </div>
+                        </li>
+                @endif
+            </ul>
+
 </header>
 
-<div style="margin: 0px;">
+<div class="container">
     @yield('content')
 </div>
 
 
-
 <head>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/hamburgerMenu.css')}}"/>
+    <script type="text/javascript" src="{{asset('js/hamburgerMenu.js')}}"></script>
 </head>
 
 <footer>

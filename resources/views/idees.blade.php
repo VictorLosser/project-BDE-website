@@ -63,7 +63,7 @@
 
     </style>
 
-    <div style="margin: 1% 5% 3% 5%;"><button type="button" class="btn btn-primary btn-lg btn-block"><a class="nav-link" href="/idee/create" style="color: white;"><h2>Ajouter une idée</h2></a></button></div>
+    <div style="margin: 1% 0% 3% 0%;"><button type="button" class="btn btn-primary btn-lg btn-block"><a class="nav-link" href="/idee/create" style="color: white;"><h2>Ajouter une idée</h2></a></button></div>
 
     <!-- IDEES DISPLAY -->
     <div class="row" style="justify-content: space-around;">

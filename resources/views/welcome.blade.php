@@ -4,7 +4,6 @@
 
 @section('content')
 
-    <div class="container">
         <h2>LES 3 ARTICLES LES PLUS POPULAIRES</h2>
         <section id="carouselid">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3000">
@@ -33,6 +32,5 @@
                 </a>
             </div>
         </section>
-    </div>
 
 @endsection

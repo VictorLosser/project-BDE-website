@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <input id="eventDate" name="eventDate" type="date" class="form-control" placeholder="date"
+                <input id="eventDate" name="eventDate" type="datetime-local" class="form-control" placeholder="date"
                        value="" required>
             </div>
             <div class="col">

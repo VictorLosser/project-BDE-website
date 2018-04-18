@@ -135,7 +135,6 @@ class EventController extends Controller
     {
         $userID = Auth::user()->id;
 
-
         EventsBDE::find($id)->update([
             'title' => $request->eventName,
             'description' => $request->eventDescription,
@@ -144,6 +143,20 @@ class EventController extends Controller
             'price' => $request->eventPrice,
             'user_id' => $userID
         ]);
+        $lastEventId = EventsBDE::orderBy('id', 'DESC')->first()->id;
+
+        if($request->has('eventImg')) {
+            $path = 'storage/events/'.$random_name=rand(5, 10).$request->eventImg;
+            Storage::disk('public')->put($path, $request->file('eventImg'));
+
+            ImageBDE::find($id)->update([
+                'image_link' => $path,
+                'alt' => $request->eventAlt,
+                'imageable_id' => $lastEventId,
+                'imageable_type' => 'event',
+                'user_id' => $userID
+            ]);
+        }
 
         return redirect('/evenements')->with('status', "L'événement a bien été modifié !");
     }

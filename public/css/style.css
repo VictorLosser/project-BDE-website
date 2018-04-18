@@ -32,6 +32,36 @@
     left: -1em;
     cursor: pointer;
 }
+.flexCenter {
+    display: flex;
+    justify-content: center;
+}
+#divSearch {
+    position: relative;
+    margin: 25px;
+    width: 50%;
+    text-align: center;
+}
+#searchBar {
+    width: 100%;
+    border-radius: 10px;
+}
+#searchBar:focus {
+    outline: none;
+}
+#searchBar::placeholder {
+    text-align: center;
+}
+#searchBarCompletion {
+    position: absolute;
+    display: none;
+    z-index: 999;
+    border-radius: 10px;
+    border: 1px grey solid;
+    background-color: white;
+    width: 100%;
+    text-align: center;
+}
 
 
 /*-----Evenements-----*/
@@ -330,7 +360,7 @@ header .navbar-brand, header .navbar-brand img {
     margin-top: 10px;
 }
 
-.product-item {
+.product-item, .aside-item {
     background-color: gainsboro;
     margin: 10px 10px 10px 10px;
     width: 200px;
@@ -353,7 +383,7 @@ header .navbar-brand, header .navbar-brand img {
     margin: auto;
 }
 
-.product-item img {
+.product-item img, .aside-item img {
     height: 100%;
     margin-left: 50%;
     transform: translateX(-50%);

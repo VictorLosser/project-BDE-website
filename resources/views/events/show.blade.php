@@ -13,8 +13,8 @@
 
 
     <div class="container" style="text-align: center">
-        <button type="" class="trollBtn" style="display: block;margin:auto;"><a href="/evenements">< Retour</a>
-        </button>
+        <!--<button type="" class="trollBtn" style="display: block;margin:auto;"><a href="/evenements">< Retour</a>
+        </button>-->
         <div id="showFlex">
             <div id="showImg">
                 <a id="showImgLink" href="{{asset('storage/'.$event->images[0]->image_link)}}">

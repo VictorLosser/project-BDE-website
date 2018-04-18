@@ -47,8 +47,8 @@
 
 
     <div class="container" style="text-align: center">
-        <button type="" class="trollBtn" style="display: block;margin:auto;"><a href="/idees">< Retour</a>
-        </button>
+        <!--<button type="" class="trollBtn" style="display: block;margin:auto;"><a href="/idees">< Retour</a>
+        </button>-->
 
         <div class="showDesc" style="position: relative; margin-bottom: 2em;">
             <div><h1>{{ $idee->title }}</h1></div>
