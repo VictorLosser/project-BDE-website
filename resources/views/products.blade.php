@@ -93,7 +93,7 @@
               class="btnInline">
             {{ csrf_field() }}
             <button class="btn btn-info"
-                    id="no-category"
+                    id="non-category"
                     type="submit"
                     name="no-category">
                 Tous les produits

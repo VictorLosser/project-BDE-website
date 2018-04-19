@@ -50,7 +50,7 @@ use Illuminate\Support\Facades\Auth;
                     <label for="password" class="control-label"><i class="fas fa-key"></i> Mot de passe</label>
 
                     <div class="">
-                        <input id="password" type="password" class="form-control" name="password" required>
+                        <input id="connexion-password" type="password" class="form-control" name="password" required>
 
                         @if ($errors->has('password'))
                             <span class="help-block">
@@ -111,7 +111,8 @@ use Illuminate\Support\Facades\Auth;
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="control-label"><i class="fas fa-at"></i> Adresse e-mail</label>
 
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
+                    <input id="inscription-email" type="email" class="form-control" name="email"
+                           value="{{ old('email') }}"
                            required>
 
                     @if ($errors->has('email'))
@@ -177,7 +178,8 @@ use Illuminate\Support\Facades\Auth;
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-shopping-basket"></i>
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i
+                                            class="fas fa-shopping-basket"></i>
                                     GESTION PRODUITS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -195,7 +197,8 @@ use Illuminate\Support\Facades\Auth;
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-calendar-alt"></i>
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i
+                                            class="fas fa-calendar-alt"></i>
                                     GESTION EVENEMENTS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -213,7 +216,8 @@ use Illuminate\Support\Facades\Auth;
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-lightbulb"></i> 
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i
+                                            class="fas fa-lightbulb"></i>
                                     GESTION BOITE A IDEES
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -350,7 +354,8 @@ use Illuminate\Support\Facades\Auth;
                                 <i class="fas fa-home"></i>
                                 ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-shopping-basket"></i> GESTION PRODUITS
+                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-shopping-basket"></i>
+                            GESTION PRODUITS
                             <div>
                                 <p><a class="headMenu_subTitle" href="/produits">Accueil</a></p>
                                 <p><a class="headMenu_subTitle" href="/produit/create">
@@ -392,7 +397,8 @@ use Illuminate\Support\Facades\Auth;
                             <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
                         <li class=" nav-link font-weight-bold">
-                            <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
+                            <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i>
+                                PRODUITS</a>
                         </li>
                         <li class=" nav-link font-weight-bold">
                             <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
@@ -406,7 +412,8 @@ use Illuminate\Support\Facades\Auth;
                         <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                     </li>
                     <li class=" nav-link font-weight-bold">
-                        <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
+                        <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i>
+                            PRODUITS</a>
                     </li>
                     <li class=" nav-link font-weight-bold">
                         <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
@@ -465,4 +472,3 @@ use Illuminate\Support\Facades\Auth;
 
 </body>
 </html>
-
