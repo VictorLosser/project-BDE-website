@@ -427,6 +427,12 @@ textarea {
     resize: none;
 }
 
+
+/*-----PANIER-----*/
+#sectionPanier {
+    text-align: center;
+}
+
 /*-------------FOOTER-------------*/
 footer {
     text-align: center;
