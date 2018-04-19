@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Orderpross;
 use Illuminate\Http\Request;
 use App\User;
 use App\ContainProductBDE;
@@ -9,6 +10,7 @@ use App\ProductBDE;
 use App\OrdersBDE;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use phpDocumentor\Reflection\Types\Null_;
 use Psr\Log\NullLogger;
 
@@ -116,7 +118,7 @@ class OrderController extends Controller
             return redirect('produits')->with('status',"Votre Panier est vide");
 
          else {
-             $order = OrdersBDE::where('user_id',Auth::id())->first();
+             $order = OrdersBDE::where('user_id',Auth::id())->where('validated',0)->first();
 
 
              return view('Basket', compact('order'));
@@ -147,7 +149,7 @@ class OrderController extends Controller
             'validated' => 1,
         ]);
 
-        //ici il faut mettre le code d'envoi d'e-mail
+        //Mail::to(Auth::user())->send(new Orderpross);
         return redirect('produits')->with('status', "Merci de votre commande, elle sera traitée dans les meilleurs délais par un membre du BDE");
 
     }
@@ -162,4 +164,5 @@ class OrderController extends Controller
     {
         //
     }
+
 }
