@@ -310,6 +310,7 @@ header .navbar-brand, header .navbar-brand img {
 
 #btnConnexion, #btnInscription {
     cursor: pointer;
+    width: 100%;
     margin: 0px;
     padding: 5px;
     transition: 0.5s;
