@@ -84,7 +84,7 @@
                     <!--Ne jamais supprimer toutes les photos d'un event, tjrs en laisser une-->
                 @if(Auth::check())
                     <!--Ne peut supprimer une image que s'il lui même l'a ajouté-->
-                        @if( $image->id != $event->images[0]->id && ($image->user_id == Auth::user()->id || Auth::user()->->isAuthorized() == "Bde" || Auth::user()->->isAuthorized() == "Salarié"))
+                        @if( $image->id != $event->images[0]->id && ($image->user_id == Auth::user()->id || Auth::user()->isAuthorized() == "Bde" || Auth::user()->isAuthorized() == "Salarié"))
                             <form action="{{ route('image.destroy', ['id' => $image->id]) }}" method="post"
                                   class="btnDelEventImg">
                                 {{ csrf_field() }}
@@ -111,7 +111,7 @@
                 /*echo "<script>console.log(".$user.");</script>";*/
             }
             ?>
-            @if(Auth::user() && $ok == "true" |||| Auth::user()->isAuthorized() == "Bde")
+            @if(Auth::user() && $ok == "true" || Auth::user()->isAuthorized() == "Bde")
                 <div class="rightEditBtn">
 
                     <button id="btnAddImg" class="btn btn-primary">Ajouter</button>

@@ -5,11 +5,11 @@
     @yield('onContent')
 
     <?php
-    if(isset($event))
+    if (isset($event))
         $OBJ = $event;
-    elseif(isset($idee))
+    elseif (isset($idee))
         $OBJ = $idee;
-    elseif(isset($image))
+    elseif (isset($image))
         $OBJ = $image;
     ?>
 
@@ -18,17 +18,22 @@
         <h1><i class="fas fa-comments"></i> Commentaires</h1>
         @foreach($OBJ->comments as $comm)
             <div class="comments">
-                <div class="commUser"><i class="fas fa-user"></i> {{$comm->users->firstname." ".$comm->users->name}} a dit :</div>
+                <div class="commUser"><i class="fas fa-user"></i> {{$comm->users->firstname." ".$comm->users->name}} a
+                    dit :
+                </div>
                 <div class="commDate"><i class="fas fa-clock"></i> {{$comm->created_at}}</div>
                 <div class="commContent">{{$comm->content}}</div>
                 @if(Auth::check())
-                    <div class="rightEditBtn">
-                        <form action="{{url('comment', [$comm->id])}}" method="post">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i> Supprimer</button>
-                        </form>
-                    </div>
+                    @if(Auth::user()->isAuthorized() == 'Bde' || Auth::user()->isAuthorized() == 'Salarié')
+                        <div class="rightEditBtn">
+                            <form action="{{url('comment', [$comm->id])}}" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i> Supprimer
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 @endif
             </div>
         @endforeach
