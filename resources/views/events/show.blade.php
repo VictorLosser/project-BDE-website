@@ -54,20 +54,25 @@
                         <p class="sign">Publié par un visiteur le {{$event->created_at}}</p>
                     @endif
                 </div>
-                <form action="/participate" method="post" class="btnInline">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="id_event" value="{{$event->id}}"/>
-                    <button class="btn btn-info"
-                            type="submit"
-                            value="{{ $event->id }}">
-                        <i class="fas fa-plus"></i> Je participe
-                    </button>
-                </form>
-                <a href="/participate/{{ $event->id }}" class="btnInline">
-                    <button class="btn btn-info">
-                        <i class="fas fa-users"></i> Voir les participants
-                    </button>
-                </a>
+
+                @if(Auth::user())
+                    <form action="/participate" method="post" class="btnInline">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id_event" value="{{$event->id}}"/>
+                        <button class="btn btn-info"
+                                type="submit"
+                                value="{{ $event->id }}">
+                            <i class="fas fa-plus"></i> Je participe
+                        </button>
+                    </form>
+                    @if(Auth::user()->status_id == 2)
+                        <a href="/participate/{{ $event->id }}" class="btnInline">
+                            <button class="btn btn-info">
+                                <i class="fas fa-users"></i> Voir les participants
+                            </button>
+                        </a>
+                    @endif
+                @endif
             </div>
 
         </div>
@@ -79,7 +84,7 @@
                     <!--Ne jamais supprimer toutes les photos d'un event, tjrs en laisser une-->
                 @if(Auth::check())
                     <!--Ne peut supprimer une image que s'il lui même l'a ajouté-->
-                        @if($image->id != $event->images[0]->id && $image->user_id == Auth::user()->id)
+                        @if( $image->id != $event->images[0]->id && ($image->user_id == Auth::user()->id || Auth::user()->->isAuthorized() == "Bde" || Auth::user()->->isAuthorized() == "Salarié"))
                             <form action="{{ route('image.destroy', ['id' => $image->id]) }}" method="post"
                                   class="btnDelEventImg">
                                 {{ csrf_field() }}
@@ -106,7 +111,7 @@
                 /*echo "<script>console.log(".$user.");</script>";*/
             }
             ?>
-            @if((Auth::user()->status_id) == 2 && $ok == "true")
+            @if(Auth::user() && $ok == "true" |||| Auth::user()->isAuthorized() == "Bde")
                 <div class="rightEditBtn">
 
                     <button id="btnAddImg" class="btn btn-primary">Ajouter</button>
