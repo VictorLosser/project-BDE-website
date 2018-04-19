@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\EventsBDE;
 use App\ImageBDE;
+use App\LikeBDE;
 use App\CommentsBDE;
 use App\User;
 use Illuminate\Support\Facades\Storage;
@@ -145,11 +146,16 @@ class EventController extends Controller
         ]);
         $lastEventId = EventsBDE::orderBy('id', 'DESC')->first()->id;
 
-        if($request->has('eventImg')) {
-            $path = 'storage/events/'.$random_name=rand(5, 10).$request->eventImg;
-            Storage::disk('public')->put($path, $request->file('eventImg'));
+        if ($request->has('eventImg')) {
+            /*$path = 'storage/events/'.$random_name=rand(5, 10).$request->eventImg;
+            Storage::disk('public')->put($path, $request->file('eventImg'));*/
+            $path = Storage::putFile('events', $request->file('eventImg'));
 
-            ImageBDE::find($id)->update([
+
+            ImageBDE::where([
+                ['imageable_id', '=', $id],
+                ['imageable_type', '=', 'event']
+            ])->update([
                 'image_link' => $path,
                 'alt' => $request->eventAlt,
                 'imageable_id' => $lastEventId,
@@ -157,7 +163,6 @@ class EventController extends Controller
                 'user_id' => $userID
             ]);
         }
-
         return redirect('/evenements')->with('status', "L'événement a bien été modifié !");
     }
 
@@ -172,22 +177,28 @@ class EventController extends Controller
     {
         $event = EventsBDE::find($id);
 
+        echo "Go supp imgs : ";
         $event->images->each(function ($img, $key) {
             $link = $img->image_link;
-            Storage::delete('events/' . $link);
+            Storage::delete($link);
         });
         /*foreach ($product->imsages as $img) {
             $link = $img->image_link;
             Storage::disk('public')->delete('products/'.$link);
         }*/
 
+        echo "Yeah img supp. ";
         CommentsBDE::where([
-            ['imageable_id', '=', $id],
-            ['imageable_type', '=', 'event'],
+            ['commentable_id', '=', $id],
+            ['commentable_type', '=', 'event']
         ])->delete();
         ImageBDE::where([
             ['imageable_id', '=', $id],
-            ['imageable_type', '=', 'event'],
+            ['imageable_type', '=', 'event']
+        ])->delete();
+        LikeBDE::where([
+            ['likeable_id', '=', $id],
+            ['likeable_type', '=', 'event']
         ])->delete();
         EventsBDE::find($id)->delete();
 

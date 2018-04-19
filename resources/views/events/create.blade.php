@@ -12,11 +12,12 @@
     <form method="post" action="/evenement" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
-            <div>
+            <div class="col">
                 <input id="eventName" name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
                        value="" required>
             </div>
         </div>
+        <br>
         <div class="row">
             <div class="col">
                     <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3"
@@ -24,14 +25,16 @@
                               required></textarea>
             </div>
         </div>
+        <br>
         <div class="row">
             <div class="col">
-                <input id="eventDate" name="eventDate" type="datetime-local" class="form-control" placeholder="date"
+                <input id="eventDate" name="eventDate" type="datetime-local" class="form-control" placeholder="Date"
                        value="" required>
             </div>
             <div class="col">
                 <input id="eventRecurrence" name="eventRecurrence" type="number" class="form-control"
                        placeholder="Récurrence (ex: 7 -> événement hebdo)"
+                       step="1"
                        value="" required>
             </div>
             <div class="col">

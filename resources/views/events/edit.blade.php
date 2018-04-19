@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form method="post" action="{{url('evenement', [$event->id])}}">
+    <form method="post" action="{{url('evenement', [$event->id])}}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <input type="hidden" name="_method" value="PUT">
@@ -12,35 +12,36 @@
         <div class="row">
             <div>
                 <input id="eventName" name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
-                       value="{{ $event->title }}" required>
+                       value="{{$event->title}}" required>
             </div>
         </div>
         <div class="row">
             <div class="col">
                     <textarea id="eventDescription" name="eventDescription" class="form-control" rows="3"
                               placeholder="description"
-                              required>{{ $event->description }}</textarea>
+                              required>{{$event->description}}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <input id="eventDate" name="eventDate" type="datetime-local" class="form-control" placeholder="date"
-                       value="{{ $event->date_event }}" required>
+                       value="{{$event->date_event}}" required>
             </div>
             <div class="col">
                 <input id="eventRecurrence" name="eventRecurrence" type="number" class="form-control"
                        placeholder="Récurrence (ex: 7 -> événement hebdo)"
                        step="1"
-                       value="{{ $event->repeat_interval }}" required>
+                       value="{{$event->repeat_interval}}" required>
             </div>
             <div class="col">
                 <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix"
                        step="0.01"
-                       value="{{ $event->price }}" required>
+                       value="{{$event->price}}" required>
             </div>
         </div>
         <br/>
-        <input id="changeImg" type="checkbox" name="changeImg" value=""> Changer d'image ?
+        <br/>
+        <label><input id="changeImg" type="checkbox" name="changeImg" value="">Changer d'image ?</label>
         <div id="divImgUpload" style="display: none;">
             <div class="row">
                 <div class="col">
@@ -137,7 +138,7 @@
         });
 
         $('#eventPrice').on('change keyup keydown', function () {
-            $('.rt-price').text($('#eventPrice').val()+"€");
+            $('.rt-price').text($('#eventPrice').val() + "€");
         });
 
         $('#changeImg').on('change', function () {

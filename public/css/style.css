@@ -153,6 +153,23 @@
 #countEventImgLikes, .countEventImgLikes {
     color: black;
 }
+.divImgListing {
+    position: relative;
+}
+.btnDelEventImg {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.btnDelEventImg input {
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 0px 3px 3px 3px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
 
 /*-----Commentaires-----*/
 #eventComm {
