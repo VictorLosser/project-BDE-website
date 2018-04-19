@@ -1,3 +1,7 @@
+.row {
+    margin: 10px 0 10px 0;
+}
+
 /*--------------Produits-------------------*/
 .btnInline {
     display: inline;
@@ -65,22 +69,50 @@
 
 
 /*-----Evenements-----*/
-.trollBtn a {
-    color: black;
+.event-header {
+    height:3em;
 }
 
-.trollBtn a:hover {
-    text-decoration: none;
+.event-header h2 {
+    font-size: 30px;
+    text-align: center;
+    color:rgb(240, 0, 0);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.trollBtn {
-    position: absolute;
-    left: 95px;
-    transition: 0.1s;
+.event-header a {
+    text-decoration-color:#993333;
 }
 
-.trollBtn:hover {
-    transform: translate3d(100px, 50px, 0px);
+.event-description p {
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.event-date p {
+    margin-top:0.5em;
+    margin-bottom:0px;
+}
+
+.event-price p {
+    margin: 5px 5px 5px 5px;
+}
+
+.event-price {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color:#009999;
+}
+
+#price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #009999;
 }
 
 #showImg img {
@@ -153,6 +185,23 @@
 #countEventImgLikes, .countEventImgLikes {
     color: black;
 }
+.divImgListing {
+    position: relative;
+}
+.btnDelEventImg {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.btnDelEventImg input {
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 0px 3px 3px 3px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
 
 /*-----Commentaires-----*/
 #eventComm {
@@ -206,6 +255,7 @@ header {
     z-index: 100;
     background-color: rgba(200, 200, 200, 1);
     transition: 0.5s;
+    margin-bottom:20px;
 }
 
 header .nav-link {
@@ -222,7 +272,7 @@ header .nav-link:hover {
     padding: 0px;
 }
 
-header .nav-item:after {
+header .navItems:after {
     content: '';
     position: absolute;
     left: 0px;
@@ -232,7 +282,7 @@ header .nav-item:after {
     transition: 0.5s;
 }
 
-header .nav-item:hover:after {
+header .navItems:hover:after {
     content: '';
     position: absolute;
     width: 100%;
@@ -308,10 +358,24 @@ header .navbar-brand, header .navbar-brand img {
     background-color: rgba(240, 0, 0, 1);
     transition: 0.5s;
 }
+.navbar-nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
 
 /*------------Carrousel------------*/
+.welcome-title {
+    text-align: center;
+}
+
+.fa-hotjar {
+    color: orangered;
+}
+
 #carouselid {
-    background-color: silver;
+    background-color:white;
     overflow: hidden;
 }
 
@@ -370,23 +434,27 @@ header .navbar-brand, header .navbar-brand img {
     height: 50px;
 }
 
-.product-header h1 {
+.product-header h2 {
     font-size: 20px;
     text-align: center;
     overflow: hidden;
+    color:rgb(240, 0, 0);
+}
+
+.product-header a {
+    text-decoration-color:#993333;
 }
 
 .product-image {
-    width: 80%;
     height: 150px;
     overflow: hidden;
     margin: auto;
 }
 
 .product-item img, .aside-item img {
+    display:block;
     height: 100%;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin:auto;
 }
 
 .product-description {
@@ -405,27 +473,31 @@ header .navbar-brand, header .navbar-brand img {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    color:#009999;
 }
 
 .product-price p {
     margin: 5px 5px 5px 5px;
 }
 
-#old-price {
-    text-decoration: line-through;
-    font-size: 15px;
-    color: darkslategray;
-}
-
 #price {
     font-size: 20px;
     font-weight: bold;
-    color: red;
+    color: #009999;
 }
 
 textarea {
     resize: none;
 }
+.s-product-price{
+    font-weight: bold;
+    font-size:2em;
+}
+
+.s-product-image img {
+    height:400px;
+}
+
 
 
 /*-----PANIER-----*/
@@ -433,17 +505,19 @@ textarea {
     text-align: center;
 }
 
+
 /*-------------FOOTER-------------*/
 footer {
     text-align: center;
     height: 100%;
     width: 100%;
-    padding: 5vh 0px 5vh 0px;
-    color: rgb(240, 0, 0);
-    background-color: white;
+    padding: 10px 0px 10px 0px;
+    margin-top:50px;
+    color: white;
+    background-color: rgb(240, 0, 0);
 }
 
 footer a:hover, footer a:visited, footer a:link, footer a:active {
-    color: rgb(240, 0, 0);
+    color: white;
     text-decoration: none;
 }

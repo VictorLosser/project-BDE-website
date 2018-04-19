@@ -8,12 +8,10 @@
 
 @section('content')
 
-    <br>
-    <a href="/produits">
-        <button type="button" class="btn btn-primary" style="display: block;margin:auto;"><-- Retour</button>
-    </a>
-    <br>
     <div style="text-align: center;">
+        <a href="/produits">
+            <button type="button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour</button>
+        </a>
         <div class="s-product-header">
             <h1>{{ $product->title }}</h1>
         </div>
@@ -25,13 +23,17 @@
         <div class="s-product-description">
             <p>{{ $product->description }}</p>
         </div>
-        <div class="s-product-price" style="font-weight: bold;"><p>{{ $product->price }}€</p></div>
+        <div class="s-product-price"><p>
+                <i class="fas fa-chevron-right"></i>
+                {{ $product->price }} €
+                <i class="fas fa-chevron-left"></i>
+            </p></div>
+        <form action="/commande" method="post">
+            {{ csrf_field() }}
+            <input type="hidden" name="id_product" value="{{ $product->id }}"/>
+            <button class="btn btn-danger btn-lg" type="submit"><i class="fas fa-cart-plus"></i> Ajouter au panier</button>
+        </form>
     </div>
-    <div class="s-product-price"><p>{{ $product->price }}€</p></div>
-    <form action="/commande" method="post">
-        {{ csrf_field() }}
-        <input type="hidden" name="id_product" value="{{ $product->id }}"/>
-        <button class="btn btn-danger" type="submit">Ajouter au panier</button>
-    </form>
+
 
 @endsection

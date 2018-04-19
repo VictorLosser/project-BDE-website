@@ -60,12 +60,17 @@ class ParticipateController extends Controller
     {
         if (Auth::check()) {
             $userID = Auth::user()->id;
-
+            $status="";
+            $isalready = DB::table('participates-bde')->where('event_id','=',$request->id_event)->where('user_id','=',$userID)->first();
+            if ($isalready == []){
             ParticipatesBDE::Create([
                 'event_id' => $request->id_event,
                 'user_id' => $userID
             ]);
-            return redirect('/evenements')->with('status', 'Participation bien enregistrée!');
+            $status  = "Participation bien enregistrée";}
+            else
+              $status = "Vous êtes déja inscit à cet évènement.";
+            return redirect('/evenements')->with('status', $status);
         } else {
             $userID = 0;
             return redirect('/evenements')->with('status', 'Participation refusée, vous devez être connecté(e)!');

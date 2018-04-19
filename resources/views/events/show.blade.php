@@ -11,6 +11,11 @@
     use Illuminate\Routing\UrlGenerator;
     ?>
 
+    @if (session('status'))
+        <div class="alert alert-success" style="margin: 0px;">
+            {{ session('status') }}
+        </div>
+    @endif
 
     <div class="container" style="text-align: center">
         <!--<button type="" class="trollBtn" style="display: block;margin:auto;"><a href="/evenements">< Retour</a>
@@ -26,7 +31,8 @@
                 <div id="divImgLike" onclick="addLikeEventImg({{$event->images[0]->id}})">
                     <p class="eventImgLikes">
                         <span id="countEventImgLikes">{{$event->images[0]->likes()->count()}} </span><i
-                                class="far fa-thumbs-up" style="background-color: transparent;" title="Afficher noms des likes->users"></i>
+                                class="far fa-thumbs-up" style="background-color: transparent;"
+                                title="Afficher noms des likes->users"></i>
                     </p>
                 </div>
             </div>
@@ -34,9 +40,10 @@
                 <div><h1>{{ $event->title }}</h1></div>
                 <div>
                     <p><strong>Description : </strong>{{ $event->description }}</p>
-                    <p><strong>Récurrence : </strong> Tous les {{$event->repeat_interval}} jour(s)</p>
-                    <p><strong>Prix : </strong><span style="color: red">{{ $event->price }}€</span></p>
-                    <p><strong>Date de l'évènement : </strong>{{$event->date_event}}</p>
+                    <p><strong><i class="fas fa-euro-sign"></i> Prix : </strong><span style="color: red">{{ $event->price }} €</span></p>
+                    <p><strong><i class="fas fa-calendar-alt"></i> Date de l'évènement : </strong>{{$event->date_event}}</p>
+                    <p><strong><i class="fas fa-redo"></i> Récurrence : </strong> Tous les {{$event->repeat_interval}} jour(s)</p>
+                    <p class="sign"><i class="fas fa-user"></i>
                     @if($event->users->id != 0)
                         <p class="sign">Publié par {{$event->users->firstname." ".$event->users->name}}
                             le {{$event->created_at}}</p>
@@ -50,11 +57,13 @@
                     <button class="btn btn-info"
                             type="submit"
                             value="{{ $event->id }}">
-                        Je participe</button>
+                        <i class="fas fa-plus"></i> Je participe
+                    </button>
                 </form>
                 <a href="/participate/{{ $event->id }}" class="btnInline">
                     <button class="btn btn-info">
-                        Voir les participants</button>
+                        <i class="fas fa-users"></i> Voir les participants
+                    </button>
                 </a>
             </div>
 
@@ -62,7 +71,13 @@
         <div id="imgList">
             @foreach($event->images as $image)
                 <div class="divImgListing">
-                    <img class="imgListing" src="{{asset('/storage/'.$image->image_link)}}" alt="{{$image->alt}}" title="{{$image->alt}}" imgId="{{$image->id}}" likes="{{$image->likes()->count()}}" />
+                    <img class="imgListing" src="{{asset('/storage/'.$image->image_link)}}" alt="{{$image->alt}}"
+                         title="{{$image->alt}}" imgId="{{$image->id}}" likes="{{$image->likes()->count()}}"/>
+                    <form action="{{ route('image.destroy', ['id' => $image->id]) }}" method="post" class="btnDelEventImg">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <input type="submit" value="x" />
+                    </form>
                 </div>
             @endforeach
         </div>
@@ -72,17 +87,17 @@
                 <div class="rightEditBtn">
 
                     <button id="btnAddImg" class="btn btn-primary">Ajouter</button>
-                    {{ csrf_field() }}
 
                     <div id="divImgUpload" style="display: none; text-align: left;">
-                        <form id="addImgForm" method="post" action="{{ url('image') }}" enctype="multipart/form-data">
+                        <form id="addImgForm" method="post" action="/image" enctype="multipart/form-data">
+                            {{ csrf_field() }}
 
                             <input id="eventImgType" name="eventImgType" value="event" type="hidden"/>
                             <input id="eventId" name="eventId" value="{{$event->id}}" type="hidden"/>
                             <div class="row">
                                 <div class="col">
                                     <img id="new-image" style="max-height: 150px;"/>
-                                    <input id="eventImg" type="file" accept="image/*" name="eventImg">
+                                    <input id="eventImg" name="eventImg" type="file">
                                 </div>
                             </div>
                             <div class="row">
@@ -116,7 +131,7 @@
                         'alt': $(this).attr('alt'),
                         'title': $(this).attr('title')
                     });
-                    $('#divImgLike').attr('onclick', "addLikeEventImg("+$(this).attr('imgId')+")");
+                    $('#divImgLike').attr('onclick', "addLikeEventImg(" + $(this).attr('imgId') + ")");
                     $('#countEventImgLikes').text($(this).attr('likes'));
                 });
 
@@ -136,58 +151,66 @@
                 });
 
                 /*SUBMIT FORMULAIRE*/
-                $('#addImgForm').submit(function () {
+                /*$('#addImgForm').submit(function () {
                     /*event.preventDefault();*/
 
-                    /*var form_data = $('#addImgForm').serialize();
-                    console.log(form_data);*/
+                /*var form_data = $('#addImgForm').serialize();
+                console.log(form_data);
 
-                    /*alert(eventImgType + "\n" + eventId + "\n" + eventImgAlt);
-                    $.post('/image', {
-                                            eventImgType: eventImgType,
-                                            eventId: eventId,
-                                            eventImg: eventImg,
-                                            eventImgAlt: eventImgAlt,
-                                        });*/
+                alert(eventImgType + "\n" + eventId + "\n" + eventImgAlt);
+                $.post('/image', {
+                                        eventImgType: eventImgType,
+                                        eventId: eventId,
+                                        eventImg: eventImg,
+                                        eventImgAlt: eventImgAlt,
+                                    });*/
 
-                    $("#addImgFormMsg").fadeIn();
-                    $("#addImgFormMsg").css({color: 'green'}).text('Loading ...');
+                /*$("#addImgFormMsg").fadeIn();
+                $("#addImgFormMsg").css({color: 'green'}).text('Loading ...');
 
-                    eventImgType = $(this).find('#eventImgType').val();
-                    eventId = $(this).find('#eventId').val();
-                    eventImg = $(this).find('#eventImg').val();
-                    eventImgAlt = $(this).find('#eventImgAlt').val();
+                eventImgType = $(this).find('#eventImgType').val();
+                eventId = $(this).find('#eventId').val();
+                file = $(this).find('#eventImg').files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.readAsText(file);
+                    reader.onload = function(e) {
+                        // browser completed reading file - display it
+                        alert(e.target.result);
+                    };
+                }
+                eventImgAlt = $(this).find('#eventImgAlt').val();
 
-                    alert(eventId+"\n"+eventImgType+"\n"+eventImgAlt+"\n"+eventImg);
+                alert(eventId+"\n"+eventImgType+"\n"+eventImgAlt+"\n"+eventImg);
 
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        dataType: 'json',
-                        type: "POST",
-                        url: "/image",
-                        data: {
-                            eventImg: eventImg,
-                            eventId: eventId,
-                            eventImgType: eventImgType,
-                            eventImgAlt: eventImgAlt
-                        },
-                        success: function (data) {
-                            $("#addImgFormMsg").text('C goood').delay(5000).fadeOut();
-                        },
-                        error: function (data) {
-                            $("#addImgFormMsg").css({color: 'red'});
-                            $("#addImgFormMsg").text('Echec, go voir console log :(').delay(5000).fadeOut();
-                            console.log("Errors: ", data);
-                        }
-                    });
-
-                    return false;
-                    /*annule le chargement de la page php, car nous allons passer par une requete post direct en js vers le fichier .php*/
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
                 });
+                $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: "/image",
+                    data: {
+                        eventImg: eventImg,
+                        eventId: eventId,
+                        eventImgType: eventImgType,
+                        eventImgAlt: eventImgAlt
+                    },
+                    success: function (data) {
+                        $("#addImgFormMsg").text('C goood').delay(5000).fadeOut();
+                    },
+                    error: function (data) {
+                        $("#addImgFormMsg").css({color: 'red'});
+                        $("#addImgFormMsg").text('Echec, go voir console log :(').delay(5000).fadeOut();
+                        console.log("Errors: ", data);
+                    }
+                });
+
+                return false;
+                //annule le chargement de la page php, car nous allons passer par une requete post direct en js vers le fichier .php
+            });*/
 
 
                 function addLikeEventImg($id) {
@@ -215,8 +238,8 @@
                             if (!data.likeExists) {
                                 $('#countEventImgLikes').text(data.likeCount);
                                 $('.imgListing').each(function () {
-                                    if ($(this).attr("imgid")==imgId) {
-                                        $(this).attr("likes", parseInt($(this).attr("likes"))+1)
+                                    if ($(this).attr("imgid") == imgId) {
+                                        $(this).attr("likes", parseInt($(this).attr("likes")) + 1)
                                     }
                                 })
                             } else {
@@ -231,7 +254,7 @@
                     return false;
                 }
 
-                function removeLikeEventImg($likeId ,$imgId) {
+                function removeLikeEventImg($likeId, $imgId) {
                     imgId = $imgId;
 
                     /*alert('Go supprimer ton like, likeID = ' + $id);*/
@@ -247,14 +270,14 @@
                         url: "/like/" + $likeId,
                         success: function (data) {
                             console.log(data);
-                            $('#countEventImgLikes').text(($('#countEventImgLikes').text())-1);
+                            $('#countEventImgLikes').text(($('#countEventImgLikes').text()) - 1);
                         },
                         error: function (data) {
                             console.log("Errors for supprimation : ", data);
-                            $('#countEventImgLikes').text(parseInt($('#countEventImgLikes').text())-1);
+                            $('#countEventImgLikes').text(parseInt($('#countEventImgLikes').text()) - 1);
                             $('.imgListing').each(function () {
-                                if ($(this).attr("imgid")==imgId) {
-                                    $(this).attr("likes", parseInt($(this).attr("likes"))-1)
+                                if ($(this).attr("imgid") == imgId) {
+                                    $(this).attr("likes", parseInt($(this).attr("likes")) - 1)
                                 }
                             })
                         }

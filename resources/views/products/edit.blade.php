@@ -8,7 +8,7 @@
         Vous êtes sur une page réservée aux administrateurs. (vous en avez de la chance)
     </div>
 
-    <form method="post" action="{{url('produit', [$product->id])}}">
+    <form method="post" action="{{url('produit', [$product->id])}}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <input type="hidden" name="_method" value="PUT">
@@ -48,11 +48,10 @@
             </div>
         </div>
         <br/>
-        <input id="changeImg" type="checkbox" name="changeImg" value=""> Changer d'image ?
-        <div id="divImgUpload" style="display: none;">
+        <label><input id="changeImg" type="checkbox" name="changeImg" value="">Changer d'image ?</label>        <div id="divImgUpload" style="display: none;">
             <div class="row">
                 <div class="col">
-                    <input id="productImg" type="file" accept="image/*" name="eventImg">
+                    <input id="productImg" type="file" accept="image/*" name="productImg">
                 </div>
             </div>
             <div class="row">

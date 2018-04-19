@@ -2,6 +2,27 @@
 @media screen and (max-width: 768px) {
     #headSandwichIcone, #headMenu {
     }
+    #divBtnProfil * {
+        font-size: 1.2em;
+    }
+    #showFlex {
+        flex-direction: column;
+    }
+    #showImg { order: 2; }
+    #showDesc {
+        order: 1;
+        margin-bottom: 50px;
+    }
+    #divSearch {
+        width: 100%;
+    }
+    #searchBar {
+        height: 50px;
+    }
+    #templateContainer {
+        margin: 0px;
+        max-width: 100%;
+    }
 }
 
 /*Menu petits appareils*/
@@ -49,9 +70,9 @@ div#headMenu li
     border-bottom: 2px red solid;
     transition: 0.35s;
 }
-div#headMenu li:hover
+div#headMenu li:hover, .headMenu_subTitle a:hover
 {
-    color: white;
+    color: red;
     border: 2px red solid;
 }
 .croixBarres
@@ -64,4 +85,21 @@ div#headMenu li:hover
 #headSandwichIcone
 {
     order: 2;
+}
+.headMenu_title:after {
+    content: "\25bc";
+}
+.headMenu_title > div {
+    display: none;
+}
+.headMenu_subTitle {
+    margin: 0px;
+    font-size: 1em;
+    color: black;
+}
+#responsiveBtnInsCo {
+    margin-top: 1em;
+}
+#responsiveBtnInsCo * {
+    font-size: 1em;
 }

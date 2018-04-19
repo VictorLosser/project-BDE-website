@@ -55,6 +55,8 @@ class ImageController extends Controller
         ]);
         echo "Et la, c'est la requete store entière qui est passé sans erreurs. WP";
 
+        return redirect('/evenement/'.$request->eventId)->with('status', 'Image ajoutée !');
+
     }
 
     /**
@@ -100,8 +102,13 @@ class ImageController extends Controller
     public function destroy($id)
     {
         $image = ImageBDE::find($id);
+        $eventId = $image->imageable_id;
 
         $link = $image->image_link;
-        Storage::delete('events' . $link);
+        Storage::delete($link);
+
+        ImageBDE::find($id)->delete();
+
+        return redirect('/evenement/'.$eventId)->with('status', 'Image Supprimée.');
     }
 }

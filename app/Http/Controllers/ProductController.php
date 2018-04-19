@@ -139,7 +139,7 @@ class productController extends Controller
             <div class="col-md-3 product-item">
                 <div class="product-header">
                     <?php echo "<a href=\"/produit/" . $product->id . "\">" ?>
-                    <h1><?php echo $product->title ?></h1></a>
+                    <h2><?php echo $product->title ?></h2></a>
                 </div>
                 <div class="product-image"><img
                             src="<?php echo asset('storage/' . $products[$key]->images[0]->image_link) ?>"
@@ -189,6 +189,7 @@ class productController extends Controller
     {
         if (Auth::check()) {
             $authorisation = Auth::user()->isauthorized();
+            $userID = Auth::user()->id;
         } else
             return redirect('/produits')->with('status', 'Accès refusé');
 
@@ -200,6 +201,26 @@ class productController extends Controller
                 'description' => $request->productDescription,
                 'price' => $request->productPrice
             ]);
+
+            $lastProductId = ProductBDE::orderBy('id', 'DESC')->first()->id;
+
+            if ($request->has('productImg')) {
+                /*$path = 'storage/products/'.$random_name=rand(5, 10).$request->productImg;
+                Storage::disk('public')->put($path, $request->file('productImg'));*/
+                $path = Storage::putFile('products', $request->file('productImg'));
+
+
+                ImageBDE::where([
+                    ['imageable_id', '=', $id],
+                    ['imageable_type', '=', 'product']
+                ])->update([
+                    'image_link' => $path,
+                    'alt' => $request->productAlt,
+                    'imageable_id' => $lastProductId,
+                    'imageable_type' => 'product',
+                    'user_id' => $userID
+                ]);
+            }
 
             return redirect('/produits')->with('status', 'Le produit a bien été modifié');
         } else
@@ -219,7 +240,7 @@ class productController extends Controller
 
         $product->images->each(function ($img, $key) {
             $link = $img->image_link;
-            Storage::delete('products/' . $link);
+            Storage::delete($link);
         });
         /*foreach ($product->images as $img) {
             $link = $img->image_link;

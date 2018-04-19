@@ -16,8 +16,6 @@
 
     <body id="bodyProduct">
 
-    <br>
-
     <div class="flexCenter">
         <div id="divSearch">
             <input id="searchBar" type="text" placeholder="Votre recherche ici ..." />
@@ -58,6 +56,7 @@
                     type="submit"
                     name="title"
                     value="title">
+                <i class="fas fa-sort-alpha-down"></i>
                 Trier par nom
             </button>
         </form>
@@ -69,6 +68,7 @@
                     type="submit"
                     name="price"
                     value="price">
+                <i class="fas fa-sort-numeric-down"></i>
                 Trier par prix
             </button>
         </form>
@@ -158,7 +158,7 @@
 
     <aside class="aside">
         <p id="asideCroix">x</p>
-        <h5>Notre dernier produit !</h5>
+        <h5><i class="fas fa-exclamation-circle"></i> Notre dernier produit ! <i class="fas fa-exclamation-circle"></i></h5>
         <?php $lastProduct = $products->last(); ?>
         <div class="col-md aside-item">
             <div>

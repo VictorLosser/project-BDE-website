@@ -15,18 +15,18 @@
 
     <div id="eventComm">
         <hr/>
-        <h1>Commentaires :</h1>
+        <h1><i class="fas fa-comments"></i> Commentaires</h1>
         @foreach($OBJ->comments as $comm)
             <div class="comments">
-                <div class="commUser">{{$comm->users->firstname." ".$comm->users->name}} a dit :</div>
-                <div class="commDate">{{$comm->created_at}}</div>
+                <div class="commUser"><i class="fas fa-user"></i> {{$comm->users->firstname." ".$comm->users->name}} a dit :</div>
+                <div class="commDate"><i class="fas fa-clock"></i> {{$comm->created_at}}</div>
                 <div class="commContent">{{$comm->content}}</div>
                 @if(Auth::check())
                     <div class="rightEditBtn">
                         <form action="{{url('comment', [$comm->id])}}" method="post">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i> Supprimer</button>
                         </form>
                     </div>
                 @endif
@@ -65,7 +65,7 @@
             </div>
         @else
             <div class="alert alert-danger" style="text-align: center;">
-                <p style="margin: 0px;">Vous devez être connecté pour répondre !</p>
+                <p style="margin: 0px;"><i class="fas fa-times"></i> Vous devez être connecté pour répondre !</p>
             </div>
         @endif
     </div>

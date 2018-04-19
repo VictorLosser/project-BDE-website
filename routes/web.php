@@ -34,6 +34,7 @@ Route::get('/produits/productsData', 'productController@productsData');
 Route::get('/produits/indexdata', 'productController@indexData');
 
 Route::get('/downloadPDF/{eventID}','ParticipateController@downloadPDF');
+Route::get('/downloadCSV/{eventID}','CsvController@downloadCSV');
 
 
 Route::get('/evenements', function () {

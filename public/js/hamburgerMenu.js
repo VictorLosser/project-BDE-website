@@ -5,17 +5,26 @@ mediaSize.addListener(resizePage) // Attach listener function on state changes
 function resizePage(mediaSize) {
     if (mediaSize.matches) { // If media query matches
         $('#headSandwichIcone').show();
+        $('#btnInsCo').hide();
     }
     else {
         $('#headSandwichIcone').hide();
         $('#headMenu').slideUp();
         $('#popupMenuBackground').hide();
+        $('#btnInsCo').show();
     }
 }
 
 //=document.ready
 $(function(){
     $('#headSandwichIcone').click(animMenu);
+    $('.headMenu_title').click(function () {
+        if ($('div', this).is(":hidden")) {
+            $('div', this).slideDown();
+        } else {
+            $('div:visible', this).slideUp();
+        }
+    })
 });
 
 function animMenu() {
