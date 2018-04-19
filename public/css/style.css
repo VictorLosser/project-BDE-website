@@ -1,3 +1,7 @@
+.row {
+    margin: 10px 0 10px 0;
+}
+
 /*--------------Produits-------------------*/
 .btnInline {
     display: inline;
@@ -65,22 +69,50 @@
 
 
 /*-----Evenements-----*/
-.trollBtn a {
-    color: black;
+.event-header {
+    height:3em;
 }
 
-.trollBtn a:hover {
-    text-decoration: none;
+.event-header h2 {
+    font-size: 30px;
+    text-align: center;
+    color:rgb(240, 0, 0);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.trollBtn {
-    position: absolute;
-    left: 95px;
-    transition: 0.1s;
+.event-header a {
+    text-decoration-color:#993333;
 }
 
-.trollBtn:hover {
-    transform: translate3d(100px, 50px, 0px);
+.event-description p {
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.event-date p {
+    margin-top:0.5em;
+    margin-bottom:0px;
+}
+
+.event-price p {
+    margin: 5px 5px 5px 5px;
+}
+
+.event-price {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color:#009999;
+}
+
+#price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #009999;
 }
 
 #showImg img {
@@ -385,23 +417,27 @@ header .navbar-brand, header .navbar-brand img {
     height: 50px;
 }
 
-.product-header h1 {
+.product-header h2 {
     font-size: 20px;
     text-align: center;
     overflow: hidden;
+    color:rgb(240, 0, 0);
+}
+
+.product-header a {
+    text-decoration-color:#993333;
 }
 
 .product-image {
-    width: 80%;
     height: 150px;
     overflow: hidden;
     margin: auto;
 }
 
 .product-item img, .aside-item img {
+    display:block;
     height: 100%;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin:auto;
 }
 
 .product-description {
@@ -420,23 +456,17 @@ header .navbar-brand, header .navbar-brand img {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
+    color:#009999;
 }
 
 .product-price p {
     margin: 5px 5px 5px 5px;
 }
 
-#old-price {
-    text-decoration: line-through;
-    font-size: 15px;
-    color: darkslategray;
-}
-
 #price {
     font-size: 20px;
     font-weight: bold;
-    color: red;
+    color: #009999;
 }
 
 textarea {

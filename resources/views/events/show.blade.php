@@ -34,15 +34,17 @@
                 <div><h1>{{ $event->title }}</h1></div>
                 <div>
                     <p><strong>Description : </strong>{{ $event->description }}</p>
-                    <p><strong>Récurrence : </strong> Tous les {{$event->repeat_interval}} jour(s)</p>
-                    <p><strong>Prix : </strong><span style="color: red">{{ $event->price }}€</span></p>
+                    <p><strong><i class="fas fa-euro-sign"></i> Prix : </strong><span style="color: red">{{ $event->price }} €</span></p>
                     <p><strong><i class="fas fa-calendar-alt"></i> Date de l'évènement : </strong>{{$event->date_event}}</p>
+                    <p><strong><i class="fas fa-redo"></i> Récurrence : </strong> Tous les {{$event->repeat_interval}} jour(s)</p>
+                    <p class="sign"><i class="fas fa-user"></i>
                     @if($event->users->id != 0)
-                        <p class="sign">Publié par {{$event->users->firstname." ".$event->users->name}}
-                            le {{$event->created_at}}</p>
+                        Publié par {{$event->users->firstname." ".$event->users->name}}
                     @else
-                        <p class="sign">Publié par un visiteur le {{$event->created_at}}</p>
+                        Publié par un visiteur
                     @endif
+                         <i class="fas fa-clock"></i> {{$event->created_at}}
+                    </p>
                 </div>
                 <form action="/participate" method="post" class="btnInline">
                     {{ csrf_field() }}

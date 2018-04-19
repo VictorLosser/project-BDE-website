@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <link rel="icon" href="{{ asset('img/exia-logo.ico') }}" />
+    <link rel="icon" href="{{ asset('img/exia-logo.ico') }}"/>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>
@@ -133,7 +133,8 @@ use Illuminate\Support\Facades\Auth;
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="password-confirm" class="control-label"><i class="fas fa-key"></i> Confirmer votre mot de passe</label>
+                    <label for="password-confirm" class="control-label"><i class="fas fa-key"></i> Confirmer votre mot
+                        de passe</label>
 
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                            required>
@@ -154,9 +155,9 @@ use Illuminate\Support\Facades\Auth;
 
 <header>
     <nav class="navbar navbar-expand-md" id="the-navbar">
-        <a class="navbar-brand" href="./"><img src="{{ asset('img/exia-logo.png') }}"
-                                               alt="Accueil - CESI.eXia BDE Strasbourg"
-                                               title="Accueil - CESI.eXia BDE Strasbourg"/></a>
+        <a class="navbar-brand" href="/"><img src="{{ asset('img/exia-logo.png') }}"
+                                              alt="Accueil - CESI.eXia BDE Strasbourg"
+                                              title="Accueil - CESI.eXia BDE Strasbourg"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -176,25 +177,7 @@ use Illuminate\Support\Facades\Auth;
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                                    GESTION EVENEMENTS
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="/evenements">Accueil</a>
-                                    <a class="dropdown-item" href="/evenement/create">
-                                        <i class="fas fa-plus"></i>
-                                        Ajouter un événement</a>
-                                    <a class="dropdown-item" href="/evenement">
-                                        <i class="fas fa-sliders-h"></i>
-                                        Modifier ou supprimer un événement</a>
-                                </div>
-                            </li>
-                        </div>
-                        <div class="navItems">
-                            <li class="dropdown font-weight-bold" id="nav_gest_produits">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-shopping-basket"></i>
                                     GESTION PRODUITS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -212,7 +195,25 @@ use Illuminate\Support\Facades\Auth;
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-calendar-alt"></i>
+                                    GESTION EVENEMENTS
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/evenements">Accueil</a>
+                                    <a class="dropdown-item" href="/evenement/create">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter un événement</a>
+                                    <a class="dropdown-item" href="/evenement">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Modifier ou supprimer un événement</a>
+                                </div>
+                            </li>
+                        </div>
+                        <div class="navItems">
+                            <li class="dropdown font-weight-bold" id="nav_gest_produits">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-lightbulb"></i> 
                                     GESTION BOITE A IDEES
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -240,7 +241,7 @@ use Illuminate\Support\Facades\Auth;
                         </div>
                         <div class="navItems">
                             <li class="font-weight-bold" id="nav_produits">
-                                <a class="nav-link" href="/produits">PRODUITS</a>
+                                <a class="nav-link" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                             </li>
                         </div>
                         <div class="navItems">
@@ -271,7 +272,7 @@ use Illuminate\Support\Facades\Auth;
                     </div>
                     <div class="navItems">
                         <li class="font-weight-bold" id="nav_produits">
-                            <a class="nav-link" href="/produits">PRODUITS</a>
+                            <a class="nav-link" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                         </li>
                     </div>
                     <div class="navItems">
@@ -349,7 +350,18 @@ use Illuminate\Support\Facades\Auth;
                                 <i class="fas fa-home"></i>
                                 ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="headMenu_title nav-link font-weight-bold">
+                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-shopping-basket"></i> GESTION PRODUITS
+                            <div>
+                                <p><a class="headMenu_subTitle" href="/produits">Accueil</a></p>
+                                <p><a class="headMenu_subTitle" href="/produit/create">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter un produit</a></p>
+                                <p><a class="headMenu_subTitle" href="/produit">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Modifier ou supprimer un produit</a></p>
+                            </div>
+                        </li>
+                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-calendar-alt"></i>
                             GESTION EVENEMENTS
                             <div>
                                 <p><a class="headMenu_subTitle" href="/evenements">Accueil</a></p>
@@ -362,19 +374,7 @@ use Illuminate\Support\Facades\Auth;
                                 </p>
                             </div>
                         </li>
-                        <li class="headMenu_title nav-link font-weight-bold">
-                            GESTION PRODUITS
-                            <div>
-                                <p><a class="headMenu_subTitle" href="/produits">Accueil</a></p>
-                                <p><a class="headMenu_subTitle" href="/produit/create">
-                                        <i class="fas fa-plus"></i>
-                                        Ajouter un produit</a></p>
-                                <p><a class="headMenu_subTitle" href="/produit">
-                                        <i class="fas fa-sliders-h"></i>
-                                        Modifier ou supprimer un produit</a></p>
-                            </div>
-                        </li>
-                        <li class="headMenu_title nav-link font-weight-bold">
+                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-lightbulb"></i>
                             GESTION BOITE A IDEES
                             <div>
                                 <p><a class="headMenu_subTitle" href="/idees">Accueil</a></p>
@@ -392,7 +392,7 @@ use Illuminate\Support\Facades\Auth;
                             <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
                         <li class=" nav-link font-weight-bold">
-                            <a class="headMenu_subTitle" href="/produits">PRODUITS</a>
+                            <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                         </li>
                         <li class=" nav-link font-weight-bold">
                             <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
@@ -406,7 +406,7 @@ use Illuminate\Support\Facades\Auth;
                         <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                     </li>
                     <li class=" nav-link font-weight-bold">
-                        <a class="headMenu_subTitle" href="/produits">PRODUITS</a>
+                        <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                     </li>
                     <li class=" nav-link font-weight-bold">
                         <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
