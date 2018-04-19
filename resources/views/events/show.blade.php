@@ -142,10 +142,7 @@
             @endif
         @endif
 
-    <!--
     </div>
-    Les commentaires seront affichés ici
-    -->
 
         @endsection
 

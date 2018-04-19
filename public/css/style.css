@@ -4,6 +4,7 @@ html, body {
     min-height: 100vh;
     overflow-x: hidden;
 }
+
 .row {
     margin: 10px 0 10px 0;
 }
@@ -42,26 +43,32 @@ html, body {
     left: -1em;
     cursor: pointer;
 }
+
 .flexCenter {
     display: flex;
     justify-content: center;
 }
+
 #divSearch {
     position: relative;
     margin: 25px;
     width: 50%;
     text-align: center;
 }
+
 #searchBar {
     width: 100%;
     border-radius: 10px;
 }
+
 #searchBar:focus {
     outline: none;
 }
+
 #searchBar::placeholder {
     text-align: center;
 }
+
 #searchBarCompletion {
     position: absolute;
     display: none;
@@ -73,23 +80,22 @@ html, body {
     text-align: center;
 }
 
-
 /*-----Evenements-----*/
 .event-header {
-    height:3em;
+    height: 3em;
 }
 
 .event-header h2 {
     font-size: 30px;
     text-align: center;
-    color:rgb(240, 0, 0);
+    color: rgb(240, 0, 0);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .event-header a {
-    text-decoration-color:#993333;
+    text-decoration-color: #993333;
 }
 
 .event-description p {
@@ -100,8 +106,8 @@ html, body {
 }
 
 .event-date p {
-    margin-top:0.5em;
-    margin-bottom:0px;
+    margin-top: 0.5em;
+    margin-bottom: 0px;
 }
 
 .event-price p {
@@ -112,7 +118,7 @@ html, body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color:#009999;
+    color: #009999;
 }
 
 #price {
@@ -150,6 +156,7 @@ html, body {
     color: grey;
     font-size: small;
 }
+
 #imgList {
     display: flex;
     justify-content: center;
@@ -161,13 +168,16 @@ html, body {
     box-sizing: content-box;
     border: 1px grey solid;
 }
+
 #imgList img {
     height: 100px;
     margin: 0px 10px 0px 10px;
 }
+
 #showImg {
     position: relative;
 }
+
 .eventImgLikes, .ideeLikes {
     cursor: pointer;
     position: absolute;
@@ -181,24 +191,30 @@ html, body {
     box-shadow: 5px 1px 10px rgba(50, 50, 50, 0.5);
     transition: 0.25s;
 }
+
 .ideeLikes {
     position: absolute;
     bottom: -3em;
 }
+
 .eventImgLikes:active, .ideeLikes:active {
     transform: scale(0.8);
 }
+
 #countEventImgLikes, .countEventImgLikes {
     color: black;
 }
+
 .divImgListing {
     position: relative;
 }
+
 .btnDelEventImg {
     position: absolute;
     top: 0px;
     right: 0px;
 }
+
 .btnDelEventImg input {
     border: none;
     background-color: red;
@@ -208,46 +224,53 @@ html, body {
     vertical-align: middle;
 }
 
-
 /*-----Commentaires-----*/
 #eventComm {
     text-align: left;
 }
+
 .comments {
     padding: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
 .comments:nth-child(odd) {
-    background-color: #FAF0E6;          /*rgb(250, 250, 230)*/
+    background-color: #FAF0E6; /*rgb(250, 250, 230)*/
 }
+
 .comments:nth-child(even) {
     background-color: rgb(240, 240, 240);
 }
+
 .commUser {
     color: grey;
 }
+
 .commDate {
     color: silver;
     font-size: 0.75em;
 }
+
 .commContent:before {
     content: '> ';
     color: red;
     font-weight: bold;
 }
+
 #leaveAcomment {
     border: 1px black solid;
     border-radius: 10px;
     padding: 2%;
 }
+
 #newCommContent {
     color: black !important;
 }
+
 .rightEditBtn {
     text-align: right;
 }
-
 
 /*----------------Header------------------*/
 header {
@@ -255,7 +278,7 @@ header {
     z-index: 100;
     background-color: rgba(200, 200, 200, 1);
     transition: 0.5s;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 header .nav-link {
@@ -308,7 +331,7 @@ header .navbar-brand, header .navbar-brand img {
     justify-content: space-around;
 }
 
-#btnConnexion, #btnInscription {
+.btnConnexion, .btnInscription {
     cursor: pointer;
     width: 100%;
     margin: 0px;
@@ -359,12 +382,12 @@ header .navbar-brand, header .navbar-brand img {
     background-color: rgba(240, 0, 0, 1);
     transition: 0.5s;
 }
+
 .navbar-nav {
     display: flex;
     justify-content: space-around;
     width: 100%;
 }
-
 
 /*------------Carrousel------------*/
 .welcome-title {
@@ -376,7 +399,7 @@ header .navbar-brand, header .navbar-brand img {
 }
 
 #carouselid {
-    background-color:white;
+    background-color: white;
     overflow: hidden;
 }
 
@@ -391,7 +414,7 @@ header .navbar-brand, header .navbar-brand img {
 }
 
 .carousel-item h2, .carousel-item h5, .carousel-item p {
-    text-align:center;
+    text-align: center;
 }
 
 .nav-item {
@@ -439,11 +462,11 @@ header .navbar-brand, header .navbar-brand img {
     font-size: 20px;
     text-align: center;
     overflow: hidden;
-    color:rgb(240, 0, 0);
+    color: rgb(240, 0, 0);
 }
 
 .product-header a {
-    text-decoration-color:#993333;
+    text-decoration-color: #993333;
 }
 
 .product-image {
@@ -453,9 +476,9 @@ header .navbar-brand, header .navbar-brand img {
 }
 
 .product-item img, .aside-item img {
-    display:block;
+    display: block;
     height: 100%;
-    margin:auto;
+    margin: auto;
 }
 
 .product-description {
@@ -474,14 +497,14 @@ header .navbar-brand, header .navbar-brand img {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color:#009999;
+    color: #009999;
 }
 
 .product-price p {
     margin: 5px 5px 5px 5px;
 }
 
-#price {
+.price {
     font-size: 20px;
     font-weight: bold;
     color: #009999;
@@ -490,22 +513,46 @@ header .navbar-brand, header .navbar-brand img {
 textarea {
     resize: none;
 }
-.s-product-price{
+
+.s-product-price {
     font-weight: bold;
-    font-size:2em;
+    font-size: 2em;
 }
 
 .s-product-image img {
-    height:400px;
+    height: 400px;
 }
 
+/*-----IDEAS-----*/
+img {
+    max-height: 400px;
+}
 
+#texte {
+    margin-left: 20%;
+    text-align: left;
+}
+
+.showDesc {
+    text-align: center;
+}
+
+.showDesc h1 {
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.sign {
+    text-align: left;
+    font-style: italic;
+    color: grey;
+    font-size: small;
+}
 
 /*-----PANIER-----*/
 #sectionPanier {
     text-align: center;
 }
-
 
 /*-------------FOOTER-------------*/
 footer {
@@ -513,7 +560,7 @@ footer {
     height: 100%;
     width: 100%;
     padding: 10px 0px 10px 0px;
-    margin-top:50px;
+    margin-top: 50px;
     color: white;
     background-color: rgb(240, 0, 0);
 }

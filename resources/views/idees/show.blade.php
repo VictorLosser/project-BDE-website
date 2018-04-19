@@ -3,48 +3,6 @@
 @section('title', $idee->title)
 
 @section('onContent')
-    <style>
-        .trollBtn a {
-            color: black;
-        }
-
-        .trollBtn a:hover {
-            text-decoration: none;
-        }
-
-        .trollBtn {
-            position: absolute;
-            left: 95px;
-            transition: 0.1s;
-        }
-
-        .trollBtn:hover {
-            transform: translate3d(100px, 50px, 0px);
-        }
-
-        .showDesc {
-            text-align: center;
-        }
-
-        .showDesc h1 {
-            text-transform: uppercase;
-            margin-bottom: 25px;
-        }
-
-        #texte {
-            margin-left: 20%;
-            text-align: left;
-        }
-
-        .sign {
-            text-align: right;
-            font-style: italic;
-            color: grey;
-            font-size: small;
-        }
-
-    </style>
-
 
     <div class="container" style="text-align: center">
         <!--<button type="" class="trollBtn" style="display: block;margin:auto;"><a href="/idees">< Retour</a>
@@ -61,20 +19,23 @@
                             {{ csrf_field() }}
 
                             <input id="eventName" name="eventName" value="{{$idee->title}}" type="hidden"/>
-                            <input id="eventDescription" name="eventDescription" value="{{$idee->description}}" type="hidden"/>
+                            <input id="eventDescription" name="eventDescription" value="{{$idee->description}}"
+                                   type="hidden"/>
                             <div class="row">
                                 <div class="col">
-                                    <input id="eventDate" name="eventDate" type="datetime-local" class="form-control" placeholder="Date"
+                                    <input id="eventDate" name="eventDate" type="datetime-local" class="form-control"
                                            value="" required>
                                 </div>
                                 <div class="col">
-                                    <input id="eventRecurrence" name="eventRecurrence" type="number" class="form-control"
+                                    <input id="eventRecurrence" name="eventRecurrence" type="number"
+                                           class="form-control"
                                            placeholder="Récurrence (ex: 7 -> événement hebdo)"
                                            step="1"
                                            value="" required>
                                 </div>
                                 <div class="col">
-                                    <input id="eventPrice" name="eventPrice" type="number" class="form-control" placeholder="prix"
+                                    <input id="eventPrice" name="eventPrice" type="number" class="form-control"
+                                           placeholder="prix"
                                            step="0.01"
                                            value="" required>
                                 </div>
@@ -115,92 +76,89 @@
             </div>
             <p class="ideeLikes" onclick="addLikeIdeeImg({{$idee->id}})">
                 <span id="countIdeeLikes">{{$idee->likes()->count()}} </span><i
-                        class="far fa-thumbs-up" style="background-color: transparent;" title="Afficher noms des likes->users"></i>
+                        class="far fa-thumbs-up" style="background-color: transparent;"
+                        title="Afficher noms des likes->users"></i>
             </p>
         </div>
 
-
-        <!--
-        </div>
-        Les commentaires seront affichés ici
-        -->
+    </div>
 
 @endsection
 
-        @section('scripts')
-            <script>
-                $('#btnAddImg').on('click', function () {
-                    $('#divImgUpload').slideToggle();
-                    if ($('#btnAddImg').text() == "Créer l'événement") {
-                        $('#btnAddImg').text('Annuler');
-                    }
-                    else {
-                        $('#btnAddImg').text("Créer l'événement");
-                    }
-                });
+@section('scripts')
+    <script>
+        $('#btnAddImg').on('click', function () {
+            $('#divImgUpload').slideToggle();
+            if ($('#btnAddImg').text() == "Créer l'événement") {
+                $('#btnAddImg').text('Annuler');
+            }
+            else {
+                $('#btnAddImg').text("Créer l'événement");
+            }
+        });
 
-                function addLikeIdeeImg($id) {
-                    ideeId = $id;
-                    likeType = 'idea';
+        function addLikeIdeeImg($id) {
+            ideeId = $id;
+            likeType = 'idea';
 
-                    /*alert('Go add ton like sur une ' + likeType + ', imgID = ' + imgId);*/
+            /*alert('Go add ton like sur une ' + likeType + ', imgID = ' + imgId);*/
 
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $.ajax({
-                        dataType: 'json',
-                        type: "POST",
-                        url: "/like",
-                        data: {
-                            imgId: ideeId,
-                            likeType: likeType
-                        },
-                        success: function (data) {
-                            console.log(data);
-                            if (!data.likeExists) {
-                                $('#countIdeeLikes').text(data.likeCount);
-                            } else {
-                                removeLikeEventImg(data.likeId);
-                            }
-                        },
-                        error: function (data) {
-                            console.log("Errors for ajoutation : ", data);
-                        }
-                    });
-
-                    return false;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+            });
 
-                function removeLikeEventImg($likeId) {
-
-                    /*alert('Go supprimer ton like, likeID = ' + $id);*/
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $.ajax({
-                        dataType: 'json',
-                        type: "DELETE",
-                        url: "/like/" + $likeId,
-                        success: function (data) {
-                            console.log(data);
-                            $('#countIdeeLikes').text(($('#countIdeeLikes').text())-1);
-                        },
-                        error: function (data) {
-                            console.log("Errors for supprimation : ", data);
-                            //Meme avec erreurs, la requete marche bien, donc bon !
-                            $('#countIdeeLikes').text(parseInt($('#countIdeeLikes').text())-1);
-                        }
-                    });
-
-                    return false;
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: "/like",
+                data: {
+                    imgId: ideeId,
+                    likeType: likeType
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (!data.likeExists) {
+                        $('#countIdeeLikes').text(data.likeCount);
+                    } else {
+                        removeLikeEventImg(data.likeId);
+                    }
+                },
+                error: function (data) {
+                    console.log("Errors for ajoutation : ", data);
                 }
+            });
 
-            </script>
+            return false;
+        }
+
+        function removeLikeEventImg($likeId) {
+
+            /*alert('Go supprimer ton like, likeID = ' + $id);*/
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                dataType: 'json',
+                type: "DELETE",
+                url: "/like/" + $likeId,
+                success: function (data) {
+                    console.log(data);
+                    $('#countIdeeLikes').text(($('#countIdeeLikes').text()) - 1);
+                },
+                error: function (data) {
+                    console.log("Errors for supprimation : ", data);
+                    //Meme avec erreurs, la requete marche bien, donc bon !
+                    $('#countIdeeLikes').text(parseInt($('#countIdeeLikes').text()) - 1);
+                }
+            });
+
+            return false;
+        }
+
+    </script>
 @endsection

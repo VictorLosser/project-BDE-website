@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
     <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/bootstrap-social.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/hamburgerMenu.css')}}"/>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{asset('js/hamburgerMenu.js')}}"></script>
     <script src="{{asset('js/jquery-ui.js')}}"></script>
     <script src="{{asset('js/formLogin.js')}}"></script>
     <!-- Font-Awesome (CDN) -->
@@ -31,14 +34,13 @@ use Illuminate\Support\Facades\Auth;
     <div id="popupBackground" style="display: none;"></div>
     <div class="popupFenetre" id="connexionPopup" style="display: none;">
         <div class="croixIcon croixIconPopup"><i class="fas fa-times"></i></div>
-        <div id="formulaireInterne">
+        <div id="formLogIn">
             <form class="form-horizontal" method="POST" action="{{ route('login') }}" autocomplete="on">
                 {{ csrf_field() }}
-                <div><p id="popupFenetreTitre">Connexion</p></div>
+                <div><p class="popupFenetreTitre">Connexion</p></div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="control-label"><i class="fas fa-at"></i> Adresse e-mail</label>
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required
-                           autofocus>
+                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -80,10 +82,10 @@ use Illuminate\Support\Facades\Auth;
     </div>
     <div class="popupFenetre" id="inscriptionPopup" style="display: none;">
         <div class="croixIcon croixIconPopup"><i class="fas fa-times"></i></div>
-        <div id="formulaireInterne">
+        <div id="formRegister">
             <form class="form-horizontal" method="POST" action="{{ route('register') }}" autocomplete="on">
                 {{ csrf_field() }}
-                <div><p id="popupFenetreTitre">Inscription</p></div>
+                <div><p class="popupFenetreTitre">Inscription</p></div>
                 <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                     <label for="firstname" class="control-label"><i class="far fa-id-card"></i> Prénom</label>
 
@@ -99,8 +101,7 @@ use Illuminate\Support\Facades\Auth;
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="control-label"><i class="far fa-id-card"></i> Nom</label>
 
-                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required
-                           autofocus>
+                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
 
                     @if ($errors->has('name'))
                         <span class="help-block">
@@ -168,7 +169,7 @@ use Illuminate\Support\Facades\Auth;
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav">
                         <div class="navItems">
-                            <li class="font-weight-bold" id="nav_home">
+                            <li class="font-weight-bold nav_home">
                                 <a class="nav-link" href="/">
                                     <i class="fas fa-home"></i>
                                     ACCUEIL<span class="sr-only">(current)</span></a>
@@ -176,13 +177,13 @@ use Illuminate\Support\Facades\Auth;
                         </div>
                         <div class="navItems">
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#"
                                    data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i
                                             class="fas fa-shopping-basket"></i>
                                     GESTION PRODUITS
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/produits">Accueil</a>
                                     <a class="dropdown-item" href="/produit/create">
                                         <i class="fas fa-plus"></i>
@@ -195,13 +196,13 @@ use Illuminate\Support\Facades\Auth;
                         </div>
                         <div class="navItems">
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#"
                                    data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i
                                             class="fas fa-calendar-alt"></i>
                                     GESTION EVENEMENTS
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/evenements">Accueil</a>
                                     <a class="dropdown-item" href="/evenement/create">
                                         <i class="fas fa-plus"></i>
@@ -214,13 +215,13 @@ use Illuminate\Support\Facades\Auth;
                         </div>
                         <div class="navItems">
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#"
                                    data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i
                                             class="fas fa-lightbulb"></i>
                                     GESTION BOITE A IDEES
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/idees">Accueil</a>
                                     <a class="dropdown-item" href="/idee/create">
                                         <i class="fas fa-plus"></i>
@@ -237,7 +238,7 @@ use Illuminate\Support\Facades\Auth;
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav">
                         <div class="navItems">
-                            <li class="font-weight-bold" id="nav_home">
+                            <li class="font-weight-bold nav_home">
                                 <a class="nav-link" href="/">
                                     <i class="fas fa-home"></i>
                                     ACCUEIL<span class="sr-only">(current)</span></a>
@@ -250,12 +251,12 @@ use Illuminate\Support\Facades\Auth;
                         </div>
                         <div class="navItems">
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#"
                                    data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
                                     EVENEMENTS
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/evenements">Nos événements</a>
                                     <a class="dropdown-item" href="/idees">Propositions d'événements</a>
                                 </div>
@@ -268,7 +269,7 @@ use Illuminate\Support\Facades\Auth;
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav">
                     <div class="navItems">
-                        <li class="font-weight-bold" id="nav_home">
+                        <li class="font-weight-bold nav_home">
                             <a class="nav-link" href="/">
                                 <i class="fas fa-home"></i>
                                 ACCUEIL<span class="sr-only">(current)</span></a>
@@ -281,12 +282,12 @@ use Illuminate\Support\Facades\Auth;
                     </div>
                     <div class="navItems">
                         <li class="dropdown font-weight-bold" id="nav_gest_produits">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#"
                                data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
                                 EVENEMENTS
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/evenements">Nos événements</a>
                                 <a class="dropdown-item" href="/idees">Propositions d'événements</a>
                             </div>
@@ -304,12 +305,12 @@ use Illuminate\Support\Facades\Auth;
         @if (Auth::check())
             <div id="divBtnProfil" class="dropdown font-weight-bold">
 
-                <a id="btnProfil" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                <a id="btnProfil" class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#"
                    data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
                     <i class="fas fa-user-circle"></i>
                     {{ Auth::user()->firstname}} </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu">
                     <a class="dropdown-item" href="/home"><i class="fas fa-id-card"></i> Profil</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
@@ -325,12 +326,12 @@ use Illuminate\Support\Facades\Auth;
         @else
             <div id="btnInsCo">
                 <a> <!--href="double-crochets/* url('/register') */double-crochets"-->
-                    <button id="btnInscription" class="btn-member btn btn-outline-danger my-2 my-sm-0 eventInscription">
+                    <button class="btn-member btn btn-outline-danger my-2 my-sm-0 eventInscription btnInscription">
                         <i class="fas fa-user-plus"></i> Inscription
                     </button>
                 </a>
                 <a><!--href="double-crochets/* url('/login') */double-crochets"-->
-                    <button id="btnConnexion" class="btn member btn btn-outline-danger my-2 my-sm-0 eventConnexion">
+                    <button class="btn member btn btn-outline-danger my-2 my-sm-0 eventConnexion btnConnexion">
                         <i class="fas fa-sign-in-alt"></i> Connexion
                     </button>
                 </a>
@@ -349,7 +350,7 @@ use Illuminate\Support\Facades\Auth;
                 Menu<br/><br/>
                 @if (Auth::check())
                     @if((Auth::user()->status_id) == 2)
-                        <li class="font-weight-bold" id="nav_home">
+                        <li class="font-weight-bold nav_home">
                             <a class="nav-link" href="/">
                                 <i class="fas fa-home"></i>
                                 ACCUEIL<span class="sr-only">(current)</span></a>
@@ -393,7 +394,7 @@ use Illuminate\Support\Facades\Auth;
                         </li>
                     @elseif((Auth::user()))
 
-                        <li class="font-weight-bold" id="nav_home">
+                        <li class="font-weight-bold nav_home">
                             <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
                         <li class=" nav-link font-weight-bold">
@@ -408,7 +409,7 @@ use Illuminate\Support\Facades\Auth;
                         </li>
                     @endif
                 @else
-                    <li class="font-weight-bold" id="nav_home">
+                    <li class="font-weight-bold nav_home">
                         <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                     </li>
                     <li class=" nav-link font-weight-bold">
@@ -423,33 +424,25 @@ use Illuminate\Support\Facades\Auth;
                     </li>
                     <div id="responsiveBtnInsCo">
                         <a> <!--href="double-crochets/* url('/register') */double-crochets"-->
-                            <button id="btnInscription"
-                                    class="btn-member btn btn-outline-danger my-2 my-sm-0 eventInscription">
+                            <button class="btn-member btn btn-outline-danger my-2 my-sm-0 eventInscription btnInscription">
                                 Inscription
                             </button>
                         </a>
                         <a><!--href="double-crochets/* url('/login') */double-crochets"-->
-                            <button id="btnConnexion"
-                                    class="btn member btn btn-outline-danger my-2 my-sm-0 eventConnexion">
+                            <button class="btn member btn btn-outline-danger my-2 my-sm-0 eventConnexion btnConnexion">
                                 Connexion
                             </button>
                         </a>
                     </div>
                 @endif
             </ul>
-
+        </div>
+    </div>
 </header>
 
 <div id="templateContainer" class="container">
     @yield('content')
 </div>
-
-
-<head>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/hamburgerMenu.css')}}"/>
-    <script type="text/javascript" src="{{asset('js/hamburgerMenu.js')}}"></script>
-</head>
 
 <footer>
     <a href="https://www.facebook.com/BdeExiaStrasbourg/">

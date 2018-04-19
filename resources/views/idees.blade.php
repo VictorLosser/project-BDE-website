@@ -12,54 +12,7 @@
     @endif
 
     <style>
-        .trollBtn a {
-            color: black;
-        }
 
-        .trollBtn a:hover {
-            text-decoration: none;
-        }
-
-        .trollBtn {
-            position: absolute;
-            left: 95px;
-            transition: 0.1s;
-        }
-
-        .trollBtn:hover {
-            transform: translate3d(100px, 50px, 0px);
-        }
-
-        img {
-            max-height: 400px;
-        }
-
-        .showFlex {
-            margin: 25px;
-            display: flex;
-            flex-wrap: nowrap;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .showDesc {
-            margin-left: 50px;
-            text-align: left;
-        }
-
-        .showDesc h1 {
-            text-transform: uppercase;
-            margin-bottom: 25px;
-        }
-
-        .sign {
-            text-align: left;
-            font-style: italic;
-            text-orientation: sideways;
-            color: grey;
-            font-size: small;
-        }
 
     </style>
 

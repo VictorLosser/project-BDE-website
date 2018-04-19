@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <body id="bodyProduct">
+    <div id="bodyProduct">
 
     <div class="flexCenter">
         <div id="divSearch">
@@ -187,6 +187,6 @@
         </script>
     </aside>
 
-    </body>
+    </div>
 
 @endsection

@@ -27,7 +27,7 @@
                     <p><i class="fas fa-calendar-alt"></i> {{$event->date_event}}</p>
                 </div>
                 <div class="event-price pannelRightAlign">
-                    <p id="price">{{$event->price}} €</p>
+                    <p class="price">{{$event->price}} €</p>
                 </div>
             </div>
         @endforeach
