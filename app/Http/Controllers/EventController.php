@@ -117,8 +117,8 @@ class EventController extends Controller
         $event = EventsBDE::find($id);
 
         if (Auth::check()) {
-            $status = Auth::user()->status_id;
-            if ($status == 2)
+            $status = Auth::user()->isauthorized();
+            if ($status == 'Bde')
                 return view('events.edit', compact('event'));
         } else {
             return redirect('/evenements')->with('status', 'Accès refusé');
@@ -175,32 +175,38 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        $event = EventsBDE::find($id);
+        if (Auth::check()) {
+            $status = Auth::user()->isauthorized();
+            if ($status == 'Bde') {
 
-        echo "Go supp imgs : ";
-        $event->images->each(function ($img, $key) {
-            $link = $img->image_link;
-            Storage::delete($link);
-        });
-        /*foreach ($product->imsages as $img) {
-            $link = $img->image_link;
-            Storage::disk('public')->delete('products/'.$link);
-        }*/
+                $event = EventsBDE::find($id);
 
-        echo "Yeah img supp. ";
-        CommentsBDE::where([
-            ['commentable_id', '=', $id],
-            ['commentable_type', '=', 'event']
-        ])->delete();
-        ImageBDE::where([
-            ['imageable_id', '=', $id],
-            ['imageable_type', '=', 'event']
-        ])->delete();
-        LikeBDE::where([
-            ['likeable_id', '=', $id],
-            ['likeable_type', '=', 'event']
-        ])->delete();
-        EventsBDE::find($id)->delete();
+                echo "Go supp imgs : ";
+                $event->images->each(function ($img, $key) {
+                    $link = $img->image_link;
+                    Storage::delete($link);
+                });
+                /*foreach ($product->imsages as $img) {
+                    $link = $img->image_link;
+                    Storage::disk('public')->delete('products/'.$link);
+                }*/
+
+                echo "Yeah img supp. ";
+                CommentsBDE::where([
+                    ['commentable_id', '=', $id],
+                    ['commentable_type', '=', 'event']
+                ])->delete();
+                ImageBDE::where([
+                    ['imageable_id', '=', $id],
+                    ['imageable_type', '=', 'event']
+                ])->delete();
+                LikeBDE::where([
+                    ['likeable_id', '=', $id],
+                    ['likeable_type', '=', 'event']
+                ])->delete();
+                EventsBDE::find($id)->delete();
+            }
+        }
 
         // DON'T USE THIS LINE WHEN AJAX IS WORKING
         //return redirect('/evenements')->with('status', "L'événement a bien été supprimé");

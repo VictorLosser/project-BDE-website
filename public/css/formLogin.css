@@ -44,13 +44,14 @@
 }
 
 .popupFenetreTitre {
+    text-align: center;
     font-size: 2em;
     font-weight: bold;
     margin: 25px 0px 50px 0px;
 }
 
 .popupFenetre form {
-    text-align: center;
+    text-align: left;
 }
 
 #divCheckBox {

@@ -32,12 +32,18 @@ class ParticipateController extends Controller
              return view('events');
      }*/
     }
-    public function downloadPDF($eventID){
-        $participantsData = DB::select('SELECT id, name, firstname FROM `participates-bde` LEFT JOIN `users` ON `participates-bde`.`user_id` = `users`.`id`  WHERE `event_id` = ?', [$eventID]);
-        $eventData = EventsBDE::find($eventID);
 
-        $pdf = PDF::loadView('participates.pdf', compact('participantsData','eventData'));
-        return $pdf->download('participants.pdf');
+    public function downloadPDF($eventID)
+    {
+        if (Auth::check()) {
+            if (Auth::user()->isAuthorized() == 'Bde') {
+                $participantsData = DB::select('SELECT id, name, firstname FROM `participates-bde` LEFT JOIN `users` ON `participates-bde`.`user_id` = `users`.`id`  WHERE `event_id` = ?', [$eventID]);
+                $eventData = EventsBDE::find($eventID);
+
+                $pdf = PDF::loadView('participates.pdf', compact('participantsData', 'eventData'));
+                return $pdf->download('participants.pdf');
+            }
+        }
     }
 
     /**
@@ -60,17 +66,17 @@ class ParticipateController extends Controller
     {
         if (Auth::check()) {
             $userID = Auth::user()->id;
-            $status="";
-            $isalready = DB::table('participates-bde')->where('event_id','=',$request->id_event)->where('user_id','=',$userID)->first();
-            if ($isalready == []){
-            ParticipatesBDE::Create([
-                'event_id' => $request->id_event,
-                'user_id' => $userID
-            ]);
-            $status  = "Participation bien enregistrée";}
-            else
-              $status = "Vous êtes déja inscit à cet évènement.";
-            return redirect('/evenement/'.$request->id_event)->with('status', $status);
+            $status = "";
+            $isalready = DB::table('participates-bde')->where('event_id', '=', $request->id_event)->where('user_id', '=', $userID)->first();
+            if ($isalready == []) {
+                ParticipatesBDE::Create([
+                    'event_id' => $request->id_event,
+                    'user_id' => $userID
+                ]);
+                $status = "Participation bien enregistrée";
+            } else
+                $status = "Vous êtes déja inscit à cet évènement.";
+            return redirect('/evenement/' . $request->id_event)->with('status', $status);
         } else {
             $userID = 0;
             return redirect('/evenements')->with('status', 'Participation refusée, vous devez être connecté(e)!');

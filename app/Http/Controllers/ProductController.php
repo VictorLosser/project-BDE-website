@@ -117,7 +117,7 @@ class productController extends Controller
         $categories = \App\ProductCategoryBDE::all();
 
         return view('products',
-            compact('products','categories')
+            compact('products', 'categories')
         );
     }
 
@@ -236,24 +236,28 @@ class productController extends Controller
      */
     public function destroy($id)
     {
-        $product = ProductBDE::find($id);
+        if (Auth::check()) {
+            if (Auth::user()->isAuthorized() == 'Bde') {
+                $product = ProductBDE::find($id);
 
-        $product->images->each(function ($img, $key) {
-            $link = $img->image_link;
-            Storage::delete($link);
-        });
-        /*foreach ($product->images as $img) {
-            $link = $img->image_link;
-            Storage::disk('public')->delete('products/'.$link);
-        }*/
+                $product->images->each(function ($img, $key) {
+                    $link = $img->image_link;
+                    Storage::delete($link);
+                });
+                /*foreach ($product->images as $img) {
+                    $link = $img->image_link;
+                    Storage::disk('public')->delete('products/'.$link);
+                }*/
 
-        ImageBDE::where([
-            ['imageable_id', '=', $id],
-            ['imageable_type', '=', 'product'],
-        ])->delete();
-        ProductBDE::find($id)->delete();
+                ImageBDE::where([
+                    ['imageable_id', '=', $id],
+                    ['imageable_type', '=', 'product'],
+                ])->delete();
+                ProductBDE::find($id)->delete();
 
-        // DON'T USE THIS LINE WHEN AJAX IS WORKING
-        //return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
+                // DON'T USE THIS LINE WHEN AJAX IS WORKING
+                //return redirect('/produits')->with('status', 'Le produit a bien été supprimé');
+            }
+        }
     }
 }

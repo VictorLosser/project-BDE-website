@@ -131,7 +131,7 @@
                             <div class="row">
                                 <div class="col">
                                     <input id="eventImgAlt" name="eventImgAlt" type="text" class="form-control"
-                                           placeholder="Description de l'image"/>
+                                           placeholder="Description de l'image" required>
                                 </div>
                             </div>
                             <input id="envoyerForm" class="btn btn-success" type="submit" value="Envoyer"/>
@@ -241,42 +241,49 @@
                 function addLikeEventImg($id) {
                     imgId = $id;
                     likeType = 'image';
+                    authCheck = '{{Auth::check()}}';
+
 
                     /*alert('Go add ton like sur une ' + likeType + ', imgID = ' + imgId);*/
-
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $.ajax({
-                        dataType: 'json',
-                        type: "POST",
-                        url: "/like",
-                        data: {
-                            imgId: imgId,
-                            likeType: likeType
-                        },
-                        success: function (data) {
-                            console.log(data);
-                            if (!data.likeExists) {
-                                $('#countEventImgLikes').text(data.likeCount);
-                                $('.imgListing').each(function () {
-                                    if ($(this).attr("imgid") == imgId) {
-                                        $(this).attr("likes", parseInt($(this).attr("likes")) + 1)
-                                    }
-                                })
-                            } else {
-                                removeLikeEventImg(data.likeId, imgId);
+                    if ( authCheck == 1 ) {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
-                        },
-                        error: function (data) {
-                            console.log("Errors for ajoutation : ", data);
-                        }
-                    });
+                        });
 
-                    return false;
+                        $.ajax({
+                            dataType: 'json',
+                            type: "POST",
+                            url: "/like",
+                            data: {
+                                imgId: imgId,
+                                likeType: likeType
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                if (!data.likeExists) {
+                                    $('#countEventImgLikes').text(data.likeCount);
+                                    $('.imgListing').each(function () {
+                                        if ($(this).attr("imgid") == imgId) {
+                                            $(this).attr("likes", parseInt($(this).attr("likes")) + 1)
+                                        }
+                                    })
+                                } else {
+                                    removeLikeEventImg(data.likeId, imgId);
+                                }
+                            },
+                            error: function (data) {
+                                console.log("Errors for ajoutation : ", data);
+                            }
+                        });
+
+                        return false;
+                    }
+                    else {
+                        alert("Connectez vous pour liker !");
+
+                    }
                 }
 
                 function removeLikeEventImg($likeId, $imgId) {

@@ -43,13 +43,13 @@
                             <div class="row">
                                 <div class="col">
                                     <img id="new-image" style="max-height: 150px;"/>
-                                    <input id="eventImg" name="eventImg" type="file">
+                                    <input id="eventImg" name="eventImg" type="file" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <input id="eventAlt" name="eventAlt" type="text" class="form-control"
-                                           placeholder="Description de l'image"/>
+                                           placeholder="Description de l'image" required>
                                 </div>
                             </div>
                             <input id="envoyerForm" class="btn btn-success" type="submit" value="Envoyer"/>

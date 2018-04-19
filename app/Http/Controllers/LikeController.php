@@ -37,38 +37,40 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        $userID = Auth::user()->id;
-        $return = array();
+        if (Auth::check()) {
+            $userID = Auth::user()->id;
+            $return = array();
 
-        $likeExists = LikeBDE::where([
-            ['likeable_id', '=', $request->imgId],
-            ['likeable_type', '=', $request->likeType],
-            ['user_id', '=', $userID]
-        ])->first();
+            $likeExists = LikeBDE::where([
+                ['likeable_id', '=', $request->imgId],
+                ['likeable_type', '=', $request->likeType],
+                ['user_id', '=', $userID]
+            ])->first();
 
-        if ($likeExists) {
-            $return['likeExists'] = $likeExists->id;
+            if ($likeExists) {
+                $return['likeExists'] = $likeExists->id;
+            }
+
+            /*echo "Bonjour user ".$userID.", lancement firstOrNew : ";*/
+            $like = LikeBDE::firstOrCreate([
+                'likeable_id' => $request->imgId,
+                'likeable_type' => $request->likeType,
+                'user_id' => $userID
+            ]);
+            /*echo "Lancement where 1: ";*/
+            $newLikeCount = LikeBDE::where([
+                ['likeable_id', '=', $request->imgId],
+                ['likeable_type', '=', $request->likeType]
+            ])->count();
+
+            if (!empty($like)) {
+
+                $return['likeId'] = $like->id;
+            }
+
+            $return['likeCount'] = $newLikeCount;
+            echo json_encode($return);
         }
-
-        /*echo "Bonjour user ".$userID.", lancement firstOrNew : ";*/
-        $like = LikeBDE::firstOrCreate([
-            'likeable_id' => $request->imgId,
-            'likeable_type' => $request->likeType,
-            'user_id' => $userID
-        ]);
-        /*echo "Lancement where 1: ";*/
-        $newLikeCount = LikeBDE::where([
-            ['likeable_id', '=', $request->imgId],
-            ['likeable_type', '=', $request->likeType]
-        ])->count();
-
-        if (!empty($like)) {
-
-            $return['likeId'] = $like->id;
-        }
-
-        $return['likeCount'] = $newLikeCount;
-        echo json_encode($return);
     }
 
     /**
@@ -113,6 +115,8 @@ class LikeController extends Controller
      */
     public function destroy($id)
     {
-        LikeBDE::find($id)->delete();
+        if (Auth::check()) {
+            LikeBDE::find($id)->delete();
+        }
     }
 }

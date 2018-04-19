@@ -10,7 +10,7 @@
 
     <div style="text-align: center;">
         <a href="/produits">
-            <button type="button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour</button>
+            <button type="button" class="btn btn-default"><i class="fas fa-arrow-left"></i> Retour</button>
         </a>
         <div class="s-product-header">
             <h1>{{ $product->title }}</h1>
@@ -28,11 +28,15 @@
                 {{ $product->price }} €
                 <i class="fas fa-chevron-left"></i>
             </p></div>
-        <form action="/commande" method="post">
-            {{ csrf_field() }}
-            <input type="hidden" name="id_product" value="{{ $product->id }}"/>
-            <button class="btn btn-danger btn-lg" type="submit"><i class="fas fa-cart-plus"></i> Ajouter au panier</button>
-        </form>
+        @if (Auth::check())
+            <form action="/commande" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="id_product" value="{{ $product->id }}"/>
+                <button class="btn btn-danger btn-lg" type="submit"><i class="fas fa-cart-plus"></i> Ajouter au
+                    panier
+                </button>
+            </form>
+        @endif
     </div>
 
 

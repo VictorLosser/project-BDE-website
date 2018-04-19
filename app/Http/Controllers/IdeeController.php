@@ -24,7 +24,7 @@ class IdeeController extends Controller
         } else
             return redirect('/idees')->with('status', 'Accès refusé');
 
-        if ($authorisation == 'Bde' || 'Salarié') {
+        if ($authorisation == 'Bde') {
             $idees = IdeaBoxBDE::all();
             return view('idees.index', compact('idees'));
         } else
@@ -94,7 +94,12 @@ class IdeeController extends Controller
         $idee = IdeaBoxBDE::find($id);
 
         if (Auth::check()) {
-            return view('idees.edit', compact('idee'));
+            if ($authorisation == 'Bde') {
+                return view('idees.edit', compact('idee'));
+            }
+            else {
+                return redirect('/idees')->with('status', 'Accès refusé');
+            }
         } else {
             return redirect('/idees')->with('status', 'Accès refusé');
         }

@@ -39,24 +39,25 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        echo "Requete store recue par le controller 5/5";
-        $userID = Auth::user()->id;
+        if (Auth::check()) {
+            echo "Requete store recue par le controller 5/5";
+            $userID = Auth::user()->id;
 
-        echo "Go storage l'image : ";
-        $path = Storage::putFile('events', $request->file('eventImg'));
-        echo "La si tu vois ça, alors le fichier a bien upload ;)";
+            echo "Go storage l'image : ";
+            $path = Storage::putFile('events', $request->file('eventImg'));
+            echo "La si tu vois ça, alors le fichier a bien upload ;)";
 
-        ImageBDE::create([
-            'image_link' => $path,
-            'alt' => $request->eventImgAlt,
-            'imageable_id' => $request->eventId,
-            'imageable_type' => $request->eventImgType,
-            'user_id' => $userID
-        ]);
-        echo "Et la, c'est la requete store entière qui est passé sans erreurs. WP";
+            ImageBDE::create([
+                'image_link' => $path,
+                'alt' => $request->eventImgAlt,
+                'imageable_id' => $request->eventId,
+                'imageable_type' => $request->eventImgType,
+                'user_id' => $userID
+            ]);
+            echo "Et la, c'est la requete store entière qui est passé sans erreurs. WP";
 
-        return redirect('/evenement/'.$request->eventId)->with('status', 'Image ajoutée !');
-
+            return redirect('/evenement/' . $request->eventId)->with('status', 'Image ajoutée !');
+        }
     }
 
     /**
@@ -101,14 +102,16 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        $image = ImageBDE::find($id)->first();
-        $eventId = $image->imageable_id;
+        if (Auth::check()) {
+            $image = ImageBDE::find($id)->first();
+            $eventId = $image->imageable_id;
 
-        $link = $image->image_link;
-        Storage::delete($link);
+            $link = $image->image_link;
+            Storage::delete($link);
 
-        ImageBDE::find($id)->delete();
+            ImageBDE::find($id)->delete();
 
-        return redirect('/evenement/'.$eventId)->with('status', 'Image Supprimée.');
+            return back()->with('status', 'Image supprimée !');
+        }
     }
 }

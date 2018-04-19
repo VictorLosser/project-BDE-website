@@ -103,8 +103,10 @@ class CommentController extends Controller
     public
     function destroy($id)
     {
-        CommentsBDE::find($id)->delete();
+        if (Auth::user()) {
+            CommentsBDE::find($id)->delete();
 
-        return redirect(url()->previous());
+            return redirect(url()->previous());
+        }
     }
 }

@@ -26,54 +26,54 @@
 }
 
 /*Menu petits appareils*/
+.navbar-toggler-icon, .navbar-toggler {
+    display: none;
+}
+#headMenu {
+    padding-bottom: 25px;
+}
+.headMenu_title div {
+    display: none;
+}
+.headMenu_title, .headMenu_subTitle {
+    cursor: pointer;
+}
+.headMenu_title:focus,.headMenu_title:hover , .headMenu_subTitle:focus, .headMenu_subTitle:hover {
+    text-decoration: none;
+    color: red;
+}
+.headMenu_title {
+    font-size: 1.5em;
+    margin: 0.5em;
+    list-style-type:none;
+    color: black;
+}
+.noPuce {
+    list-style-type:none;
+    margin: 0.5em 0px 0.5em 0px;
+}
+.center_title {
+    text-align: center;
+    margin: 0.5em;
+}
+.headMenu_subTitle {
+    font-size: 0.9em;
+    padding-left: 5%;
+    color: grey;
+}
+.drop_title:after {
+    content: '\25bc';
+}
+
+
+
+/*Burger menu*/
 .croixBarres
 {
     height: 0.65em;
     width: 75px;
     border: 2px red outset;
     border-radius: 5px;
-}
-#headSandwichIcone
-{
-    margin: 0px;
-    padding: 0px;
-    z-index: 100;
-}
-#headMenu
-{
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    padding-bottom: 1em;
-    max-height: 100vh;
-    overflow-y: auto;
-    background-color: rgba(200, 200, 200, 1);
-    z-index: 99;
-}
-div#headMenu ul
-{
-    text-transform: uppercase;
-    width: 100%;
-    padding: 5%;
-    margin-bottom: 0.5em;
-    text-align: center;
-    font-size: 2em;
-    font-weight: bold;
-}
-div#headMenu li
-{
-    text-transform: initial;
-    font: initial;
-    list-style-type: none;
-    font-size: 1em;
-    margin-bottom: 0px;
-    border-bottom: 2px red solid;
-    transition: 0.35s;
-}
-div#headMenu li:hover, .headMenu_subTitle a:hover
-{
-    color: red;
-    border: 2px red solid;
 }
 .croixBarres
 {
@@ -85,17 +85,6 @@ div#headMenu li:hover, .headMenu_subTitle a:hover
 #headSandwichIcone
 {
     order: 2;
-}
-.headMenu_title:after {
-    content: "\25bc";
-}
-.headMenu_title > div {
-    display: none;
-}
-.headMenu_subTitle {
-    margin: 0px;
-    font-size: 1em;
-    color: black;
 }
 #responsiveBtnInsCo {
     margin-top: 1em;

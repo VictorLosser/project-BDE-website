@@ -16,7 +16,8 @@ function resizePage(mediaSize) {
 }
 
 //=document.ready
-$(function(){
+$(document).ready(function(){
+    resizePage(mediaSize);
     $('#headSandwichIcone').click(animMenu);
     $('.headMenu_title').click(function () {
         if ($('div', this).is(":hidden")) {

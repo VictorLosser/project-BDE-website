@@ -3,7 +3,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 ?>
 
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
@@ -28,6 +28,16 @@ use Illuminate\Support\Facades\Auth;
 </head>
 
 <body>
+    @if (session('loginFailure'))
+        <div class="alert alert-success">
+            {{ session('loginFailure') }}
+        </div>
+    @endif
+    @if (session('registerFailure'))
+        <div class="alert alert-success">
+            {{ session('registerFailure') }}
+        </div>
+    @endif
 
 <!--POPUP-->
 <div id="popupAll" style="display: none;">
@@ -40,7 +50,8 @@ use Illuminate\Support\Facades\Auth;
                 <div><p class="popupFenetreTitre">Connexion</p></div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="control-label"><i class="fas fa-at"></i> Adresse e-mail</label>
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
+                           required>
 
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -172,15 +183,15 @@ use Illuminate\Support\Facades\Auth;
                             <li class="font-weight-bold nav_home">
                                 <a class="nav-link" href="/">
                                     <i class="fas fa-home"></i>
-                                    ACCUEIL<span class="sr-only">(current)</span></a>
+                                    ACCUEIL</a>
                             </li>
                         </div>
                         <div class="navItems">
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#"
                                    data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i
-                                            class="fas fa-shopping-basket"></i>
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                    <i class="fas fa-shopping-basket"></i>
                                     GESTION PRODUITS
                                 </a>
                                 <div class="dropdown-menu">
@@ -241,7 +252,7 @@ use Illuminate\Support\Facades\Auth;
                             <li class="font-weight-bold nav_home">
                                 <a class="nav-link" href="/">
                                     <i class="fas fa-home"></i>
-                                    ACCUEIL<span class="sr-only">(current)</span></a>
+                                    ACCUEIL</a>
                             </li>
                         </div>
                         <div class="navItems">
@@ -272,7 +283,7 @@ use Illuminate\Support\Facades\Auth;
                         <li class="font-weight-bold nav_home">
                             <a class="nav-link" href="/">
                                 <i class="fas fa-home"></i>
-                                ACCUEIL<span class="sr-only">(current)</span></a>
+                                ACCUEIL</a>
                         </li>
                     </div>
                     <div class="navItems">
@@ -311,7 +322,7 @@ use Illuminate\Support\Facades\Auth;
                     <i class="fas fa-user-circle"></i>
                     {{ Auth::user()->firstname}} </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/home"><i class="fas fa-id-card"></i> Profil</a>
+                    <!--<a class="dropdown-item" href="/home"><i class="fas fa-id-card"></i> Profil</a>-->
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
                                 class="fas fa-sign-out-alt"></i> Logout</a>
@@ -331,7 +342,7 @@ use Illuminate\Support\Facades\Auth;
                     </button>
                 </a>
                 <a><!--href="double-crochets/* url('/login') */double-crochets"-->
-                    <button class="btn member btn btn-outline-danger my-2 my-sm-0 eventConnexion btnConnexion">
+                    <button class="btn-member btn btn-outline-danger my-2 my-sm-0 eventConnexion btnConnexion">
                         <i class="fas fa-sign-in-alt"></i> Connexion
                     </button>
                 </a>
@@ -347,15 +358,14 @@ use Illuminate\Support\Facades\Auth;
 
         <div id="headMenu" style="display: none;">
             <ul>
-                Menu<br/><br/>
+                <br/><br/>
                 @if (Auth::check())
-                    @if((Auth::user()->status_id) == 2)
-                        <li class="font-weight-bold nav_home">
-                            <a class="nav-link" href="/">
-                                <i class="fas fa-home"></i>
-                                ACCUEIL<span class="sr-only">(current)</span></a>
+                    @if((Auth::user()->isAuthorized()) == "Bde")
+                        <li class="noPuce">
+                            <a class="headMenu_title" href="/">ACCUEIL
+                            </a>
                         </li>
-                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-shopping-basket"></i>
+                        <li class="headMenu_title drop_title">
                             GESTION PRODUITS
                             <div>
                                 <p><a class="headMenu_subTitle" href="/produits">Accueil</a></p>
@@ -367,7 +377,7 @@ use Illuminate\Support\Facades\Auth;
                                         Modifier ou supprimer un produit</a></p>
                             </div>
                         </li>
-                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-calendar-alt"></i>
+                        <li class="headMenu_title drop_title">
                             GESTION EVENEMENTS
                             <div>
                                 <p><a class="headMenu_subTitle" href="/evenements">Accueil</a></p>
@@ -380,7 +390,7 @@ use Illuminate\Support\Facades\Auth;
                                 </p>
                             </div>
                         </li>
-                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-lightbulb"></i>
+                        <li class="headMenu_title drop_title">
                             GESTION BOITE A IDEES
                             <div>
                                 <p><a class="headMenu_subTitle" href="/idees">Accueil</a></p>
@@ -392,44 +402,41 @@ use Illuminate\Support\Facades\Auth;
                                         Modifier ou supprimer une idée</a></p>
                             </div>
                         </li>
-                    @elseif((Auth::user()))
-
-                        <li class="font-weight-bold nav_home">
-                            <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                    @else
+                        <li class="noPuce">
+                            <a class="headMenu_title" href="/"><i class="fas fa-home"></i> ACCUEIL</a>
                         </li>
-                        <li class=" nav-link font-weight-bold">
-                            <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i>
-                                PRODUITS</a>
+                        <li class="noPuce">
+                            <a class="headMenu_title" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                         </li>
-                        <li class=" nav-link font-weight-bold">
-                            <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
+                        <li class="noPuce">
+                            <a class="headMenu_title" href="/evenements"><i class="fas fa-calendar-alt"></i> EVENEMENTS</a>
                         </li>
-                        <li class=" nav-link font-weight-bold">
-                            <a class="headMenu_subTitle" href="/idees">BOITE A IDEES</a>
+                        <li class="noPuce">
+                            <a class="headMenu_title" href="/idees"><i class="fas fa-lightbulb"></i> BOITE A IDEES</a>
                         </li>
                     @endif
                 @else
-                    <li class="font-weight-bold nav_home">
-                        <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                    <li class="noPuce">
+                        <a class="headMenu_title" href="/"><i class="fas fa-home"></i> ACCUEIL</a>
                     </li>
-                    <li class=" nav-link font-weight-bold">
-                        <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i>
-                            PRODUITS</a>
+                    <li class="noPuce">
+                        <a class="headMenu_title" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                     </li>
-                    <li class=" nav-link font-weight-bold">
-                        <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
+                    <li class="noPuce">
+                        <a class="headMenu_title" href="/evenements"><i class="fas fa-calendar-alt"></i> EVENEMENTS</a>
                     </li>
-                    <li class=" nav-link font-weight-bold">
-                        <a class="headMenu_subTitle" href="/idees">BOITE A IDEES</a>
+                    <li class="noPuce">
+                        <a class="headMenu_title" href="/idees"><i class="fas fa-lightbulb"></i> BOITE A IDEES</a>
                     </li>
                     <div id="responsiveBtnInsCo">
                         <a> <!--href="double-crochets/* url('/register') */double-crochets"-->
-                            <button class="btn-member btn btn-outline-danger my-2 my-sm-0 eventInscription btnInscription">
+                            <button class="btn btn-outline-danger my-2 my-sm-0 eventInscription btnInscription">
                                 Inscription
                             </button>
                         </a>
                         <a><!--href="double-crochets/* url('/login') */double-crochets"-->
-                            <button class="btn member btn btn-outline-danger my-2 my-sm-0 eventConnexion btnConnexion">
+                            <button class="btn btn-outline-danger my-2 my-sm-0 eventConnexion btnConnexion">
                                 Connexion
                             </button>
                         </a>
@@ -458,7 +465,7 @@ use Illuminate\Support\Facades\Auth;
         <i class="fab fa-youtube-square fa-3x"></i>
     </a>
     <p>BDE CESI.eXia Strasbourg <i class="far fa-copyright"></i> 2018</p>
-    <p><a href="/mentions-legales"><i class="fas fa-gavel"></i> MENTIONS LÉGALES</a></p>
+    <p><a href="/mentions-legales">MENTIONS LÉGALES</a></p>
 </footer>
 
 @yield('scripts')
