@@ -46,7 +46,7 @@
                     </p>
                     <p><strong><i class="fas fa-redo"></i> Récurrence : </strong> Tous les {{$event->repeat_interval}}
                         jour(s)</p>
-                    <p class="sign"><i class="fas fa-user"></i>
+                    <p class="sign">
                     @if($event->users->id != 0)
                         <p class="sign">Publié par {{$event->users->firstname." ".$event->users->name}}
                             le {{$event->created_at}}</p>
