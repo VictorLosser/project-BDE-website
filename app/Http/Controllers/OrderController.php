@@ -111,11 +111,16 @@ class OrderController extends Controller
     public function show()
     {
         $userID = Auth::id();
-        $order = DB::table('orders-bde')->where('user_id', $userID)->get();
-        $userorder = $order[0]->id;
-        $products = DB::table('contain-product-bde')->where('order_id', $userorder)->get();
-        //$order = OrdersBDE::all()->where($id, '=', $id);
-        return view('Basket', compact('order', 'products'));
+        $order = DB::table('orders-bde')->where('user_id', $userID)->where('validated','=',0)->get();
+        if($order == '[]')
+            return redirect('produits')->with('status',"Votre Panier est vide");
+
+         else {
+             $order = OrdersBDE::where('user_id',Auth::id())->first();
+
+
+             return view('Basket', compact('order'));
+         }
     }
 
     /**
@@ -136,9 +141,15 @@ class OrderController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-        //
+            OrdersBDE::where('user_id', '=', Auth::id())->where('validated', '=', 0)->update([
+            'validated' => 1,
+        ]);
+
+        //ici il faut mettre le code d'envoi d'e-mail
+        return redirect('produits')->with('status', "Merci de votre commande, elle sera traitée dans les meilleurs délais par un membre du BDE");
+
     }
 
     /**

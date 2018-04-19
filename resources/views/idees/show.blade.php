@@ -51,7 +51,7 @@
         </button>-->
 
         @if(Auth::check())
-            @if((Auth::user()->status_id) == 2)
+            @if(())
                 <div class="rightEditBtn">
 
                     <button id="btnAddImg" class="btn btn-default">Créer l'événement</button>

@@ -25,7 +25,9 @@ Route::resources([
     'commande' =>'OrderController'
 ]);
 
-Route::get('/commande/panier','productController@show');
+Route::get('/commande/panier','OrderController@show');
+Route::post('comamande/validation','OrderController@update');
+
 
 Route::get('/produits', 'productController@shows');
 Route::get('/produits/productsData', 'productController@productsData');
