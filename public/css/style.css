@@ -489,8 +489,6 @@ header .navbar-brand, header .navbar-brand img {
 textarea {
     resize: none;
 }
-
-
 .s-product-price{
     font-weight: bold;
     font-size:2em;
@@ -498,6 +496,13 @@ textarea {
 
 .s-product-image img {
     height:400px;
+}
+
+
+
+/*-----PANIER-----*/
+#sectionPanier {
+    text-align: center;
 }
 
 
