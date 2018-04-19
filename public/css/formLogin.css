@@ -43,7 +43,7 @@
     width: 100%;
 }
 
-#popupFenetreTitre {
+.popupFenetreTitre {
     font-size: 2em;
     font-weight: bold;
     margin: 25px 0px 50px 0px;
