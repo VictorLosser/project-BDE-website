@@ -101,7 +101,7 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        $image = ImageBDE::find($id);
+        $image = ImageBDE::find($id)->first();
         $eventId = $image->imageable_id;
 
         $link = $image->image_link;

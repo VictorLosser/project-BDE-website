@@ -40,10 +40,13 @@
                 <div><h1>{{ $event->title }}</h1></div>
                 <div>
                     <p><strong>Description : </strong>{{ $event->description }}</p>
-                    <p><strong><i class="fas fa-euro-sign"></i> Prix : </strong><span style="color: red">{{ $event->price }} €</span></p>
-                    <p><strong><i class="fas fa-calendar-alt"></i> Date de l'évènement : </strong>{{$event->date_event}}</p>
-                    <p><strong><i class="fas fa-redo"></i> Récurrence : </strong> Tous les {{$event->repeat_interval}} jour(s)</p>
-                    <p class="sign"><i class="fas fa-user"></i>
+                    <p><strong><i class="fas fa-euro-sign"></i> Prix : </strong><span style="color: red">{{ $event->price }}
+                            €</span></p>
+                    <p><strong><i class="fas fa-calendar-alt"></i> Date de l'évènement : </strong>{{$event->date_event}}
+                    </p>
+                    <p><strong><i class="fas fa-redo"></i> Récurrence : </strong> Tous les {{$event->repeat_interval}}
+                        jour(s)</p>
+                    <p class="sign">
                     @if($event->users->id != 0)
                         <p class="sign">Publié par {{$event->users->firstname." ".$event->users->name}}
                             le {{$event->created_at}}</p>
@@ -73,17 +76,37 @@
                 <div class="divImgListing">
                     <img class="imgListing" src="{{asset('/storage/'.$image->image_link)}}" alt="{{$image->alt}}"
                          title="{{$image->alt}}" imgId="{{$image->id}}" likes="{{$image->likes()->count()}}"/>
-                    <form action="{{ route('image.destroy', ['id' => $image->id]) }}" method="post" class="btnDelEventImg">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <input type="submit" value="x" />
-                    </form>
+                    <!--Ne jamais supprimer toutes les photos d'un event, tjrs en laisser une-->
+                @if(Auth::check())
+                    <!--Ne peut supprimer une image que s'il lui même l'a ajouté-->
+                        @if($image->id != $event->images[0]->id && $image->user_id == Auth::user()->id)
+                            <form action="{{ route('image.destroy', ['id' => $image->id]) }}" method="post"
+                                  class="btnDelEventImg">
+                                {{ csrf_field() }}
+
+                                {{ method_field('DELETE') }}
+                                <input type="submit" value="x"/>
+                            </form>
+                        @endif
+                    @endif
                 </div>
             @endforeach
         </div>
 
         @if(Auth::check())
-            @if((Auth::user()->status_id) == 2)
+            <?php
+            /*Si le user connecté participe alors il peut ajouter une image*/
+            $ok = "false";
+            foreach ($event->usersParticipate as $user) {
+                $authUserId = Auth::user()->id;
+
+                if ($user->id == $authUserId) {
+                    $ok = "true";
+                }
+                /*echo "<script>console.log(".$user.");</script>";*/
+            }
+            ?>
+            @if((Auth::user()->status_id) == 2 && $ok == "true")
                 <div class="rightEditBtn">
 
                     <button id="btnAddImg" class="btn btn-primary">Ajouter</button>

@@ -1,3 +1,9 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 .row {
     margin: 10px 0 10px 0;
 }
@@ -244,12 +250,6 @@
 
 
 /*----------------Header------------------*/
-html {
-    overflow-x: hidden;
-    margin: 0px;
-    padding: 0px;
-}
-
 header {
     position: relative;
     z-index: 100;

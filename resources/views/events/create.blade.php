@@ -32,9 +32,7 @@
                        value="" required>
             </div>
             <div class="col">
-                <input id="eventRecurrence" name="eventRecurrence" type="number" class="form-control"
-                       placeholder="Récurrence (ex: 7 -> événement hebdo)"
-                       step="1"
+                <input id="eventRecurrence" name="eventRecurrence" type="number" class="form-control" placeholder="Récurrence (ex: 7 -> événement hebdo)" step="1"
                        value="" required>
             </div>
             <div class="col">
