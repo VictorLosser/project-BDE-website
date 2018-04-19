@@ -34,7 +34,7 @@
                         searchText = $(this).val();
                         $('#searchBarCompletion').text("");
                         $('.product-header:containsIN('+searchText+')').each(function(){
-                            text = $("h1", this).text();
+                            text = $("h2", this).text();
                             href = $("a", this).attr("href");
                             $('#searchBarCompletion').append('<a href="' + href + '">' + '<p>' + text + '</p>' + '</a>');
                         });
@@ -162,7 +162,7 @@
         <?php $lastProduct = $products->last(); ?>
         <div class="col-md aside-item">
             <div>
-                <h1 style="font-size: 1.3em; padding: 10px 0px 5px 0px;">{{ $lastProduct->title }}</h1>
+                <h1 style="font-size: 1.3em; padding: 10px 0px 5px 0px;" class="">{{ $lastProduct->title }}</h1>
             </div>
             <div class="product-image"><img src="{{asset('storage/'.$lastProduct->images[0]->image_link)}}"
                                             alt="{{$lastProduct->images[0]->alt}}">
