@@ -70,7 +70,7 @@ class ParticipateController extends Controller
             $status  = "Participation bien enregistrée";}
             else
               $status = "Vous êtes déja inscit à cet évènement.";
-            return redirect('/evenements')->with('status', $status);
+            return redirect('/evenement/'.$request->id_event)->with('status', $status);
         } else {
             $userID = 0;
             return redirect('/evenements')->with('status', 'Participation refusée, vous devez être connecté(e)!');
