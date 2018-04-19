@@ -139,7 +139,7 @@ class productController extends Controller
             <div class="col-md-3 product-item">
                 <div class="product-header">
                     <?php echo "<a href=\"/produit/" . $product->id . "\">" ?>
-                    <h1><?php echo $product->title ?></h1></a>
+                    <h2><?php echo $product->title ?></h2></a>
                 </div>
                 <div class="product-image"><img
                             src="<?php echo asset('storage/' . $products[$key]->images[0]->image_link) ?>"

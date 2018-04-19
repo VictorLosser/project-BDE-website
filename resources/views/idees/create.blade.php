@@ -12,7 +12,7 @@
     <form method="post" action="/idee" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
-            <div>
+            <div class="col">
                 <input id="eventName" name="eventName" type="text" class="form-control" placeholder="Nom de l'évenement"
                        value="" required>
             </div>
@@ -24,11 +24,10 @@
                               required></textarea>
             </div>
         </div>
-
-        <br/>
-        <input type="submit"
-               value="ENVOYER"
-               class="btn btn-sm btn-secondary"/>
+        <div class="col">
+            <button type="submit"
+                   class="btn btn-danger">ENVOYER</button>
+        </div>
     </form>
 
     <br>
@@ -42,7 +41,7 @@
             <h3>Apparence : </h3>
             <div class="col-md-3 product-item">
                 <div class="event-header">
-                    <h1 class="rt-title"><i>Titre</i></h1>
+                    <h2 class="rt-title"><i>Titre</i></h2>
                 </div>
                 <div class="event-description">
                     <p class="rt-description"><i>Description</i></p>

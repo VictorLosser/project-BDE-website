@@ -158,7 +158,7 @@
 
     <aside class="aside">
         <p id="asideCroix">x</p>
-        <h5>Notre dernier produit !</h5>
+        <h5><i class="fas fa-exclamation-circle"></i> Notre dernier produit ! <i class="fas fa-exclamation-circle"></i></h5>
         <?php $lastProduct = $products->last(); ?>
         <div class="col-md aside-item">
             <div>

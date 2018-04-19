@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    <link rel="icon" href="{{ asset('img/exia-logo.ico') }}"/>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{asset('css/formLogin.css')}}"/>
@@ -35,7 +36,7 @@ use Illuminate\Support\Facades\Auth;
                 {{ csrf_field() }}
                 <div><p id="popupFenetreTitre">Connexion</p></div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="control-label">E-Mail Address</label>
+                    <label for="email" class="control-label"><i class="fas fa-at"></i> Adresse e-mail</label>
                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required
                            autofocus>
 
@@ -46,7 +47,7 @@ use Illuminate\Support\Facades\Auth;
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="control-label">Password</label>
+                    <label for="password" class="control-label"><i class="fas fa-key"></i> Mot de passe</label>
 
                     <div class="">
                         <input id="password" type="password" class="form-control" name="password" required>
@@ -61,17 +62,17 @@ use Illuminate\Support\Facades\Auth;
                 <div class="form-group" id="divCheckBox">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>Se souvenir
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Se souvenir
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Login
+                    <button type="submit" class="btn btn-danger">
+                        Se connecter
                     </button>
 
                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                        Forgot Your Password?
+                        Mot de passe oublié ?
                     </a>
                 </div>
             </form>
@@ -84,7 +85,7 @@ use Illuminate\Support\Facades\Auth;
                 {{ csrf_field() }}
                 <div><p id="popupFenetreTitre">Inscription</p></div>
                 <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
-                    <label for="firstname" class="control-label">Firstname</label>
+                    <label for="firstname" class="control-label"><i class="far fa-id-card"></i> Prénom</label>
 
                     <input id="firstname" type="text" class="form-control" name="firstname"
                            value="{{ old('firstname') }}" required autofocus>
@@ -96,7 +97,7 @@ use Illuminate\Support\Facades\Auth;
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="control-label">Name</label>
+                    <label for="name" class="control-label"><i class="far fa-id-card"></i> Nom</label>
 
                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required
                            autofocus>
@@ -108,7 +109,7 @@ use Illuminate\Support\Facades\Auth;
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="control-label">E-Mail Address</label>
+                    <label for="email" class="control-label"><i class="fas fa-at"></i> Adresse e-mail</label>
 
                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
                            required>
@@ -121,7 +122,7 @@ use Illuminate\Support\Facades\Auth;
                 </div>
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="control-label">Password</label>
+                    <label for="password" class="control-label"><i class="fas fa-key"></i> Mot de passe</label>
 
                     <input id="password" type="password" class="form-control" name="password" required>
 
@@ -132,15 +133,16 @@ use Illuminate\Support\Facades\Auth;
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="password-confirm" class="control-label">Confirm Password</label>
+                    <label for="password-confirm" class="control-label"><i class="fas fa-key"></i> Confirmer votre mot
+                        de passe</label>
 
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                            required>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Register
+                    <button type="submit" class="btn btn-danger">
+                        Je m'inscris
                     </button>
                 </div>
             </form>
@@ -153,9 +155,9 @@ use Illuminate\Support\Facades\Auth;
 
 <header>
     <nav class="navbar navbar-expand-md" id="the-navbar">
-        <a class="navbar-brand" href="./"><img src="{{ asset('img/exia-logo.png') }}"
-                                               alt="Accueil - CESI.eXia BDE Strasbourg"
-                                               title="Accueil - CESI.eXia BDE Strasbourg"/></a>
+        <a class="navbar-brand" href="/"><img src="{{ asset('img/exia-logo.png') }}"
+                                              alt="Accueil - CESI.eXia BDE Strasbourg"
+                                              title="Accueil - CESI.eXia BDE Strasbourg"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -166,34 +168,26 @@ use Illuminate\Support\Facades\Auth;
                     <ul class="navbar-nav">
                         <div class="navItems">
                             <li class="font-weight-bold" id="nav_home">
-                                <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/">
+                                    <i class="fas fa-home"></i>
+                                    ACCUEIL<span class="sr-only">(current)</span></a>
                             </li>
                         </div>
                         <div class="navItems">
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
-                                    GESTION EVENEMENTS
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="/evenements">Accueil</a>
-                                    <a class="dropdown-item" href="/evenement/create">Ajouter un événement</a>
-                                    <a class="dropdown-item" href="/evenement">Modifier ou supprimer un événement</a>
-                                </div>
-                            </li>
-                        </div>
-                        <div class="navItems">
-                            <li class="dropdown font-weight-bold" id="nav_gest_produits">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-shopping-basket"></i>
                                     GESTION PRODUITS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="/produits">Accueil</a>
-                                    <a class="dropdown-item" href="/produit/create">Ajouter un produit</a>
-                                    <a class="dropdown-item" href="/produit">Modifier ou supprimer un produit</a>
+                                    <a class="dropdown-item" href="/produit/create">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter un produit</a>
+                                    <a class="dropdown-item" href="/produit">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Modifier ou supprimer un produit</a>
                                 </div>
                             </li>
                         </div>
@@ -201,13 +195,35 @@ use Illuminate\Support\Facades\Auth;
                             <li class="dropdown font-weight-bold" id="nav_gest_produits">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-calendar-alt"></i>
+                                    GESTION EVENEMENTS
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/evenements">Accueil</a>
+                                    <a class="dropdown-item" href="/evenement/create">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter un événement</a>
+                                    <a class="dropdown-item" href="/evenement">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Modifier ou supprimer un événement</a>
+                                </div>
+                            </li>
+                        </div>
+                        <div class="navItems">
+                            <li class="dropdown font-weight-bold" id="nav_gest_produits">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" style="color:#bee5eb"><i class="fas fa-lightbulb"></i> 
                                     GESTION BOITE A IDEES
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="/idees">Accueil</a>
-                                    <a class="dropdown-item" href="/idee/create">Ajouter une idée</a>
-                                    <a class="dropdown-item" href="/idee">Modifier ou supprimer une idée</a>
+                                    <a class="dropdown-item" href="/idee/create">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter une idée</a>
+                                    <a class="dropdown-item" href="/idee">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Modifier ou supprimer une idée</a>
                                 </div>
                             </li>
                         </div>
@@ -218,12 +234,14 @@ use Illuminate\Support\Facades\Auth;
                     <ul class="navbar-nav">
                         <div class="navItems">
                             <li class="font-weight-bold" id="nav_home">
-                                <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/">
+                                    <i class="fas fa-home"></i>
+                                    ACCUEIL<span class="sr-only">(current)</span></a>
                             </li>
                         </div>
                         <div class="navItems">
                             <li class="font-weight-bold" id="nav_produits">
-                                <a class="nav-link" href="/produits">PRODUITS</a>
+                                <a class="nav-link" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                             </li>
                         </div>
                         <div class="navItems">
@@ -247,12 +265,14 @@ use Illuminate\Support\Facades\Auth;
                 <ul class="navbar-nav">
                     <div class="navItems">
                         <li class="font-weight-bold" id="nav_home">
-                            <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/">
+                                <i class="fas fa-home"></i>
+                                ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
                     </div>
                     <div class="navItems">
                         <li class="font-weight-bold" id="nav_produits">
-                            <a class="nav-link" href="/produits">PRODUITS</a>
+                            <a class="nav-link" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                         </li>
                     </div>
                     <div class="navItems">
@@ -283,15 +303,19 @@ use Illuminate\Support\Facades\Auth;
                 <a id="btnProfil" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                    data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" style="color:#bee5eb">
+                    <i class="fas fa-user-circle"></i>
                     {{ Auth::user()->firstname}} </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/home">Profil</a>
+                    <a class="dropdown-item" href="/home"><i class="fas fa-id-card"></i> Profil</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                class="fas fa-sign-out-alt"></i> Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
-                    <a class="dropdown-item" href="/commande/panier/">Panier</a>
+                    <a class="dropdown-item" href="/commande/panier/">
+                        <i class="fas fa-shopping-cart"></i>
+                        Panier</a>
                 </div>
             </div>
         @else
@@ -322,31 +346,44 @@ use Illuminate\Support\Facades\Auth;
                 @if (Auth::check())
                     @if((Auth::user()->status_id) == 2)
                         <li class="font-weight-bold" id="nav_home">
-                            <a class="nav-link" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/">
+                                <i class="fas fa-home"></i>
+                                ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="headMenu_title nav-link font-weight-bold">
+                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-shopping-basket"></i> GESTION PRODUITS
+                            <div>
+                                <p><a class="headMenu_subTitle" href="/produits">Accueil</a></p>
+                                <p><a class="headMenu_subTitle" href="/produit/create">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter un produit</a></p>
+                                <p><a class="headMenu_subTitle" href="/produit">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Modifier ou supprimer un produit</a></p>
+                            </div>
+                        </li>
+                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-calendar-alt"></i>
                             GESTION EVENEMENTS
                             <div>
                                 <p><a class="headMenu_subTitle" href="/evenements">Accueil</a></p>
-                                <p><a class="headMenu_subTitle" href="/evenement/create">Ajouter un événement</a></p>
-                                <p><a class="headMenu_subTitle" href="/evenement">Modifier ou supprimer un événement</a>
+                                <p><a class="headMenu_subTitle" href="/evenement/create">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter un événement</a></p>
+                                <p><a class="headMenu_subTitle" href="/evenement">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Modifier ou supprimer un événement</a>
                                 </p>
                             </div>
                         </li>
-                        <li class="headMenu_title nav-link font-weight-bold">
-                            GESTION PRODUITS
-                            <div>
-                                <p><a class="headMenu_subTitle" href="/produits">Accueil</a></p>
-                                <p><a class="headMenu_subTitle" href="/produit/create">Ajouter un produit</a></p>
-                                <p><a class="headMenu_subTitle" href="/produit">Modifier ou supprimer un produit</a></p>
-                            </div>
-                        </li>
-                        <li class="headMenu_title nav-link font-weight-bold">
+                        <li class="headMenu_title nav-link font-weight-bold"><i class="fas fa-lightbulb"></i>
                             GESTION BOITE A IDEES
                             <div>
                                 <p><a class="headMenu_subTitle" href="/idees">Accueil</a></p>
-                                <p><a class="headMenu_subTitle" href="/idee/create">Ajouter une idée</a></p>
-                                <p><a class="headMenu_subTitle" href="/idee">Modifier ou supprimer une idée</a></p>
+                                <p><a class="headMenu_subTitle" href="/idee/create">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter une idée</a></p>
+                                <p><a class="headMenu_subTitle" href="/idee">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Modifier ou supprimer une idée</a></p>
                             </div>
                         </li>
                     @elseif((Auth::user()))
@@ -355,7 +392,7 @@ use Illuminate\Support\Facades\Auth;
                             <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
                         <li class=" nav-link font-weight-bold">
-                            <a class="headMenu_subTitle" href="/produits">PRODUITS</a>
+                            <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                         </li>
                         <li class=" nav-link font-weight-bold">
                             <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
@@ -369,7 +406,7 @@ use Illuminate\Support\Facades\Auth;
                         <a class="headMenu_subTitle" href="/">ACCUEIL<span class="sr-only">(current)</span></a>
                     </li>
                     <li class=" nav-link font-weight-bold">
-                        <a class="headMenu_subTitle" href="/produits">PRODUITS</a>
+                        <a class="headMenu_subTitle" href="/produits"><i class="fas fa-shopping-basket"></i> PRODUITS</a>
                     </li>
                     <li class=" nav-link font-weight-bold">
                         <a class="headMenu_subTitle" href="/evenements">EVENEMENTS</a>
@@ -417,8 +454,11 @@ use Illuminate\Support\Facades\Auth;
     <a href="https://pbs.twimg.com/media/CupgL0cVIAEujP7.jpg">
         <i class="fab fa-snapchat-square fa-3x"></i>
     </a>
-    <p>BDE CESI.eXia Strasbourg © 2018</p>
-    <p><a href="/mentions-legales">MENTIONS LÉGALES</a></p>
+    <a href="https://www.youtube.com/user/BdeExiaStrasbourg">
+        <i class="fab fa-youtube-square fa-3x"></i>
+    </a>
+    <p>BDE CESI.eXia Strasbourg <i class="far fa-copyright"></i> 2018</p>
+    <p><a href="/mentions-legales"><i class="fas fa-gavel"></i> MENTIONS LÉGALES</a></p>
 </footer>
 
 @yield('scripts')
