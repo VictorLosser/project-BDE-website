@@ -136,7 +136,7 @@ class productController extends Controller
             ->get();
 
         foreach ($products as $key => $product) { ?>
-            <div class="col-md-3 product-item" onclick="document.location.href='/produit/<?php $product->id?>';">
+            <div class="col-md-3 product-item" onclick="document.location.href='/produit/<?php echo $product->id?>';">
                 <div class="product-header">
                     <?php echo "<a href=\"/produit/" . $product->id . "\">" ?>
                     <h2><?php echo $product->title ?></h2></a>
