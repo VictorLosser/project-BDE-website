@@ -51,7 +51,7 @@ class OrderController extends Controller
 
 
             if ($userorder == '[]') {
-                $status = 'produit ajouté à un panier nouvellement crée';
+                $status = 'PRODUIT AJOUTE !';
                 OrdersBDE::create([
                     'validated' => 0,
                     'order_date' => $date,
@@ -65,15 +65,13 @@ class OrderController extends Controller
                     'order_id' => $orderID->id,
                     'product_id' => $request->id_product
                 ]);
-                $total_price = DB::select('SELECT SUM(quantity*price) as totaux FROM `orders-bde` LEFT JOIN `contain-product-bde` ON `orders-bde`.id = `contain-product-bde`.order_id LEFT JOIN `product-bde` ON `product-bde`.id = `contain-product-bde`.product_id WHERE `orders-bde`.validated = 0 AND `orders-bde`.`user_id`= ?', [$userID]);
 
-                OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->update([
-                    'total_price' => $total_price[0]->totaux,
-                ]);
+                $this->orderTotalSum();
+
             } else {
                 $orderID = OrdersBDE::select('id')->where('user_id', '=', $userID)->where('validated', '=', 0)->first();
                 $orderproduit = DB::table('contain-product-bde')->where('order_id', '=', $orderID->id)->where('product_id', "=", $request->id_product)->first();
-                $status = 'produit ajouté à un panier existant';
+                $status = 'PRODUIT AJOUTE !';
 
                 if ($orderproduit == []) {
                     ContainProductBDE::create([
@@ -81,22 +79,13 @@ class OrderController extends Controller
                         'order_id' => $orderID->id,
                         'product_id' => $request->id_product]);
 
-                    $total_price = DB::select('SELECT SUM(quantity*price) as totaux FROM `orders-bde` LEFT JOIN `contain-product-bde` ON `orders-bde`.id = `contain-product-bde`.order_id LEFT JOIN `product-bde` ON `product-bde`.id = `contain-product-bde`.product_id WHERE `orders-bde`.validated = 0 AND `orders-bde`.`user_id`= ?', [$userID]);
+                    $this->orderTotalSum();
 
-                    OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->update([
-                        'order_date' => $date,
-                        'total_price' => $total_price[0]->totaux
-                    ]);
                 } else {
 
                     DB::table('contain-product-bde')->where('order_id', '=', $orderID->id)->where('product_id', "=", $request->id_product)->increment('quantity', 1);
-                    $total_price = DB::select('SELECT SUM(quantity*price) as totaux FROM `orders-bde` LEFT JOIN `contain-product-bde` ON `orders-bde`.id = `contain-product-bde`.order_id LEFT JOIN `product-bde` ON `product-bde`.id = `contain-product-bde`.product_id WHERE `orders-bde`.validated = 0 AND `orders-bde`.`user_id`= ?', [$userID]);
 
-
-                    OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->update([
-                        'order_date' => $date,
-                        'total_price' => $total_price[0]->totaux
-                    ]);
+                    $this->orderTotalSum();
                 }
 
             }
@@ -115,16 +104,18 @@ class OrderController extends Controller
     public function show()
     {
         if (Auth::check()) {
+            $this->orderTotalSum();
+
             $userID = Auth::id();
             $order = DB::table('orders-bde')->where('user_id', $userID)->where('validated', '=', 0)->get();
+            $orderID = DB::table('orders-bde')->where('user_id', $userID)->where('validated', '=', 0)->first();
             if ($order == '[]')
-                return redirect('produits')->with('status', "Votre Panier est vide");
+                return redirect('produits')->with('status', "PANIER VIDE !");
 
             else {
-                $order = OrdersBDE::where('user_id', Auth::id())->where('validated', 0)->first();
+                $data = DB::select('SELECT quantity,title,price FROM `orders-bde` LEFT JOIN `contain-product-bde` ON `orders-bde`.id = `contain-product-bde`.order_id LEFT JOIN `product-bde` ON `product-bde`.id = `contain-product-bde`.product_id WHERE `orders-bde`.validated = 0 AND `orders-bde`.`user_id`= ?', [$userID]);
 
-
-                return view('Basket', compact('order'));
+                return view('Basket', compact('data','orderID'));
             }
         }
     }
@@ -170,4 +161,16 @@ class OrderController extends Controller
         //
     }
 
+    public function orderTotalSum()
+    {
+        $date = now();
+        $userID = Auth::id();
+
+        $total_price = DB::select('SELECT SUM(quantity*price) as totaux FROM `orders-bde` LEFT JOIN `contain-product-bde` ON `orders-bde`.id = `contain-product-bde`.order_id LEFT JOIN `product-bde` ON `product-bde`.id = `contain-product-bde`.product_id WHERE `orders-bde`.validated = 0 AND `orders-bde`.`user_id`= ?', [$userID]);
+
+        OrdersBDE::where('user_id', '=', $userID)->where('validated', '=', 0)->update([
+            'order_date' => $date,
+            'total_price' => $total_price[0]->totaux
+        ]);
+    }
 }

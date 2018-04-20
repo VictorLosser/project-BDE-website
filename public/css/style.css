@@ -407,6 +407,12 @@ header .navbar-brand, header .navbar-brand img {
     color: orangered;
 }
 
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    background-color:darkred;
+    border-radius: 50%;
+    padding: 1em;
+}
+
 #carouselid {
     background-color: white;
     overflow: hidden;
