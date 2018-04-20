@@ -40,8 +40,13 @@
                 <div><h1>{{ $event->title }}</h1></div>
                 <div>
                     <p><strong>Description : </strong>{{ $event->description }}</p>
-                    <p><strong><i class="fas fa-euro-sign"></i> Prix : </strong><span style="color: red">{{ $event->price }}
-                            €</span></p>
+                    <p><strong><i class="fas fa-euro-sign"></i> Prix : </strong>
+                        @if($event->price == 0.00)
+                            <span style="color: green; font-weight:bold;">Gratuit</span>
+                        @else
+                            <span style="color: red; font-weight:bold;">{{ $event->price }} €</span>
+                        @endif
+                    </p>
                     <p><strong><i class="fas fa-calendar-alt"></i> Date de l'évènement : </strong>{{$event->date_event}}
                     </p>
                     <p><strong><i class="fas fa-redo"></i> Récurrence : </strong> Tous les {{$event->repeat_interval}}
@@ -144,179 +149,179 @@
 
     </div>
 
-        @endsection
+@endsection
 
-        @section('scripts')
-            <script>
-                $('.imgListing').on('click', function () {
-                    $('#showImgLink').attr('href', $(this).attr('src'));
+@section('scripts')
+    <script>
+        $('.imgListing').on('click', function () {
+            $('#showImgLink').attr('href', $(this).attr('src'));
 
-                    $('#imgShowing').attr({
-                        'src': $(this).attr('src'),
-                        'alt': $(this).attr('alt'),
-                        'title': $(this).attr('title')
-                    });
-                    $('#divImgLike').attr('onclick', "addLikeEventImg(" + $(this).attr('imgId') + ")");
-                    $('#countEventImgLikes').text($(this).attr('likes'));
-                });
+            $('#imgShowing').attr({
+                'src': $(this).attr('src'),
+                'alt': $(this).attr('alt'),
+                'title': $(this).attr('title')
+            });
+            $('#divImgLike').attr('onclick', "addLikeEventImg(" + $(this).attr('imgId') + ")");
+            $('#countEventImgLikes').text($(this).attr('likes'));
+        });
 
-                $('#btnAddImg').on('click', function () {
-                    $('#divImgUpload').slideToggle();
-                    if ($('#btnAddImg').text() == 'Ajouter') {
-                        $('#btnAddImg').text('Annuler');
-                    }
-                    else {
-                        $('#btnAddImg').text('Ajouter');
-                    }
-                });
+        $('#btnAddImg').on('click', function () {
+            $('#divImgUpload').slideToggle();
+            if ($('#btnAddImg').text() == 'Ajouter') {
+                $('#btnAddImg').text('Annuler');
+            }
+            else {
+                $('#btnAddImg').text('Ajouter');
+            }
+        });
 
-                $('#eventImg').on('change', function (event) {
-                    var output = document.getElementById('new-image');
-                    output.src = URL.createObjectURL(event.target.files[0]);
-                });
+        $('#eventImg').on('change', function (event) {
+            var output = document.getElementById('new-image');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        });
 
-                /*SUBMIT FORMULAIRE*/
-                /*$('#addImgForm').submit(function () {
-                    /*event.preventDefault();*/
+        /*SUBMIT FORMULAIRE*/
+        /*$('#addImgForm').submit(function () {
+            /*event.preventDefault();*/
 
-                /*var form_data = $('#addImgForm').serialize();
-                console.log(form_data);
+        /*var form_data = $('#addImgForm').serialize();
+        console.log(form_data);
 
-                alert(eventImgType + "\n" + eventId + "\n" + eventImgAlt);
-                $.post('/image', {
-                                        eventImgType: eventImgType,
-                                        eventId: eventId,
-                                        eventImg: eventImg,
-                                        eventImgAlt: eventImgAlt,
-                                    });*/
+        alert(eventImgType + "\n" + eventId + "\n" + eventImgAlt);
+        $.post('/image', {
+                                eventImgType: eventImgType,
+                                eventId: eventId,
+                                eventImg: eventImg,
+                                eventImgAlt: eventImgAlt,
+                            });*/
 
-                /*$("#addImgFormMsg").fadeIn();
-                $("#addImgFormMsg").css({color: 'green'}).text('Loading ...');
+        /*$("#addImgFormMsg").fadeIn();
+        $("#addImgFormMsg").css({color: 'green'}).text('Loading ...');
 
-                eventImgType = $(this).find('#eventImgType').val();
-                eventId = $(this).find('#eventId').val();
-                file = $(this).find('#eventImg').files[0];
-                if (file) {
-                    var reader = new FileReader();
-                    reader.readAsText(file);
-                    reader.onload = function(e) {
-                        // browser completed reading file - display it
-                        alert(e.target.result);
-                    };
-                }
-                eventImgAlt = $(this).find('#eventImgAlt').val();
+        eventImgType = $(this).find('#eventImgType').val();
+        eventId = $(this).find('#eventId').val();
+        file = $(this).find('#eventImg').files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function(e) {
+                // browser completed reading file - display it
+                alert(e.target.result);
+            };
+        }
+        eventImgAlt = $(this).find('#eventImgAlt').val();
 
-                alert(eventId+"\n"+eventImgType+"\n"+eventImgAlt+"\n"+eventImg);
+        alert(eventId+"\n"+eventImgType+"\n"+eventImgAlt+"\n"+eventImg);
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: "/image",
+            data: {
+                eventImg: eventImg,
+                eventId: eventId,
+                eventImgType: eventImgType,
+                eventImgAlt: eventImgAlt
+            },
+            success: function (data) {
+                $("#addImgFormMsg").text('C goood').delay(5000).fadeOut();
+            },
+            error: function (data) {
+                $("#addImgFormMsg").css({color: 'red'});
+                $("#addImgFormMsg").text('Echec, go voir console log :(').delay(5000).fadeOut();
+                console.log("Errors: ", data);
+            }
+        });
+
+        return false;
+        //annule le chargement de la page php, car nous allons passer par une requete post direct en js vers le fichier .php
+    });*/
+
+
+        function addLikeEventImg($id) {
+            imgId = $id;
+            likeType = 'image';
+            authCheck = '{{Auth::check()}}';
+
+
+            /*alert('Go add ton like sur une ' + likeType + ', imgID = ' + imgId);*/
+            if (authCheck == 1) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: "/image",
+                    url: "/like",
                     data: {
-                        eventImg: eventImg,
-                        eventId: eventId,
-                        eventImgType: eventImgType,
-                        eventImgAlt: eventImgAlt
+                        imgId: imgId,
+                        likeType: likeType
                     },
                     success: function (data) {
-                        $("#addImgFormMsg").text('C goood').delay(5000).fadeOut();
+                        console.log(data);
+                        if (!data.likeExists) {
+                            $('#countEventImgLikes').text(data.likeCount);
+                            $('.imgListing').each(function () {
+                                if ($(this).attr("imgid") == imgId) {
+                                    $(this).attr("likes", parseInt($(this).attr("likes")) + 1)
+                                }
+                            })
+                        } else {
+                            removeLikeEventImg(data.likeId, imgId);
+                        }
                     },
                     error: function (data) {
-                        $("#addImgFormMsg").css({color: 'red'});
-                        $("#addImgFormMsg").text('Echec, go voir console log :(').delay(5000).fadeOut();
-                        console.log("Errors: ", data);
+                        console.log("Errors for ajoutation : ", data);
                     }
                 });
 
                 return false;
-                //annule le chargement de la page php, car nous allons passer par une requete post direct en js vers le fichier .php
-            });*/
+            }
+            else {
+                alert("Connectez vous pour liker !");
 
+            }
+        }
 
-                function addLikeEventImg($id) {
-                    imgId = $id;
-                    likeType = 'image';
-                    authCheck = '{{Auth::check()}}';
+        function removeLikeEventImg($likeId, $imgId) {
+            imgId = $imgId;
 
-
-                    /*alert('Go add ton like sur une ' + likeType + ', imgID = ' + imgId);*/
-                    if ( authCheck == 1 ) {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-
-                        $.ajax({
-                            dataType: 'json',
-                            type: "POST",
-                            url: "/like",
-                            data: {
-                                imgId: imgId,
-                                likeType: likeType
-                            },
-                            success: function (data) {
-                                console.log(data);
-                                if (!data.likeExists) {
-                                    $('#countEventImgLikes').text(data.likeCount);
-                                    $('.imgListing').each(function () {
-                                        if ($(this).attr("imgid") == imgId) {
-                                            $(this).attr("likes", parseInt($(this).attr("likes")) + 1)
-                                        }
-                                    })
-                                } else {
-                                    removeLikeEventImg(data.likeId, imgId);
-                                }
-                            },
-                            error: function (data) {
-                                console.log("Errors for ajoutation : ", data);
-                            }
-                        });
-
-                        return false;
-                    }
-                    else {
-                        alert("Connectez vous pour liker !");
-
-                    }
+            /*alert('Go supprimer ton like, likeID = ' + $id);*/
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+            });
 
-                function removeLikeEventImg($likeId, $imgId) {
-                    imgId = $imgId;
-
-                    /*alert('Go supprimer ton like, likeID = ' + $id);*/
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            $.ajax({
+                dataType: 'json',
+                type: "DELETE",
+                url: "/like/" + $likeId,
+                success: function (data) {
+                    console.log(data);
+                    $('#countEventImgLikes').text(($('#countEventImgLikes').text()) - 1);
+                },
+                error: function (data) {
+                    console.log("Errors for supprimation : ", data);
+                    $('#countEventImgLikes').text(parseInt($('#countEventImgLikes').text()) - 1);
+                    $('.imgListing').each(function () {
+                        if ($(this).attr("imgid") == imgId) {
+                            $(this).attr("likes", parseInt($(this).attr("likes")) - 1)
                         }
-                    });
-
-                    $.ajax({
-                        dataType: 'json',
-                        type: "DELETE",
-                        url: "/like/" + $likeId,
-                        success: function (data) {
-                            console.log(data);
-                            $('#countEventImgLikes').text(($('#countEventImgLikes').text()) - 1);
-                        },
-                        error: function (data) {
-                            console.log("Errors for supprimation : ", data);
-                            $('#countEventImgLikes').text(parseInt($('#countEventImgLikes').text()) - 1);
-                            $('.imgListing').each(function () {
-                                if ($(this).attr("imgid") == imgId) {
-                                    $(this).attr("likes", parseInt($(this).attr("likes")) - 1)
-                                }
-                            })
-                        }
-                    });
-
-                    return false;
+                    })
                 }
+            });
 
-            </script>
+            return false;
+        }
+
+    </script>
 @endsection
