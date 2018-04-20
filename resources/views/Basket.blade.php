@@ -5,28 +5,30 @@
 @section('content')
 
     <div id="sectionPanier">
-        <h1>Votre panier</h1>
+        <h1><i class="fas fa-shopping-cart"></i> Votre panier</h1>
+        <br>
+        <h2>Commande N°{{$orderID->id}}</h2>
         <br>
         <table class="table">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Commande N°{{$order->id}}</th>
                 <th scope="col">Produit</th>
+                <th scope="col">Quantité</th>
                 <th scope="col">prix</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($order->products as $product)
+            @foreach($data as $product)
                 <tr>
-                    <th scope="row">#</th>
-                    <td>{{$product->title}}</td>
-                    <td>{{$product->price}}</td>
+                    <th>{{$product->title}}</th>
+                    <td>{{$product->quantity}}</td>
+                    <td>{{$product->price}} €</td>
                 </tr>
             @endforeach
             <tr>
-                <th scope="row">prix total</th>
+                <th scope="row">TOTAL</th>
                 <td></td>
-                <td>{{$order->total_price}}</td>
+                <td>{{$orderID->total_price}} €</td>
             </tr>
             </tbody>
         </table>
@@ -35,7 +37,7 @@
                 <form action="/commande/validation" method="POST">
                     {{ csrf_field() }}
                     <input name="_method" value="PUT" type="hidden">
-                    <button class="btn btn-danger" type="submit">Valider ma Commande</button>
+                    <button class="btn btn-danger" type="submit"><i class="fas fa-check-circle"></i> Valider ma Commande</button>
                 </form>
             </td>
         </tr>
