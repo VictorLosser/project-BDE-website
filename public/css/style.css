@@ -5,6 +5,9 @@ html, body {
     overflow-x: hidden;
     /*font-family: 'Verdana';*/
 }
+img {
+    max-width: 90vw;
+}
 #templateContainer {
     min-height: 70vh;
 }
@@ -328,7 +331,9 @@ header .navbar-brand, header .navbar-brand img {
     padding-top: 0px;
     height: 75px;
 }
-
+#responsiveBtnInsCo {
+    margin-right: 40px;
+}
 #btnInsCo {
     display: flex;
     flex-direction: column;
