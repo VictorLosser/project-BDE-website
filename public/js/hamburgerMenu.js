@@ -6,12 +6,14 @@ function resizePage(mediaSize) {
     if (mediaSize.matches) { // If media query matches
         $('#headSandwichIcone').show();
         $('#btnInsCo').hide();
+        $('#templateContainer').attr("class", "");
     }
     else {
         $('#headSandwichIcone').hide();
         $('#headMenu').slideUp();
         $('#popupMenuBackground').hide();
         $('#btnInsCo').show();
+        $('#templateContainer').attr("class", "container");
     }
 }
 

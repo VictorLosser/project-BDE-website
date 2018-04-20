@@ -338,6 +338,7 @@ header .navbar-brand, header .navbar-brand img {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin-right: 20px;
 }
 
 .btnConnexion, .btnInscription {
