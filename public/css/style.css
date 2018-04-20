@@ -49,6 +49,7 @@ img {
     top: -20px;
     left: -1em;
     cursor: pointer;
+    text-shadow: -6px 6px 6px rgba(50, 50, 50, 0.5);
 }
 
 .flexCenter {
@@ -65,6 +66,7 @@ img {
 
 #searchBar {
     width: 100%;
+    text-align: center;
     border-radius: 10px;
 }
 
@@ -465,6 +467,7 @@ header .navbar-brand, header .navbar-brand img {
 }
 
 .product-item, .aside-item {
+    cursor: pointer;
     background-color: gainsboro;
     margin: 10px 10px 10px 10px;
     width: 200px;

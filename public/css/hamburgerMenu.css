@@ -23,6 +23,15 @@
         margin: 0px;
         max-width: 100%;
     }
+    .aside {
+        display: none;
+    }
+    .product-item {
+        width: 90%;
+    }
+    #showDesc {
+        margin: 0px;
+    }
 }
 
 /*Menu petits appareils*/

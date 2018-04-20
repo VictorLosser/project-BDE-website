@@ -18,7 +18,9 @@
 
     <div class="flexCenter">
         <div id="divSearch">
-            <input id="searchBar" type="text" placeholder="Votre recherche ici ..." />
+            <input id="searchBar" type="text" placeholder="Votre recherche ici ..." onclick="$('html, body').stop().animate({
+            'scrollTop':  $(this).offset().top
+        }, 500, 'swing')"/>
             <div id="searchBarCompletion">
                 <script>
                     /*creations du selecteur :contains en case non-sensitive !!!*/
@@ -160,7 +162,7 @@
         <p id="asideCroix">x</p>
         <h5><i class="fas fa-exclamation-circle"></i> Notre dernier produit ! <i class="fas fa-exclamation-circle"></i></h5>
         <?php $lastProduct = $products->last(); ?>
-        <div class="col-md aside-item">
+        <div class="col-md aside-item" onclick="document.location.href='/produit/{{$lastProduct->id}}';">
             <div>
                 <h1 style="font-size: 1.3em; padding: 10px 0px 5px 0px;" class="">{{ $lastProduct->title }}</h1>
             </div>

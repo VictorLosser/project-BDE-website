@@ -21,7 +21,7 @@
     <!-- IDEES DISPLAY -->
     <div class="row" style="justify-content: space-around;">
         @foreach ($idees as $idee)
-            <div class="col-md-3 product-item">
+            <div class="col-md-3 product-item" onclick="document.location.href='/idee/{{$idee->id}}';">
                 <div class="event-header">
                     <a href="/idee/{{$idee->id}}"><h2><i class="fas fa-lightbulb"></i> {{$idee->title}}</h2></a>
                 </div>

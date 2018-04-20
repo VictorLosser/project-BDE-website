@@ -12,7 +12,7 @@
 
     <div class="row" style="justify-content: space-around;">
         @foreach ($events as $event)
-            <div class="col-md-3 product-item">
+            <div class="col-md-3 product-item" onclick="document.location.href='/evenement/{{$event->id}}';">
                 <div class="event-header">
                     <a href="/evenement/{{$event->id}}"><h2>{{$event->title}}</h2></a>
                 </div>
