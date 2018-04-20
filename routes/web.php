@@ -18,9 +18,9 @@ use App\IdeaBoxBDE;
 Route::get('/', 'WelcomeController@getPopularProducts');
 
 Route::resources([
-    'produit' => 'productController',
-    'idee' => 'ideeController',
-    'evenement' => 'eventController',
+    'produit' => 'ProductController',
+    'idee' => 'IdeeController',
+    'evenement' => 'EventController',
     'participate' => 'ParticipateController',
     'commande' =>'OrderController'
 ]);
@@ -29,9 +29,9 @@ Route::get('/commande/panier','OrderController@show');
 Route::post('comande/validation','OrderController@update');
 
 
-Route::get('/produits', 'productController@shows');
-Route::get('/produits/productsData', 'productController@productsData');
-Route::get('/produits/indexdata', 'productController@indexData');
+Route::get('/produits', 'ProductController@shows');
+Route::get('/produits/productsData', 'ProductController@productsData');
+Route::get('/produits/indexdata', 'ProductController@indexData');
 
 Route::get('/downloadPDF/{eventID}','ParticipateController@downloadPDF');
 Route::get('/downloadCSV/{eventID}','CsvController@downloadCSV');
@@ -50,13 +50,13 @@ Route::get('/idees', function () {
 });
 Route::get('/idees/indexdata', 'IdeeController@indexData');
 
-Route::resource('comment', 'commentController')->only([
+Route::resource('comment', 'CommentController')->only([
     'store', 'destroy'
 ]);
-Route::resource('image', 'imageController')->only([
+Route::resource('image', 'ImageController')->only([
     'store', 'destroy'
 ]);
-Route::resource('like', 'likeController')->only([
+Route::resource('like', 'LikeController')->only([
     'store', 'destroy'
 ]);
 
