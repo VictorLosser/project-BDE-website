@@ -29,7 +29,7 @@
     .product-item {
         width: 90%;
     }
-    #showDesc {
+    #showDesc, #texte {
         margin: 0px;
     }
 }
